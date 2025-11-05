@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulting – ASTROVIA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+
+  <style>
+    html, body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  scroll-padding-top: 0 !important;
+  overflow-x: hidden;
+}
+
+
+    :root{
+      --bg:#0c1020;          /* bleu nuit profond */
+      --bg-soft:#111634;     /* bleu plus doux */
+      --text:#e8ecf5;        /* texte principal */
+      --muted:#b9c2d6;       /* texte secondaire */
+      --accent:#6bd3ff;      /* bleu cyan accent */
+      --accent-2:#00b884;    /* vert accent secondaire */
+      --card:#151a3f;
+      --line:rgba(255,255,255,.08);
+      --warn:#f7b500;
+      --error:#ff5a5f;
+      --ok:#2ecc71;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',sans-serif;background:radial-gradient(1200px 600px at 10% -10%,rgba(107,211,255,.15),transparent 50%), radial-gradient(800px 400px at 90% -10%,rgba(0,184,132,.12),transparent 50%), var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1200px,92%);margin-inline:auto}
+
+    /* Header */
+    header {
+  position: fixed;        /* ✅ reste visible tout le temps */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;          /* au-dessus de tout */
+  background: rgba(12,16,32,0.85); /* fond semi-transparent */
+  backdrop-filter: blur(10px);     /* effet de flou doux */
+  border-bottom: 1px solid var(--line);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.3px}
+    .brand .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;color:#001628;font-weight:900}
+    .logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+    .nav a{color:var(--text);opacity:.9}
+    .navlinks{display:flex;gap:18px;align-items:center}
+    .navlinks a{padding:8px 10px;border-radius:10px}
+    .navlinks a:hover{background:var(--line)}
+    /* Dropdown menu */
+.navlinks ul, .navlinks li { list-style: none; margin: 0; padding: 0; }
+.navlinks > li { position: relative; }
+
+.dropdown > a::after {
+  content: "";
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(17, 22, 52, 0.95);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 0;
+  box-shadow: var(--shadow);
+  min-width: 220px;
+}
+
+.submenu li a {
+  display: block;
+  padding: 8px 14px;
+  color: var(--text);
+  opacity: 0.9;
+}
+
+.submenu li a:hover {
+  background: var(--line);
+}
+
+.dropdown:hover .submenu {
+  display: block;
+}
+
+/* Pour mobile : sous-menus visibles dans le menu déroulant */
+@media (max-width: 960px) {
+  .navlinks li { width: 100%; }
+  .submenu {
+    position: static;
+    display: none;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding-left: 10px;
+  }
+  .dropdown.open .submenu {
+    display: block;
+  }
+}
+
+    .cta{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#001628 !important;padding:10px 14px;border-radius:12px;font-weight:700}
+    .menu-btn{display:none}
+
+
+
+
+
+
+/* --- Animation d'apparition au scroll --- */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Animation d'apparition globale pour toutes les sections --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px) scale(0.98);
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  will-change: opacity, transform;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* --- Apparition fluide globale --- */
+.fade-up, .slide-left, .slide-right, .zoom-in {
+  opacity: 0;
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  will-change: opacity, transform;
+}
+
+/* Effets de départ */
+.fade-up { transform: translateY(60px); }
+.slide-left { transform: translateX(-80px); }
+.slide-right { transform: translateX(80px); }
+.zoom-in { transform: scale(0.9); }
+
+/* Quand l’élément devient visible */
+.fade-up.visible,
+.slide-left.visible,
+.slide-right.visible,
+.zoom-in.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Animation du tracé de la courbe */
+.curve-path {
+  stroke: var(--accent);
+  stroke-width: 2px;
+  fill: none;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 3.5s ease-in-out;
+}
+
+/* Quand on scrolle jusqu’à la section */
+.curve-path.animate {
+  stroke-dashoffset: 0;
+}
+
+
+
+/* === Footer professionnel === */
+.footer {
+  background: var(--bg);
+  color: var(--text);
+  border-top: 1px solid var(--line);
+  padding: 60px 20px 30px;
+  position: relative;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.footer-logo img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.footer-logo h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.footer-contact h4,
+.footer-social h4 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.footer-contact p {
+  margin: 8px 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.footer-contact a {
+  color: var(--accent-2);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-contact a:hover {
+  color: var(--accent);
+}
+
+/* === Icône LinkedIn === */
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.footer-social .social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  font-size: 24px;
+  transition: all 0.3s ease;
+}
+
+.footer-social .social-link:hover {
+  background: var(--accent);
+  color: #001628;
+  transform: scale(1.05);
+}
+
+/* === Flèche retour haut === */
+.scroll-top {
+  position: absolute;
+  right: 40px;
+  top: 40px;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 32px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.scroll-top:hover {
+  color: var(--accent);
+  transform: translateY(-4px);
+}
+
+/* === Responsive === */
+@media (max-width: 960px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .footer-logo,
+  .footer-contact,
+  .footer-social {
+    align-items: center;
+  }
+
+  .scroll-top {
+    right: 20px;
+    top: 20px;
+  }
+}
+
+/* === MENU MOBILE PRO === */
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 34px;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.menu-btn:hover {
+  color: var(--accent-2);
+  transform: scale(1.1);
+}
+
+@media (max-width: 960px) {
+  .menu-btn {
+    display: block;
+  }
+
+  .navlinks {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: rgba(12, 16, 32, 0.98);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 80px 28px;
+    gap: 20px;
+    transition: right 0.4s ease;
+    z-index: 2000;
+    box-shadow: -6px 0 20px rgba(0,0,0,0.5);
+  }
+
+  .navlinks.show {
+    right: 0;
+  }
+
+  .navlinks a {
+    font-size: 18px;
+    color: var(--text);
+    text-decoration: none;
+    padding: 10px 0;
+    width: 100%;
+  }
+
+  .navlinks a:hover {
+    color: var(--accent);
+  }
+
+  .menu-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 32px;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .menu-close:hover {
+    color: var(--accent-2);
+    transform: scale(1.1);
+  }
+
+  .submenu {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    padding-left: 14px;
+  }
+
+  .dropdown.open .submenu {
+    display: flex;
+  }
+}
+
+/* ✅ Bouton "X" uniquement sur mobile */
+.menu-close {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .menu-close {
+    display: block;
+  }
+}
+
+
+
+
+/* ✅ Fixe la zone cliquable du bouton X */
+.menu-close {
+  display: none; /* caché sur PC */
+}
+
+@media (max-width: 960px) {
+  .menu-close {
+    display: flex;               /* ✅ pour centrer l’icône */
+    align-items: center;
+    justify-content: center;
+    width: 48px;                 /* ✅ surface cliquable */
+    height: 48px;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 32px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    z-index: 2100;               /* ✅ au-dessus du reste du menu */
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .menu-close:hover {
+    color: var(--accent-2);
+    transform: scale(1.1);
+  }
+
+  .menu-close i {
+    pointer-events: none;        /* ✅ pour éviter les décalages de clic */
+  }
+}
+
+
+
+/* === SECTION REJOIGNEZ-NOUS === */
+.join-us {
+  padding: 120px 0 100px;
+  background: radial-gradient(900px 500px at 50% 0%, rgba(107, 211, 255, 0.08), transparent),
+              radial-gradient(600px 300px at 80% 20%, rgba(0, 184, 132, 0.08), transparent),
+              var(--bg-soft);
+  text-align: center;
+  position: relative;
+}
+
+.join-title {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: 1px;
+  margin-bottom: 60px;
+  text-transform: uppercase;
+}
+
+.join-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+}
+
+.join-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.join-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
+}
+
+.join-img {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.join-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.join-card:hover img {
+  transform: scale(1.1);
+}
+
+.join-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 24px 0 16px;
+  color: var(--text);
+}
+
+.join-btn {
+  display: inline-block;
+  margin-bottom: 30px;
+  padding: 10px 26px;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.join-btn:hover {
+  background: var(--accent);
+  color: #001628;
+  transform: translateY(-2px);
+}
+
+
+
+
+  </style>
+</head>
+
+<body>
+
+  <!-- === HEADER identique === -->
+  <header>
+    <div class="container nav">
+      <a href="accueil.html" class="brand" aria-label="Accueil – ASTROVIA">
+        <img src="astrovia.jpg" alt="Logo ASTROVIA" class="logo-img">
+        <span>ASTROVIA</span>
+      </a>
+      <nav>
+        <button class="menu-btn" aria-expanded="false" aria-controls="navlinks" aria-label="Ouvrir le menu">
+          <i data-lucide="menu"></i>
+        </button>
+        <ul id="navlinks" class="navlinks">
+          <li class="close-btn">
+            <button class="menu-close" aria-label="Fermer le menu">
+              <i data-lucide="x"></i>
+            </button>
+          </li>
+          <li><a href="accueil.html">Accueil</a></li>
+          <li class="dropdown">
+            <a href="expertises.html" >Nos expertises ▾</a>
+            <ul class="submenu">
+              <li><a href="consulting.html">Consulting</a></li>
+              <li><a href="cabinet-de-recrutement.html">Cabinet de recrutement</a></li>
+              <li><a href="solutions-de-fidelisation.html">Solutions de fidélisation</a></li>
+            </ul>
+          </li>
+          <li><a href="valeurs.html">Nos valeurs</a></li>
+          <li><a href="qui-sommes-nous.html">Qui sommes-nous</a></li>
+          <li class="dropdown">
+            <a href="rejoignez-nous.html" class="cta">Rejoignez-nous ▾</a>
+            <ul class="submenu">
+              <li><a href="offres-consulting.html">offres Consulting</a></li>
+              <li><a href="offres-cabinet-de-recrutement.html">offres Cabinet de recrutement</a></li>
+              <li><a href="candidature-spontanee.html">Candidature spontanée</a></li>
+            </ul>
+          </li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+ <!-- === SECTION REJOIGNEZ-NOUS === -->
+<section class="join-us reveal" id="rejoignez-nous">
+  <div class="container">
+    <h2 class="join-title">REJOIGNEZ-NOUS</h2>
+    <div class="join-grid">
+      
+      <!-- Bloc 1 -->
+      <div class="join-card fade-up">
+        <div class="join-img">
+          <img src="consulting.png" alt="Consulting">
+        </div>
+        <h3>Consulting</h3>
+        <a href="consulting-recrutement.html" class="join-btn">Voir les offres</a>
+      </div>
+
+      <!-- Bloc 2 -->
+      <div class="join-card fade-up">
+        <div class="join-img">
+          <img src="recrutement.png" alt="Cabinet de recrutement">
+        </div>
+        <h3>Cabinet de recrutement</h3>
+        <a href="offres-cabinet-de-recrutement.html" class="join-btn">Voir les offres</a>
+      </div>
+
+      <!-- Bloc 3 -->
+      <div class="join-card fade-up">
+        <div class="join-img">
+          <img src="candidature.png" alt="Candidature spontanée">
+        </div>
+        <h3>Candidature spontanée</h3>
+        <a href="candidature-spontanee.html" class="join-btn">Candidater</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+  <!-- === FOOTER identique === -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-logo">
+        <img src="astrovia.jpg" alt="Logo ASTROVIA">
+        <h3>ASTROVIA</h3>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact</h4>
+        <p>158 Chemin du Rival Escur, 81800 RABASTENS, France</p>
+        <p>Tél. : <a href="tel:+33648283477">06 48 28 34 77</a></p>
+        <p>Email : <a href="mailto:contact@astrovia.fr">contact@astrovia.fr</a></p>
+      </div>
+      <div class="footer-social">
+        <h4>Suivez-nous</h4>
+        <a href="#" class="social-link" aria-label="LinkedIn ASTROVIA">
+          <i data-lucide="linkedin"></i>
+        </a>
+      </div>
+      <a href="#top" class="scroll-top" aria-label="Remonter en haut">
+        <i data-lucide="arrow-up"></i>
+      </a>
+    </div>
+  </footer>
+
+
+  <!-- === JS pour les icônes et le menu mobile === -->
+  <script>
+    lucide.createIcons();
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuBtn = document.querySelector('.menu-btn');
+      const menuClose = document.querySelector('.menu-close');
+      const navlinks = document.getElementById('navlinks');
+
+      // Ouvre le menu
+      if (menuBtn && navlinks) {
+        menuBtn.addEventListener('click', () => {
+          navlinks.classList.add('show');
+          menuBtn.setAttribute('aria-expanded', 'true');
+        });
+      }
+
+      // Ferme le menu
+      if (menuClose && navlinks) {
+        menuClose.addEventListener('click', () => {
+          navlinks.classList.remove('show');
+          menuBtn.setAttribute('aria-expanded', 'false');
+        });
+      }
+
+      // Ferme le menu quand on clique sur un lien sans sous-menu
+      navlinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          const parent = link.parentElement;
+          const hasSubmenu = parent.classList.contains('dropdown');
+
+          if (window.innerWidth <= 960 && hasSubmenu) {
+            e.preventDefault();
+            if (parent.classList.contains('open')) {
+              window.location.href = link.getAttribute('href');
+            } else {
+              document.querySelectorAll('.dropdown.open').forEach(el => el.classList.remove('open'));
+              parent.classList.add('open');
+            }
+            return;
+          }
+
+          if (window.innerWidth <= 960) {
+            navlinks.classList.remove('show');
+            menuBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+    });
+
+
+
+
+           // === Apparition au scroll ===
+  const revealElements = document.querySelectorAll(".reveal, .fade-up, .slide-left, .slide-right, .zoom-in");
+
+function revealOnScroll() {
+  const windowHeight = window.innerHeight;
+  revealElements.forEach(el => {
+    const elementTop = el.getBoundingClientRect().top;
+    if (elementTop < windowHeight - 100) {
+      el.classList.add("visible");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1743 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Consultra – Ingénierie & Recrutement Transport</title>
+  <meta name="description" content="Entreprise de conseil en ingénierie des infrastructures de transport et cabinet de recrutement spécialisé.">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  scroll-padding-top: 0 !important;
+  overflow-x: hidden;
+}
+
+/* Fixe la section d'intro juste sous le header sans décalage */
+.intro-section {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+    :root{
+      --bg:#0c1020;          /* bleu nuit profond */
+      --bg-soft:#111634;     /* bleu plus doux */
+      --text:#e8ecf5;        /* texte principal */
+      --muted:#b9c2d6;       /* texte secondaire */
+      --accent:#6bd3ff;      /* bleu cyan accent */
+      --accent-2:#00b884;    /* vert accent secondaire */
+      --card:#151a3f;
+      --line:rgba(255,255,255,.08);
+      --warn:#f7b500;
+      --error:#ff5a5f;
+      --ok:#2ecc71;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',sans-serif;background:radial-gradient(1200px 600px at 10% -10%,rgba(107,211,255,.15),transparent 50%), radial-gradient(800px 400px at 90% -10%,rgba(0,184,132,.12),transparent 50%), var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1200px,92%);margin-inline:auto}
+
+    /* Header */
+    header {
+  position: fixed;        /* ✅ reste visible tout le temps */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;          /* au-dessus de tout */
+  background: rgba(12,16,32,0.85); /* fond semi-transparent */
+  backdrop-filter: blur(10px);     /* effet de flou doux */
+  border-bottom: 1px solid var(--line);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.3px}
+    .brand .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;color:#001628;font-weight:900}
+    .logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+    .nav a{color:var(--text);opacity:.9}
+    .navlinks{display:flex;gap:18px;align-items:center}
+    .navlinks a{padding:8px 10px;border-radius:10px}
+    .navlinks a:hover{background:var(--line)}
+    /* Dropdown menu */
+.navlinks ul, .navlinks li { list-style: none; margin: 0; padding: 0; }
+.navlinks > li { position: relative; }
+
+.dropdown > a::after {
+  content: "";
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(17, 22, 52, 0.95);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 0;
+  box-shadow: var(--shadow);
+  min-width: 220px;
+}
+
+.submenu li a {
+  display: block;
+  padding: 8px 14px;
+  color: var(--text);
+  opacity: 0.9;
+}
+
+.submenu li a:hover {
+  background: var(--line);
+}
+
+.dropdown:hover .submenu {
+  display: block;
+}
+
+/* Pour mobile : sous-menus visibles dans le menu déroulant */
+@media (max-width: 960px) {
+  .navlinks li { width: 100%; }
+  .submenu {
+    position: static;
+    display: none;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding-left: 10px;
+  }
+  .dropdown.open .submenu {
+    display: block;
+  }
+}
+
+    .cta{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#001628 !important;padding:10px 14px;border-radius:12px;font-weight:700}
+    .menu-btn{display:none}
+
+    /* Hero */
+    .hero{position:relative;overflow:hidden}
+    .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;padding:64px 0 46px}
+    .eyebrow{display:inline-block;padding:6px 10px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:var(--muted);letter-spacing:.2px}
+    h1{font-size:clamp(32px,4.5vw,54px);line-height:1.05;margin:16px 0 10px}
+    .subtitle{font-size:18px;color:var(--muted);max-width:60ch}
+    .points{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
+    .chip{border:1px solid var(--line);border-radius:999px;padding:8px 12px;color:var(--text);font-size:14px}
+    .hero-card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+    .stat{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center}
+    .stat strong{font-size:28px}
+    .hero-illustration{aspect-ratio:4/3;border-radius:var(--radius);border:1px solid var(--line);background:radial-gradient(300px 200px at 30% 20%,rgba(107,211,255,.18),transparent 60%),radial-gradient(300px 200px at 70% 40%,rgba(0,184,132,.18),transparent 60%), linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));display:grid;place-items:center}
+
+    /* Sections */
+    section{padding:70px 0;border-top:1px solid var(--line)}
+    h2{font-size:clamp(24px,3.5vw,36px);margin:0 0 10px}
+    .lead{color:var(--muted);max-width:72ch}
+
+    /* Cards grid */
+    .grid{display:grid;gap:18px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+    .card h3{margin:6px 0 6px}
+
+    /* Values */
+    .value{display:flex;gap:12px}
+    .value .icon{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;color:#001628;font-weight:900}
+
+    /* Jobs */
+    .job{display:flex;flex-direction:column;gap:10px}
+    .job .tags{display:flex;gap:8px;flex-wrap:wrap}
+    .tag{font-size:12px;border:1px solid var(--line);padding:6px 8px;border-radius:999px;color:var(--muted)}
+    .job .actions{display:flex;gap:10px;margin-top:4px}
+    .btn{display:inline-flex;gap:8px;align-items:center;padding:10px 12px;border-radius:12px;border:1px solid var(--line);color:var(--text)}
+    .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#001628;border:none;font-weight:700}
+
+    /* Expertise list */
+    .expertise{display:grid;grid-template-columns:.9fr 1.1fr;gap:20px}
+    .steps{display:grid;gap:10px}
+    .step{padding:14px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.02)}
+
+    /* FAQ */
+    details{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:12px;padding:14px}
+    details+details{margin-top:10px}
+    summary{cursor:pointer;font-weight:600}
+
+    /* Contact */
+    form{display:grid;gap:12px}
+    input, textarea{background:#0e1330;border:1px solid var(--line);border-radius:12px;color:var(--text);padding:12px 14px}
+    label{font-size:14px;color:var(--muted)}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .note{font-size:12px;color:var(--muted)}
+    .form-status{display:none;margin-top:8px;font-size:14px}
+    .form-status.show{display:block}
+
+    /* Footer */
+    footer{padding:36px 0;border-top:1px solid var(--line);color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width: 960px){
+      .hero .wrap{grid-template-columns:1fr}
+      .expertise{grid-template-columns:1fr}
+      .grid.cols-3{grid-template-columns:1fr}
+      .grid.cols-2{grid-template-columns:1fr}
+      .form-row{grid-template-columns:1fr}
+      .navlinks{display:none;position:absolute;right:4%;top:60px;background:rgba(12,16,32,.95);padding:10px;border:1px solid var(--line);border-radius:12px;flex-direction:column;gap:6px;width:min(320px,92%)}
+      .navlinks.show{display:flex}
+      .menu-btn{display:flex;background:transparent;border:1px solid var(--line);color:var(--text);padding:8px 10px;border-radius:10px}
+    }
+/* --- Section d'intro ASTROVIA --- */
+.intro-section {
+  position: relative;
+  min-height: 100vh; /* ✅ prend toujours au moins toute la hauteur de l’écran */
+  width: 100%;
+  background: 
+  linear-gradient(rgba(8,12,28,0.25), rgba(8,12,28,0.35)),
+  url('plan.png') center center no-repeat;
+  background-size: cover; /* ✅ étend l’image sans déformation */
+  background-attachment: scroll; /* effet de profondeur fluide */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  color: var(--text);
+  padding: 40px 20px; /* un peu d’air pour éviter que le contenu touche les bords */
+}
+
+
+
+/* filtre sombre pour lisibilité */
+.intro-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 12, 28, 0.6);
+  z-index: 0;
+}
+
+.intro-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: fadeInUp 1.8s ease forwards;
+}
+
+.intro-logo {
+  width: clamp(320px, 50vw, 600px);
+  height: auto;
+  margin-bottom: 10px;
+  opacity: 0;
+  animation: zoomIn 1.8s ease forwards; /* ✅ "forwards" garde le dernier état */
+}
+
+
+.intro-title {
+  font-size: clamp(26px, 3vw, 42px); /* texte plus grand */
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  color: var(--accent);
+  text-shadow: 0 4px 12px rgba(0,0,0,0.8);
+  opacity: 0;
+  animation: fadeInText 2.2s ease forwards 0.6s; /* léger décalage */
+}
+
+/* --- Animations fluides --- */
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1; /* ✅ le logo reste visible */
+  }
+}
+
+
+@keyframes fadeInText {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Section Présentation (sous le logo) --- */
+.presentation-section {
+  background: var(--bg);
+  color: var(--text);
+  text-align: center;
+  padding: 100px 20px 80px;
+  border-top: 1px solid var(--line);
+}
+
+.presentation-title {
+  font-size: clamp(20px, 2.4vw, 28px);
+  font-weight: 500;
+  max-width: 900px;
+  margin: 0 auto 14px;
+  line-height: 1.5;
+}
+
+.presentation-subtitle {
+  font-size: 18px;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.presentation-line {
+  width: 80px;
+  height: 2px;
+  margin: 0 auto 50px;
+  border: none;
+  background: var(--accent);
+  border-radius: 999px;
+}
+
+/* Icônes */
+/* --- Icônes plus grandes et plus lisibles --- */
+.presentation-icons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* colonnes plus larges */
+  gap: 60px; /* plus d’espace entre les blocs */
+  justify-items: center;
+  align-items: start;
+}
+
+.icon-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px; /* plus d’air entre icône et texte */
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.icon-card:hover {
+  transform: translateY(-8px);
+}
+
+.icon {
+  width: 70px;   /* ✅ taille des icônes agrandie */
+  height: 70px;
+  color: var(--accent);
+  stroke-width: 2; /* traits plus épais = meilleure visibilité */
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.icon-card h3 {
+  font-size: 22px; /* ✅ texte plus grand */
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.icon-card:hover .icon {
+  transform: scale(1.15);
+  color: var(--accent-2);
+}
+
+
+/* --- Section Notre accompagnement (corrigée + animée) --- */
+.accompagnement-section {
+  background: var(--bg);
+  color: var(--text);
+  padding: 140px 20px; /* réduit un peu le padding vertical */
+  position: relative;
+}
+
+.accompagnement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 90px; /* ✅ réduit l’espace entre le texte et les icônes */
+  position: relative;
+  flex-wrap: wrap;
+}
+
+/* ---- Colonne gauche ---- */
+.accompagnement-left {
+  flex: 0 0 28%; /* un peu plus compact */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.accompagnement-left h2 {
+  font-size: clamp(36px, 3.5vw, 54px);
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1.2;
+}
+
+/* ---- Colonne droite ---- */
+.accompagnement-right {
+  position: relative;
+  flex: 0 0 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 110px; /* espace vertical entre les icônes */
+  padding-left: 80px; /* ✅ réduit le décalage global */
+}
+
+/* ---- Courbe SVG ---- */
+.accompagnement-curve {
+  position: absolute;
+  left: 30px;
+  top: -10px;
+  width: 240px;
+  height: 480px;
+  z-index: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.accompagnement-curve path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  opacity: 0.6;
+  stroke-dasharray: 1000;      /* pour animer le tracé */
+  stroke-dashoffset: 1000;
+  animation: drawCurve 2.8s ease-out forwards; /* ✅ animation fluide */
+}
+
+/* --- Animation du tracé de la courbe --- */
+@keyframes drawCurve {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ---- Items (icônes + texte) ---- */
+.accompagnement-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  z-index: 1;
+}
+
+/* Ajustements pour aligner la courbe sur les icônes */
+/* Première icône */
+.accompagnement-item:nth-child(2) {
+  margin-left: 0;
+}
+
+/* Deuxième icône (Consulting) → plus à droite que les autres */
+.accompagnement-item:nth-child(3) {
+  margin-left: 40px;  /* ✅ elle avance à droite, la courbe la traverse parfaitement */
+}
+
+/* Troisième icône */
+.accompagnement-item:nth-child(4) {
+  margin-left: 5px;
+}
+
+
+
+
+/* ---- Icône ---- */
+.icon-circle {
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #001628;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+
+.icon-circle i {
+  width: 42px;
+  height: 42px;
+  stroke-width: 2.2;
+}
+
+/* ---- Texte associé ---- */
+.accompagnement-card {
+  background: var(--accent);
+  color: #001628;
+  font-weight: 700;
+  padding: 20px 36px;
+  border-radius: 16px;
+  font-size: 22px;
+  min-width: 290px; /* ✅ réduit légèrement pour éviter dépassement */
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* ---- Animation liée icône + texte ---- */
+.accompagnement-item:hover .icon-circle,
+.accompagnement-item:hover .accompagnement-card {
+  background: var(--accent-2);
+  color: #fff;
+}
+.accompagnement-item:hover .icon-circle {
+  transform: scale(1.12);
+}
+.accompagnement-item:hover .accompagnement-card {
+  transform: translateX(10px);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 960px) {
+  .accompagnement {
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+  }
+  .accompagnement-left {
+    text-align: center;
+  }
+  .accompagnement-right {
+    padding-left: 0;
+    align-items: center;
+    gap: 60px;
+  }
+  .accompagnement-curve {
+    display: none;
+  }
+  .accompagnement-item:nth-child(2),
+  .accompagnement-item:nth-child(3),
+  .accompagnement-item:nth-child(4) {
+    margin-left: 0;
+  }
+}
+
+
+/* --- Section Nous rejoindre --- */
+.join-section {
+  background: var(--bg);
+  color: var(--text);
+  text-align: center;
+  padding: 120px 20px 100px;
+  border-top: 1px solid var(--line);
+}
+
+.join-title {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.join-line {
+  width: 90%;
+  max-width: 800px;
+  height: 2px;
+  background: var(--line);
+  border: none;
+  margin: 0 auto 60px;
+}
+
+.join-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  justify-items: center;
+  align-items: start;
+  margin-bottom: 60px;
+}
+/* --- Animation d'apparition au scroll (version fluide et progressive) --- */
+.join-card {
+  opacity: 0;
+  transform: translateY(60px); /* descend plus bas pour un effet plus doux */
+  transition: opacity 1.2s cubic-bezier(0.19, 1, 0.22, 1), 
+              transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: opacity, transform;
+}
+
+.join-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+.join-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 360px;
+}
+
+.join-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.join-card h3 {
+  padding: 18px 14px 22px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+/* Animation au survol */
+.join-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+
+.join-card:hover img {
+  transform: scale(1.06);
+}
+
+/* --- Bouton Plus d’offres --- */
+.join-button {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-outline {
+  display: inline-block;
+  padding: 12px 26px;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--accent-2);
+  border: 2px solid var(--accent-2);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: var(--accent-2);
+  color: #001628;
+}
+
+/* --- Animation d'apparition au scroll --- */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Animation d'apparition globale pour toutes les sections --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px) scale(0.98);
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  will-change: opacity, transform;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* --- Apparition fluide globale --- */
+.fade-up, .slide-left, .slide-right, .zoom-in {
+  opacity: 0;
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  will-change: opacity, transform;
+}
+
+/* Effets de départ */
+.fade-up { transform: translateY(60px); }
+.slide-left { transform: translateX(-80px); }
+.slide-right { transform: translateX(80px); }
+.zoom-in { transform: scale(0.9); }
+
+/* Quand l’élément devient visible */
+.fade-up.visible,
+.slide-left.visible,
+.slide-right.visible,
+.zoom-in.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Animation du tracé de la courbe */
+.curve-path {
+  stroke: var(--accent);
+  stroke-width: 2px;
+  fill: none;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 3.5s ease-in-out;
+}
+
+/* Quand on scrolle jusqu’à la section */
+.curve-path.animate {
+  stroke-dashoffset: 0;
+}
+
+/* --- Section Contact (nouvelle version stylisée) --- */
+.contact-section {
+  background: var(--bg);
+  color: var(--text);
+  padding: 120px 20px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+
+.contact-title {
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.contact-subtitle {
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.contact-line {
+  width: 60px;
+  height: 2px;
+  background: var(--accent);
+  border: none;
+  border-radius: 999px;
+  margin: 0 auto 60px;
+}
+
+.contact-form-title {
+  font-size: 22px;
+  font-weight: 700;
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+/* --- Formulaire --- */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #0e1330;
+  color: var(--text);
+  font-size: 16px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(107,211,255,0.2);
+}
+
+/* --- Bouton --- */
+.form-actions {
+  text-align: right;
+}
+
+.btn-outline {
+  padding: 12px 32px;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--accent-2);
+  border: 2px solid var(--accent-2);
+  border-radius: 12px;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: var(--accent-2);
+  color: #001628;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .contact-form-title {
+    text-align: center;
+  }
+  .form-actions {
+    text-align: center;
+  }
+}
+/* --- Section Contact (version améliorée) --- */
+.contact-section {
+  background: var(--bg);
+  color: var(--text);
+  padding: 120px 20px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+
+.contact-title {
+  font-size: clamp(34px, 4vw, 48px);
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.contact-subtitle {
+  color: var(--muted);
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+
+.contact-line {
+  width: 70px;
+  height: 2px;
+  background: var(--accent);
+  border: none;
+  border-radius: 999px;
+  margin: 0 auto 60px;
+}
+
+.contact-form-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 36px;
+  text-align: center;
+  color: var(--accent);
+}
+
+/* --- Formulaire stylisé --- */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 950px;
+  margin: 0 auto;
+  text-align: left;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 40px 50px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+  transition: all 0.4s ease;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #0e1330;
+  color: var(--text);
+  font-size: 17px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(107,211,255,0.25);
+}
+
+/* --- Bouton Envoyer --- */
+.form-actions {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn-outline {
+  padding: 14px 36px;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--accent-2);
+  border: 2px solid var(--accent-2);
+  border-radius: 14px;
+  background: transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-outline:hover {
+  background: var(--accent-2);
+  color: #001628;
+  transform: scale(1.03);
+}
+
+/* ✅ Animation de validation réussie */
+.form-success {
+  display: none;
+  text-align: center;
+  margin-top: 30px;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.form-success.show {
+  display: block;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.success-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background: var(--accent-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: popIn 0.6s ease forwards;
+}
+
+.success-icon svg {
+  width: 36px;
+  height: 36px;
+  stroke: #001628;
+  stroke-width: 5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: drawCheck 0.8s ease forwards 0.3s;
+}
+
+.form-success p {
+  color: var(--accent-2);
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 4px;
+}
+
+@keyframes drawCheck {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  80% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .contact-form {
+    padding: 30px 24px;
+  }
+  .contact-form-title {
+    font-size: 22px;
+  }
+}
+
+/* === Footer professionnel === */
+.footer {
+  background: var(--bg);
+  color: var(--text);
+  border-top: 1px solid var(--line);
+  padding: 60px 20px 30px;
+  position: relative;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.footer-logo img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.footer-logo h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.footer-contact h4,
+.footer-social h4 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.footer-contact p {
+  margin: 8px 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.footer-contact a {
+  color: var(--accent-2);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-contact a:hover {
+  color: var(--accent);
+}
+
+/* === Icône LinkedIn === */
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.footer-social .social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  font-size: 24px;
+  transition: all 0.3s ease;
+}
+
+.footer-social .social-link:hover {
+  background: var(--accent);
+  color: #001628;
+  transform: scale(1.05);
+}
+
+/* === Flèche retour haut === */
+.scroll-top {
+  position: absolute;
+  right: 40px;
+  top: 40px;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 32px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.scroll-top:hover {
+  color: var(--accent);
+  transform: translateY(-4px);
+}
+
+/* === Responsive === */
+@media (max-width: 960px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .footer-logo,
+  .footer-contact,
+  .footer-social {
+    align-items: center;
+  }
+
+  .scroll-top {
+    right: 20px;
+    top: 20px;
+  }
+}
+
+  </style>
+</head>
+<body>
+ 
+  
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <a href="accueil.html" class="brand" aria-label="Accueil – ASTROVIA">
+        <img src="astrovia.jpg" alt="Logo ASTROVIA" class="logo-img">
+        <span>ASTROVIA</span>
+      </a>
+      <nav>
+        <button class="menu-btn" aria-expanded="false" aria-controls="navlinks">Menu</button>
+        <ul id="navlinks" class="navlinks">
+          <li><a href="accueil.html">Accueil</a></li>
+  
+          <li class="dropdown">
+            <a href="expertises.html">Nos expertises ▾</a>
+            <ul class="submenu">
+              <li><a href="consulting.html">Consulting</a></li>
+              <li><a href="cabinet-de-recrutement.html">Cabinet de recrutement</a></li>
+              <li><a href="solutions-de-fidelisation.html">Solutions de fidélisation</a></li>
+            </ul>
+          </li>
+  
+          <li><a href="valeurs.html">Nos valeurs</a></li>
+          <li><a href="qui-sommes-nous.html">Qui sommes-nous</a></li>
+  
+          <li class="dropdown">
+            <a href="rejoignez-nous.html">Rejoignez-nous ▾</a>
+            <ul class="submenu">
+              <li><a href="consulting-recrutement.html">Consulting</a></li>
+              <li><a href="cabinet-recrutement.html">Cabinet de recrutement</a></li>
+              <li><a href="candidature-spontanee.html">Candidature spontanée</a></li>
+            </ul>
+          </li>
+  
+          <li><a href="contact.html" class="cta">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  
+    <!-- Section d’intro avec fond TGV -->
+    <section id="home" class="intro-section reveal zoom-in">
+        <div class="intro-content">
+          <img src="astropng.png" alt="Logo ASTROVIA" class="intro-logo">
+          <h1 class="intro-title">INGÉNIERIE DES INFRASTRUCTURES DU TRANSPORT</h1>
+        </div>
+      </section>
+      
+  <!-- Section Présentation -->
+<section class="presentation-section reveal fade-up">
+    <div class="container">
+        <h2 class="presentation-title">
+            ASTROVIA accompagne les acteurs du transport dans leurs projets d’ingénierie
+            et met à leur disposition une expertise reconnue en recrutement spécialisé.
+          </h2>
+          <p class="presentation-subtitle">
+            Nous contribuons à la réussite de vos projets grâce à notre savoir-faire et à notre engagement.
+          </p>
+          
+      <hr class="presentation-line">
+  
+      <div class="presentation-icons">
+        <div class="icon-card">
+            <i data-lucide="lightbulb" class="icon"></i>
+            <h3>Efficacité</h3>
+          </div>
+          
+          <div class="icon-card">
+            <i data-lucide="lock" class="icon"></i>
+            <h3>Discrétion</h3>
+          </div>
+          
+          <div class="icon-card">
+            <i data-lucide="award" class="icon"></i>
+            <h3>Fiabilité</h3>
+          </div>
+          
+          <div class="icon-card">
+            <i data-lucide="trophy" class="icon"></i>
+            <h3>Expertise</h3>
+          </div>
+          
+      </div>
+    </div>
+  </section>
+  
+  <!-- Section Notre accompagnement -->
+<section class="accompagnement-section ">
+    <div class="container accompagnement">
+      
+      <!-- Colonne gauche -->
+      <div class="accompagnement-left slide-left">
+        <h2>Notre<br>accompagnement</h2>
+      </div>
+  
+      <!-- Ligne verticale centrale -->
+      <div class="accompagnement-line slide-left"></div>
+  
+      <!-- Colonne droite -->
+      <div class="accompagnement-right slide-left">
+        <!-- COURBE -->
+        <svg class="accompagnement-curve curve-path slide-left" viewBox="0 0 300 550" aria-hidden="true">
+            <!-- ✅ courbe corrigée : traverse les 3 icônes (en S, légèrement à gauche au milieu) -->
+            <path d="M150 10 C 60 160, 20 240, 150 280 S 260 440, 150 530" />
+          </svg>
+          
+      
+        <div class="accompagnement-item slide-left">
+          <a href="pres.html" class="accompagnement-item">
+          <div class="icon-circle"><i data-lucide="lightbulb"></i></div>
+          <div class="accompagnement-card">Prestation de service</div>
+        </a>
+        </div>
+      
+        <div class="accompagnement-item slide-left">
+          <a href="cabinet-recrutement.html" class="accompagnement-item">
+          <div class="icon-circle"><i data-lucide="globe"></i></div>
+          <div class="accompagnement-card">Consulting</div>
+        </a>
+        </div>
+      
+        <div class="accompagnement-item slide-left">
+          <a href="cabinet-recrutement.html" class="accompagnement-item">
+          <div class="icon-circle"><i data-lucide="handshake"></i></div>
+          <div class="accompagnement-card">Cabinet de recrutement</div>
+        </a>
+        </div>
+      </div>
+      
+      </div>
+    </div>
+  </section>
+  
+<!-- Section Nous rejoindre -->
+<section class="join-section reveal slide-left">
+    <div class="container">
+      <h2 class="join-title">Nous rejoindre</h2>
+      <hr class="join-line">
+  
+      <div class="join-grid">
+        <!-- Carte 1 -->
+        <div class="join-card">
+          <img src="Responsable de lots travaux Télécom ferroviaire.png" alt="Travaux télécom ferroviaire">
+          <h3>Responsable de lots travaux Télécom ferroviaire H/F</h3>
+        </div>
+  
+        <!-- Carte 2 -->
+        <div class="join-card">
+          <img src="Expert développement durable et procédures réglementaires.png" alt="Développement durable et réglementaire">
+          <h3>Expert développement durable et procédures réglementaires H/F</h3>
+        </div>
+  
+        <!-- Carte 3 -->
+        <div class="join-card">
+          <img src="Responsable de lots travaux voie.png" alt="Travaux voie ferroviaire">
+          <h3>Responsable de lots travaux voie H/F</h3>
+        </div>
+      </div>
+  
+      <div class="join-button">
+        <a href="#" class="btn-outline">Plus d’offres</a>
+      </div>
+    </div>
+  </section>
+  
+
+<!-- Section Contact améliorée -->
+<section class="contact-section reveal fade-up" id="contact">
+    <div class="container">
+      <h2 class="contact-title">Contact</h2>
+      <p class="contact-subtitle">Écrivez-nous pour en savoir plus.</p>
+      <hr class="contact-line">
+  
+      <h3 class="contact-form-title">Nous envoyer un message</h3>
+  
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Nom :</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+  
+          <div class="form-group">
+            <label for="email">E-mail :</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+  
+          <div class="form-group">
+            <label for="phone">Tél. :</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="message">Message :</label>
+          <textarea id="message" name="message" rows="6" required></textarea>
+        </div>
+  
+        <div class="form-actions">
+          <button type="submit" class="btn-outline">Envoyer</button>
+        </div>
+  
+        <!-- ✅ Message de validation animé -->
+        <div id="formSuccess" class="form-success">
+          <div class="success-icon">
+            <svg viewBox="0 0 52 52"><path d="M14 27l7 7 17-17" /></svg>
+          </div>
+          <p>Message envoyé avec succès !</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- === Footer professionnel === -->
+<footer class="footer">
+    <div class="container footer-grid">
+      
+      <!-- Logo et nom -->
+      <div class="footer-logo">
+        <img src="astrovia.jpg" alt="Logo ASTROVIA">
+        <h3>ASTROVIA</h3>
+      </div>
+  
+      <!-- Informations de contact -->
+      <div class="footer-contact">
+        <h4>Contact</h4>
+        <p>Où nous trouver :<br>
+          158 Chemin du Rival Escur, 81800 RABASTENS, France
+        </p>
+        <p>Nous appeler :<br>
+          <a href="tel:+33648283477">06 48 28 34 77</a>
+        </p>
+        <p>E-mail :<br>
+          <a href="mailto:contact@astrovia.fr">contact@astrovia.fr</a>
+        </p>
+      </div>
+  
+      <!-- Réseaux sociaux -->
+      <div class="footer-social">
+        <h4>Suivez-nous</h4>
+        <a href="#" class="social-link" aria-label="LinkedIn ASTROVIA">
+          <i data-lucide="linkedin"></i>
+        </a>
+      </div>
+  
+      <!-- Bouton retour haut -->
+      <a href="#top" class="scroll-top" aria-label="Remonter en haut">
+        <i data-lucide="arrow-up"></i>
+      </a>
+    </div>
+  </footer>
+  
+  
+
+  <!-- Hero -->
+  <section class="hero" id="home" aria-label="Présentation">
+    <div class="container wrap">
+      <div>
+        <span class="eyebrow">Ingénierie des infrastructures du transport</span>
+        <h1>Conseil & Recrutement pour vos projets ferroviaires et mobilité</h1>
+        <p class="subtitle">Nous accompagnons maîtres d'ouvrage et entreprises dans la réussite de leurs projets : conseil opérationnel, assistance à maîtrise d'ouvrage, recrutement spécialisé et solutions de fidélisation.</p>
+        <div class="points">
+          <span class="chip">AMO • MOE</span>
+          <span class="chip">Signalisation & Télécom</span>
+          <span class="chip">Voie • Caténaire</span>
+          <span class="chip">Environnement & RSE</span>
+        </div>
+        <div class="grid cols-2" style="margin-top:18px">
+          <div class="hero-card stat">
+            <div style="font-weight:800">★</div>
+            <div>
+              <strong>98%</strong><br><span class="muted">missions reconduites</span>
+            </div>
+          </div>
+          <div class="hero-card stat">
+            <div style="font-weight:800">⏱</div>
+            <div>
+              <strong>10+ ans</strong><br><span class="muted">d'expertise transport</span>
+            </div>
+          </div>
+        </div>
+        <p style="margin-top:14px"><a class="btn primary" href="#contact">Parler à un expert</a> <a class="btn" href="#expertises">Voir nos expertises</a></p>
+      </div>
+      <div class="hero-illustration">
+        <svg width="240" height="240" viewBox="0 0 240 240" fill="none" aria-hidden="true">
+          <rect x="20" y="60" width="200" height="120" rx="12" stroke="currentColor" opacity=".25"/>
+          <circle cx="60" cy="180" r="10" fill="currentColor" opacity=".35"/>
+          <circle cx="180" cy="180" r="10" fill="currentColor" opacity=".35"/>
+          <path d="M30 140H210" stroke="currentColor" opacity=".3"/>
+          <path d="M30 120H210" stroke="currentColor"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Expertises -->
+  <section id="expertises" aria-label="Nos expertises">
+    <div class="container">
+      <h2>Nos expertises</h2>
+      <p class="lead">Trois pôles complémentaires pour couvrir l'ensemble du cycle de vie de vos projets : conseil, recrutement, et fidélisation des talents.</p>
+      <div class="grid cols-3" style="margin-top:18px">
+        <article class="card">
+          <h3>Consulting</h3>
+          <p>Assistance à maîtrise d'ouvrage et pilotage de projets : planification, gestion des risques, coordination technique, sécurité ferroviaire.</p>
+          <ul>
+            <li>Direction de projet & PMO</li>
+            <li>Ingénierie systèmes (voie, caténaire, télécom)</li>
+            <li>Qualité, coûts, délais</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Cabinet de recrutement</h3>
+          <p>Chasse et évaluation de profils rares du secteur : ingénieurs, conducteurs de travaux, experts signalisation & environnement.</p>
+          <ul>
+            <li>Approche directe</li>
+            <li>Évaluation & mises en situation</li>
+            <li>Accompagnement à l'intégration</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Solution de fidélisation</h3>
+          <p>Programmes sur mesure pour engager, fidéliser et faire monter en compétences vos équipes dans la durée.</p>
+          <ul>
+            <li>Parcours d'onboarding</li>
+            <li>Coaching & mentoring</li>
+            <li>Mesure de l'engagement</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="expertise" style="margin-top:28px">
+        <div class="steps">
+          <div class="step"><strong>01. Cadrage</strong><br><span class="muted">Analyse du besoin, objectifs, risques, parties prenantes.</span></div>
+          <div class="step"><strong>02. Déploiement</strong><br><span class="muted">Lotissement, jalons, coordination fournisseurs et terrain.</span></div>
+          <div class="step"><strong>03. Transfert</strong><br><span class="muted">Capitalisation, documentation, formation & passage de relais.</span></div>
+        </div>
+        <div class="card">
+          <h3>Exemples de missions</h3>
+          <p class="muted">Quelques cas d'usage récents illustrant notre démarche.</p>
+          <ul>
+            <li>Modernisation d'une ligne régionale – pilotage MOE pluridisciplinaire</li>
+            <li>Déploiement GSM‑R – coordination Télécom & Signalisation</li>
+            <li>Accompagnement recrutement de 15 ingénieurs travaux</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Valeurs -->
+  <section id="valeurs" aria-label="Nos valeurs">
+    <div class="container">
+      <h2>Nos valeurs</h2>
+      <p class="lead">Efficacité, discrétion, fiabilité et expertise. Des engagements concrets au service de la performance de vos projets.</p>
+      <div class="grid cols-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:18px">
+        <div class="card value"><div class="icon">✓</div><div><h3>Efficacité</h3><p class="muted">Des résultats rapides et mesurables.</p></div></div>
+        <div class="card value"><div class="icon">∞</div><div><h3>Discrétion</h3><p class="muted">Confidentialité totale sur vos enjeux.</p></div></div>
+        <div class="card value"><div class="icon">★</div><div><h3>Fiabilité</h3><p class="muted">Engagements tenus, sans surprise.</p></div></div>
+        <div class="card value"><div class="icon">λ</div><div><h3>Expertise</h3><p class="muted">Haute technicité sectorielle.</p></div></div>
+      </div>
+
+      <div style="margin-top:22px">
+        <details>
+          <summary>Quelle est notre couverture géographique ?</summary>
+          <p class="muted">Interventions partout en France, avec possibilité d'engagements ponctuels à l'international.</p>
+        </details>
+        <details>
+          <summary>Travaillez‑vous en forfait ou en régie ?</summary>
+          <p class="muted">Les deux sont possibles selon le besoin : régie, assistance technique, ou engagement au forfait.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- À propos -->
+  <section id="about" aria-label="Qui sommes‑nous ?">
+    <div class="container">
+      <h2>Qui sommes‑nous ?</h2>
+      <div class="grid cols-2" style="margin-top:12px">
+        <div class="card">
+          <p>Cabinet indépendant rassemblant des experts du ferroviaire et des infrastructures de transport. Nous intervenons de la définition à la mise en service des projets, avec un fort accent sur la maîtrise des risques et la sécurité.</p>
+          <ul>
+            <li>Culture chantier et terrain</li>
+            <li>Réseau d'experts mobilisables rapidement</li>
+            <li>Méthodes éprouvées et documentation claire</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Chiffres clés</h3>
+          <div class="grid cols-2">
+            <div class="hero-card stat"><div style="font-weight:800">👥</div><div><strong>250+</strong><br><span class="muted">candidats en vivier</span></div></div>
+            <div class="hero-card stat"><div style="font-weight:800">🛤</div><div><strong>40+</strong><br><span class="muted">projets accompagnés</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recrutement / Offres -->
+  <section id="jobs" aria-label="Nous rejoindre">
+    <div class="container">
+      <h2>Nous rejoindre</h2>
+      <p class="lead">Découvrez quelques opportunités du moment. Intéressé(e) ? Envoyez votre CV ou candidatez spontanément.</p>
+      <div class="grid cols-3" style="margin-top:18px">
+        <article class="card job">
+          <h3>Responsable de lots travaux Télécom ferroviaire H/F</h3>
+          <div class="tags"><span class="tag">CDI</span><span class="tag">Île‑de‑France</span><span class="tag">Télécom</span></div>
+          <p class="muted">Pilotage des travaux télécom (GSM‑R, fibre, transmission), coordination sous‑traitants, sécurité chantier.</p>
+          <div class="actions"><a class="btn primary" href="#contact">Postuler</a><a class="btn" href="#">Voir le détail</a></div>
+        </article>
+        <article class="card job">
+          <h3>Expert développement durable & procédures réglementaires H/F</h3>
+          <div class="tags"><span class="tag">Mission</span><span class="tag">Occitanie</span><span class="tag">Environnement</span></div>
+          <p class="muted">Études d'impact, dossiers réglementaires, suivi environnemental en phase travaux.</p>
+          <div class="actions"><a class="btn primary" href="#contact">Postuler</a><a class="btn" href="#">Voir le détail</a></div>
+        </article>
+        <article class="card job">
+          <h3>Responsable de lots travaux voie H/F</h3>
+          <div class="tags"><span class="tag">CDI</span><span class="tag">Nouvelle‑Aquitaine</span><span class="tag">Voie</span></div>
+          <p class="muted">Supervision des travaux voie, planification, coordination MOE/MOA, suivi qualité et sécurité.</p>
+          <div class="actions"><a class="btn primary" href="#contact">Postuler</a><a class="btn" href="#">Voir le détail</a></div>
+        </article>
+      </div>
+      <p style="margin-top:12px"><a class="btn" href="#contact">Plus d'offres →</a></p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" aria-label="Contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <p class="lead">Écrivez‑nous pour en savoir plus. Nous reviendrons vers vous rapidement.</p>
+      <form id="contactForm" novalidate>
+        <div class="form-row">
+          <div>
+            <label for="name">Nom</label>
+            <input id="name" name="name" placeholder="Votre nom" required />
+          </div>
+          <div>
+            <label for="email">E‑mail</label>
+            <input id="email" name="email" type="email" placeholder="vous@exemple.com" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label for="phone">Tél.</label>
+            <input id="phone" name="phone" placeholder="06 12 34 56 78" />
+          </div>
+          <div>
+            <label for="topic">Sujet</label>
+            <input id="topic" name="topic" placeholder="Votre besoin" />
+          </div>
+        </div>
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Décrivez votre projet…" required></textarea>
+          <p class="note">En envoyant ce formulaire, vous acceptez d'être recontacté(e) par e‑mail ou téléphone.</p>
+        </div>
+        <button class="btn primary" type="submit">Envoyer</button>
+        <div id="formOk" class="form-status" style="color:var(--ok)">Merci ! Votre message a bien été envoyé.</div>
+        <div id="formErr" class="form-status" style="color:var(--error)">Oups, une erreur est survenue. Réessayez plus tard.</div>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <div>© <span id="year"></span> Consultra. Tous droits réservés.</div>
+      <div>
+        <a href="#">Mentions légales</a> · <a href="#">Politique de confidentialité</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+
+
+
+      lucide.createIcons();
+      
+      
+  
+      
+  // --- Observateur général pour toutes les animations ---
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  // Observer général pour les effets de section
+  document.querySelectorAll('.fade-up, .slide-left, .slide-right, .zoom-in, .join-card, .reveal')
+    .forEach(el => observer.observe(el));
+
+
+  // --- Observateur séparé juste pour la courbe SVG ---
+  // --- Animation de la courbe déclenchée seulement à l’arrivée sur la section ---
+const accompagnementSection = document.querySelector('.accompagnement-section');
+if (accompagnementSection) {
+  const curvePath = accompagnementSection.querySelector('.accompagnement-curve path');
+
+  // on s'assure que la courbe est réinitialisée au départ
+  curvePath.style.animation = 'none';
+
+  const observerCourbe = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // ⏳ lance l’animation de ton tracé existant
+        curvePath.style.animation = 'drawCurve 2.8s ease-out forwards';
+
+        // ✅ ensuite, on stoppe l’observateur
+        observerCourbe.unobserve(accompagnementSection);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  observerCourbe.observe(accompagnementSection);
+}
+
+
+
+
+
+    // Mobile menu toggle
+    const menuBtn = document.querySelector('.menu-btn');
+    const navlinks = document.getElementById('navlinks');
+    if(menuBtn){
+      menuBtn.addEventListener('click', ()=>{
+        navlinks.classList.toggle('show');
+        const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+        menuBtn.setAttribute('aria-expanded', String(!expanded));
+      });
+    }
+    // Mobile dropdown behavior
+document.querySelectorAll('.dropdown > a').forEach(link => {
+  link.addEventListener('click', e => {
+    if (window.innerWidth <= 960) {
+      e.preventDefault();
+      const parent = link.parentElement;
+      parent.classList.toggle('open');
+    }
+  });
+});
+
+
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Fake form submit (front only). Replace with your backend endpoint.
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const ok = document.getElementById('formOk');
+      const err = document.getElementById('formErr');
+      ok.classList.remove('show');
+      err.classList.remove('show');
+
+      // Simple validation
+      const email = document.getElementById('email').value.trim();
+      const name = document.getElementById('name').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if(!name || !emailRegex.test(email) || message.length < 10){
+        err.textContent = 'Merci de vérifier les champs requis.';
+        err.classList.add('show');
+        return;
+      }
+
+      // Simulate request
+      try{
+        await new Promise(r=>setTimeout(r,800));
+        ok.classList.add('show');
+        form.reset();
+      }catch(ex){
+        err.classList.add('show');
+      }
+    });
+
+    // --- Animation de validation réussie ---
+const contactForm = document.getElementById('contactForm');
+const formSuccess = document.getElementById('formSuccess');
+
+if (contactForm) {
+  contactForm.addEventListener('submit', e => {
+    e.preventDefault();
+
+    // Simulation d’envoi (tu pourras remplacer par un vrai appel backend)
+    contactForm.querySelector('button').disabled = true;
+
+    setTimeout(() => {
+      contactForm.reset();
+
+      // Affiche l'animation de succès
+      formSuccess.classList.add('show');
+
+      // Réactive le bouton après l'animation
+      contactForm.querySelector('button').disabled = false;
+
+      // Cache le message après 4s
+      setTimeout(() => {
+        formSuccess.classList.remove('show');
+      }, 4000);
+    }, 1200);
+  });
+}
+
+
+  </script>
+</body>
+</html>

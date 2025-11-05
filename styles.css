@@ -1,0 +1,1303 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  scroll-padding-top: 0 !important;
+  overflow-x: hidden;
+}
+
+/* Fixe la section d'intro juste sous le header sans décalage */
+.intro-section {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+    :root{
+      --bg:#0c1020;          /* bleu nuit profond */
+      --bg-soft:#111634;     /* bleu plus doux */
+      --text:#e8ecf5;        /* texte principal */
+      --muted:#b9c2d6;       /* texte secondaire */
+      --accent:#6bd3ff;      /* bleu cyan accent */
+      --accent-2:#00b884;    /* vert accent secondaire */
+      --card:#151a3f;
+      --line:rgba(255,255,255,.08);
+      --warn:#f7b500;
+      --error:#ff5a5f;
+      --ok:#2ecc71;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',sans-serif;background:radial-gradient(1200px 600px at 10% -10%,rgba(107,211,255,.15),transparent 50%), radial-gradient(800px 400px at 90% -10%,rgba(0,184,132,.12),transparent 50%), var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1200px,92%);margin-inline:auto}
+
+    /* Header */
+    header {
+  position: fixed;        /* ✅ reste visible tout le temps */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;          /* au-dessus de tout */
+  background: rgba(12,16,32,0.85); /* fond semi-transparent */
+  backdrop-filter: blur(10px);     /* effet de flou doux */
+  border-bottom: 1px solid var(--line);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.3px}
+    .brand .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;color:#001628;font-weight:900}
+    .logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+    .nav a{color:var(--text);opacity:.9}
+    .navlinks{display:flex;gap:18px;align-items:center}
+    .navlinks a{padding:8px 10px;border-radius:10px}
+    .navlinks a:hover{background:var(--line)}
+    /* Dropdown menu */
+.navlinks ul, .navlinks li { list-style: none; margin: 0; padding: 0; }
+.navlinks > li { position: relative; }
+
+.dropdown > a::after {
+  content: "";
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(17, 22, 52, 0.95);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 0;
+  box-shadow: var(--shadow);
+  min-width: 220px;
+}
+
+.submenu li a {
+  display: block;
+  padding: 8px 14px;
+  color: var(--text);
+  opacity: 0.9;
+}
+
+.submenu li a:hover {
+  background: var(--line);
+}
+
+.dropdown:hover .submenu {
+  display: block;
+}
+
+/* Pour mobile : sous-menus visibles dans le menu déroulant */
+@media (max-width: 960px) {
+  .navlinks li { width: 100%; }
+  .submenu {
+    position: static;
+    display: none;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding-left: 10px;
+  }
+  .dropdown.open .submenu {
+    display: block;
+  }
+}
+
+    .cta{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#001628 !important;padding:10px 14px;border-radius:12px;font-weight:700}
+    .menu-btn{display:none}
+
+  
+/* --- Section d'intro ASTROVIA --- */
+.intro-section {
+  position: relative;
+  min-height: 100vh; /* ✅ prend toujours au moins toute la hauteur de l’écran */
+  width: 100%;
+  background: 
+  linear-gradient(rgba(8,12,28,0.25), rgba(8,12,28,0.35)),
+  url('plan.png') center center no-repeat;
+  background-size: cover; /* ✅ étend l’image sans déformation */
+  background-attachment: scroll; /* effet de profondeur fluide */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  color: var(--text);
+  padding: 40px 20px; /* un peu d’air pour éviter que le contenu touche les bords */
+}
+
+
+
+/* filtre sombre pour lisibilité */
+.intro-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 12, 28, 0.6);
+  z-index: 0;
+}
+
+.intro-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: fadeInUp 1.8s ease forwards;
+}
+
+.intro-logo {
+  width: clamp(320px, 50vw, 600px);
+  height: auto;
+  margin-bottom: 10px;
+  opacity: 0;
+  animation: zoomIn 1.8s ease forwards; /* ✅ "forwards" garde le dernier état */
+}
+
+
+.intro-title {
+  font-size: clamp(26px, 3vw, 42px); /* texte plus grand */
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  color: var(--accent);
+  text-shadow: 0 4px 12px rgba(0,0,0,0.8);
+  opacity: 0;
+  animation: fadeInText 2.2s ease forwards 0.6s; /* léger décalage */
+}
+
+/* --- Animations fluides --- */
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1; /* ✅ le logo reste visible */
+  }
+}
+
+
+@keyframes fadeInText {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Section Présentation (sous le logo) --- */
+.presentation-section {
+  background: var(--bg);
+  color: var(--text);
+  text-align: center;
+  padding: 100px 20px 80px;
+  border-top: 1px solid var(--line);
+}
+
+.presentation-title {
+  font-size: clamp(20px, 2.4vw, 28px);
+  font-weight: 500;
+  max-width: 900px;
+  margin: 0 auto 14px;
+  line-height: 1.5;
+}
+
+.presentation-subtitle {
+  font-size: 18px;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.presentation-line {
+  width: 80px;
+  height: 2px;
+  margin: 0 auto 50px;
+  border: none;
+  background: var(--accent);
+  border-radius: 999px;
+}
+
+/* Icônes */
+/* --- Icônes plus grandes et plus lisibles --- */
+.presentation-icons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* colonnes plus larges */
+  gap: 60px; /* plus d’espace entre les blocs */
+  justify-items: center;
+  align-items: start;
+}
+
+.icon-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px; /* plus d’air entre icône et texte */
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.icon-card:hover {
+  transform: translateY(-8px);
+}
+
+.icon {
+  width: 70px;   /* ✅ taille des icônes agrandie */
+  height: 70px;
+  color: var(--accent);
+  stroke-width: 2; /* traits plus épais = meilleure visibilité */
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.icon-card h3 {
+  font-size: 22px; /* ✅ texte plus grand */
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.icon-card:hover .icon {
+  transform: scale(1.15);
+  color: var(--accent-2);
+}
+
+
+/* --- Section Notre accompagnement (corrigée + animée) --- */
+.accompagnement-section {
+  background: var(--bg);
+  color: var(--text);
+  padding: 140px 20px; /* réduit un peu le padding vertical */
+  position: relative;
+}
+
+.accompagnement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 90px; /* ✅ réduit l’espace entre le texte et les icônes */
+  position: relative;
+  flex-wrap: wrap;
+}
+
+/* ---- Colonne gauche ---- */
+.accompagnement-left {
+  flex: 0 0 28%; /* un peu plus compact */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.accompagnement-left h2 {
+  font-size: clamp(36px, 3.5vw, 54px);
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1.2;
+}
+
+/* ---- Colonne droite ---- */
+.accompagnement-right {
+  position: relative;
+  flex: 0 0 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 110px; /* espace vertical entre les icônes */
+  padding-left: 80px; /* ✅ réduit le décalage global */
+}
+
+/* ---- Courbe SVG ---- */
+.accompagnement-curve {
+  position: absolute;
+  left: 30px;
+  top: -10px;
+  width: 240px;
+  height: 480px;
+  z-index: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.accompagnement-curve path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  opacity: 0.6;
+  stroke-dasharray: 1000;      /* pour animer le tracé */
+  stroke-dashoffset: 1000;
+  animation: drawCurve 2.8s ease-out forwards; /* ✅ animation fluide */
+}
+
+/* --- Animation du tracé de la courbe --- */
+@keyframes drawCurve {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ---- Items (icônes + texte) ---- */
+.accompagnement-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  z-index: 1;
+}
+
+/* Ajustements pour aligner la courbe sur les icônes */
+/* Première icône */
+.accompagnement-item:nth-child(2) {
+  margin-left: 0;
+}
+
+/* Deuxième icône (Consulting) → plus à droite que les autres */
+.accompagnement-item:nth-child(3) {
+  margin-left: 40px;  /* ✅ elle avance à droite, la courbe la traverse parfaitement */
+}
+
+/* Troisième icône */
+.accompagnement-item:nth-child(4) {
+  margin-left: 5px;
+}
+
+
+
+
+/* ---- Icône ---- */
+.icon-circle {
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #001628;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+
+.icon-circle i {
+  width: 42px;
+  height: 42px;
+  stroke-width: 2.2;
+}
+
+/* ---- Texte associé ---- */
+.accompagnement-card {
+  background: var(--accent);
+  color: #001628;
+  font-weight: 700;
+  padding: 20px 36px;
+  border-radius: 16px;
+  font-size: 22px;
+  min-width: 290px; /* ✅ réduit légèrement pour éviter dépassement */
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* ---- Animation liée icône + texte ---- */
+.accompagnement-item:hover .icon-circle,
+.accompagnement-item:hover .accompagnement-card {
+  background: var(--accent-2);
+  color: #fff;
+}
+.accompagnement-item:hover .icon-circle {
+  transform: scale(1.12);
+}
+.accompagnement-item:hover .accompagnement-card {
+  transform: translateX(10px);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 960px) {
+  .accompagnement {
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+  }
+  .accompagnement-left {
+    text-align: center;
+  }
+  .accompagnement-right {
+    padding-left: 0;
+    align-items: center;
+    gap: 60px;
+  }
+  .accompagnement-curve {
+    display: none;
+  }
+  .accompagnement-item:nth-child(2),
+  .accompagnement-item:nth-child(3),
+  .accompagnement-item:nth-child(4) {
+    margin-left: 0;
+  }
+}
+
+
+/* --- Section Nous rejoindre --- */
+.join-section {
+  background: var(--bg);
+  color: var(--text);
+  text-align: center;
+  padding: 120px 20px 100px;
+  border-top: 1px solid var(--line);
+}
+
+.join-title {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.join-line {
+  width: 90%;
+  max-width: 800px;
+  height: 2px;
+  background: var(--line);
+  border: none;
+  margin: 0 auto 60px;
+}
+
+.join-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  justify-items: center;
+  align-items: start;
+  margin-bottom: 60px;
+}
+/* --- Animation d'apparition au scroll (version fluide et progressive) --- */
+.join-card {
+  opacity: 0;
+  transform: translateY(60px);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  max-width: 360px;
+  will-change: opacity, transform;
+
+  /* ✅ combine tout ici */
+  transition: 
+    opacity 2s cubic-bezier(0.19, 1, 0.22, 1),
+    transform 2s cubic-bezier(0.19, 1, 0.22, 1),
+    box-shadow 0.3s ease;
+}
+
+
+.join-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
+
+.join-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.join-card h3 {
+  padding: 18px 14px 22px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+/* Animation au survol */
+.join-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+
+.join-card:hover img {
+  transform: scale(1.06);
+}
+
+/* --- Bouton Plus d’offres --- */
+.join-button {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-outline {
+  display: inline-block;
+  padding: 12px 26px;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--accent-2);
+  border: 2px solid var(--accent-2);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: var(--accent-2);
+  color: #001628;
+}
+
+/* --- Animation d'apparition au scroll --- */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Animation d'apparition globale pour toutes les sections --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px) scale(0.98);
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  will-change: opacity, transform;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* --- Apparition fluide globale --- */
+.fade-up, .slide-left, .slide-right, .zoom-in {
+  opacity: 0;
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  will-change: opacity, transform;
+}
+
+/* Effets de départ */
+.fade-up { transform: translateY(60px); }
+.slide-left { transform: translateX(-80px); }
+.slide-right { transform: translateX(80px); }
+.zoom-in { transform: scale(0.9); }
+
+/* Quand l’élément devient visible */
+.fade-up.visible,
+.slide-left.visible,
+.slide-right.visible,
+.zoom-in.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Animation du tracé de la courbe */
+.curve-path {
+  stroke: var(--accent);
+  stroke-width: 2px;
+  fill: none;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 3.5s ease-in-out;
+}
+
+/* Quand on scrolle jusqu’à la section */
+.curve-path.animate {
+  stroke-dashoffset: 0;
+}
+
+/* --- Section Contact (nouvelle version stylisée) --- */
+.contact-section {
+  background: var(--bg);
+  color: var(--text);
+  padding: 120px 20px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+
+.contact-title {
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.contact-subtitle {
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.contact-line {
+  width: 60px;
+  height: 2px;
+  background: var(--accent);
+  border: none;
+  border-radius: 999px;
+  margin: 0 auto 60px;
+}
+
+.contact-form-title {
+  font-size: 22px;
+  font-weight: 700;
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+/* --- Formulaire --- */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #0e1330;
+  color: var(--text);
+  font-size: 16px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(107,211,255,0.2);
+}
+
+/* --- Bouton --- */
+.form-actions {
+  text-align: right;
+}
+
+.btn-outline {
+  padding: 12px 32px;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--accent-2);
+  border: 2px solid var(--accent-2);
+  border-radius: 12px;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: var(--accent-2);
+  color: #001628;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .contact-form-title {
+    text-align: center;
+  }
+  .form-actions {
+    text-align: center;
+  }
+}
+/* --- Section Contact (version améliorée) --- */
+.contact-section {
+  background: var(--bg);
+  color: var(--text);
+  padding: 120px 20px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+
+.contact-title {
+  font-size: clamp(34px, 4vw, 48px);
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.contact-subtitle {
+  color: var(--muted);
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+
+.contact-line {
+  width: 70px;
+  height: 2px;
+  background: var(--accent);
+  border: none;
+  border-radius: 999px;
+  margin: 0 auto 60px;
+}
+
+.contact-form-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 36px;
+  text-align: center;
+  color: var(--accent);
+}
+
+/* --- Formulaire stylisé --- */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 950px;
+  margin: 0 auto;
+  text-align: left;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 40px 50px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+  transition: all 0.4s ease;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #0e1330;
+  color: var(--text);
+  font-size: 17px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(107,211,255,0.25);
+}
+
+/* --- Bouton Envoyer --- */
+.form-actions {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn-outline {
+  padding: 14px 36px;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--accent-2);
+  border: 2px solid var(--accent-2);
+  border-radius: 14px;
+  background: transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-outline:hover {
+  background: var(--accent-2);
+  color: #001628;
+  transform: scale(1.03);
+}
+
+/* ✅ Animation de validation réussie */
+.form-success {
+  display: none;
+  text-align: center;
+  margin-top: 30px;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.form-success.show {
+  display: block;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.success-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background: var(--accent-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: popIn 0.6s ease forwards;
+}
+
+.success-icon svg {
+  width: 36px;
+  height: 36px;
+  stroke: #001628;
+  stroke-width: 5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: drawCheck 0.8s ease forwards 0.3s;
+}
+
+.form-success p {
+  color: var(--accent-2);
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 4px;
+}
+
+@keyframes drawCheck {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  80% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .contact-form {
+    padding: 30px 24px;
+  }
+  .contact-form-title {
+    font-size: 22px;
+  }
+}
+
+/* === Footer professionnel === */
+.footer {
+  background: var(--bg);
+  color: var(--text);
+  border-top: 1px solid var(--line);
+  padding: 60px 20px 30px;
+  position: relative;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.footer-logo img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.footer-logo h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.footer-contact h4,
+.footer-social h4 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.footer-contact p {
+  margin: 8px 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.footer-contact a {
+  color: var(--accent-2);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-contact a:hover {
+  color: var(--accent);
+}
+
+/* === Icône LinkedIn === */
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.footer-social .social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  font-size: 24px;
+  transition: all 0.3s ease;
+}
+
+.footer-social .social-link:hover {
+  background: var(--accent);
+  color: #001628;
+  transform: scale(1.05);
+}
+
+/* === Flèche retour haut === */
+.scroll-top {
+  position: absolute;
+  right: 40px;
+  top: 40px;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 32px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.scroll-top:hover {
+  color: var(--accent);
+  transform: translateY(-4px);
+}
+
+/* === Responsive === */
+@media (max-width: 960px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .footer-logo,
+  .footer-contact,
+  .footer-social {
+    align-items: center;
+  }
+
+  .scroll-top {
+    right: 20px;
+    top: 20px;
+  }
+}
+
+/* === MENU MOBILE PRO === */
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 34px;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.menu-btn:hover {
+  color: var(--accent-2);
+  transform: scale(1.1);
+}
+
+@media (max-width: 960px) {
+  .menu-btn {
+    display: block;
+  }
+
+  .navlinks {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: rgba(12, 16, 32, 0.98);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 80px 28px;
+    gap: 20px;
+    transition: right 0.4s ease;
+    z-index: 2000;
+    box-shadow: -6px 0 20px rgba(0,0,0,0.5);
+  }
+
+  .navlinks.show {
+    right: 0;
+  }
+
+  .navlinks a {
+    font-size: 18px;
+    color: var(--text);
+    text-decoration: none;
+    padding: 10px 0;
+    width: 100%;
+  }
+
+  .navlinks a:hover {
+    color: var(--accent);
+  }
+
+  .menu-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 32px;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .menu-close:hover {
+    color: var(--accent-2);
+    transform: scale(1.1);
+  }
+
+  .submenu {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    padding-left: 14px;
+  }
+
+  .dropdown.open .submenu {
+    display: flex;
+  }
+}
+
+/* ✅ Bouton "X" uniquement sur mobile */
+.menu-close {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .menu-close {
+    display: block;
+  }
+}
+
+
+
+
+/* ✅ Fixe la zone cliquable du bouton X */
+.menu-close {
+  display: none; /* caché sur PC */
+}
+
+@media (max-width: 960px) {
+  .menu-close {
+    display: flex;               /* ✅ pour centrer l’icône */
+    align-items: center;
+    justify-content: center;
+    width: 48px;                 /* ✅ surface cliquable */
+    height: 48px;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 32px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    z-index: 2100;               /* ✅ au-dessus du reste du menu */
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .menu-close:hover {
+    color: var(--accent-2);
+    transform: scale(1.1);
+  }
+
+  .menu-close i {
+    pointer-events: none;        /* ✅ pour éviter les décalages de clic */
+  }
+}
+
+
+
+/* --- CARTES D’EXPERTISE PROFESSIONNELLES --- */
+.expertises-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 50px;
+  justify-items: center;
+}
+
+.expertise-card {
+  position: relative;
+  background: linear-gradient(180deg, var(--card) 0%, #0f1435 100%);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+  max-width: 380px;
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.expertise-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.expertise-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.expertise-card:hover img {
+  transform: scale(1.08);
+}
+
+.expertise-card-content {
+  padding: 26px 24px 32px;
+  text-align: left;
+  position: relative;
+  z-index: 2;
+}
+
+.expertise-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent-2);
+  margin-bottom: 10px;
+  transition: color 0.3s ease;
+}
+
+.expertise-card p {
+  font-size: 15.5px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* --- Effet lumineux au survol --- */
+.expertise-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top center, rgba(107,211,255,0.12), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.expertise-card:hover::before {
+  opacity: 1;
+}
+
+.expertise-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+  border-color: var(--accent);
+}
+
+.expertise-card:hover h3 {
+  color: var(--accent);
+}
+
+/* --- Animation fluide au scroll --- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.expertise-card.visible {
+  animation: fadeUp 1.2s ease forwards;
+}
+
+
+
+
+/* --- Cartes cliquables --- */
+.expertise-card {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.expertise-card:hover {
+  text-decoration: none;
+}
+
+.expertise-card h3,
+.expertise-card p {
+  color: inherit;
+}
+
+
+
+/* --- Effet premium au survol du titre --- */
+.expertise-card:hover h3 {
+  color: var(--accent);
+  text-shadow: 0 0 8px rgba(107, 211, 255, 0.6);
+  transition: color 0.3s ease, text-shadow 0.4s ease;
+}

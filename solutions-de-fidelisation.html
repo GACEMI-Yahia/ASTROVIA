@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulting – ASTROVIA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+
+  <style>
+    html, body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  scroll-padding-top: 0 !important;
+  overflow-x: hidden;
+}
+
+
+    :root{
+      --bg:#0c1020;          /* bleu nuit profond */
+      --bg-soft:#111634;     /* bleu plus doux */
+      --text:#e8ecf5;        /* texte principal */
+      --muted:#b9c2d6;       /* texte secondaire */
+      --accent:#6bd3ff;      /* bleu cyan accent */
+      --accent-2:#00b884;    /* vert accent secondaire */
+      --card:#151a3f;
+      --line:rgba(255,255,255,.08);
+      --warn:#f7b500;
+      --error:#ff5a5f;
+      --ok:#2ecc71;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',sans-serif;background:radial-gradient(1200px 600px at 10% -10%,rgba(107,211,255,.15),transparent 50%), radial-gradient(800px 400px at 90% -10%,rgba(0,184,132,.12),transparent 50%), var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1200px,92%);margin-inline:auto}
+
+    /* Header */
+    header {
+  position: fixed;        /* ✅ reste visible tout le temps */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;          /* au-dessus de tout */
+  background: rgba(12,16,32,0.85); /* fond semi-transparent */
+  backdrop-filter: blur(10px);     /* effet de flou doux */
+  border-bottom: 1px solid var(--line);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.3px}
+    .brand .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;color:#001628;font-weight:900}
+    .logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+    .nav a{color:var(--text);opacity:.9}
+    .navlinks{display:flex;gap:18px;align-items:center}
+    .navlinks a{padding:8px 10px;border-radius:10px}
+    .navlinks a:hover{background:var(--line)}
+    /* Dropdown menu */
+.navlinks ul, .navlinks li { list-style: none; margin: 0; padding: 0; }
+.navlinks > li { position: relative; }
+
+.dropdown > a::after {
+  content: "";
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(17, 22, 52, 0.95);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 0;
+  box-shadow: var(--shadow);
+  min-width: 220px;
+}
+
+.submenu li a {
+  display: block;
+  padding: 8px 14px;
+  color: var(--text);
+  opacity: 0.9;
+}
+
+.submenu li a:hover {
+  background: var(--line);
+}
+
+.dropdown:hover .submenu {
+  display: block;
+}
+
+/* Pour mobile : sous-menus visibles dans le menu déroulant */
+@media (max-width: 960px) {
+  .navlinks li { width: 100%; }
+  .submenu {
+    position: static;
+    display: none;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding-left: 10px;
+  }
+  .dropdown.open .submenu {
+    display: block;
+  }
+}
+
+    .cta{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#001628 !important;padding:10px 14px;border-radius:12px;font-weight:700}
+    .menu-btn{display:none}
+
+
+
+
+
+
+/* --- Animation d'apparition au scroll --- */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Animation d'apparition globale pour toutes les sections --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px) scale(0.98);
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  will-change: opacity, transform;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* --- Apparition fluide globale --- */
+.fade-up, .slide-left, .slide-right, .zoom-in {
+  opacity: 0;
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  will-change: opacity, transform;
+}
+
+/* Effets de départ */
+.fade-up { transform: translateY(60px); }
+.slide-left { transform: translateX(-80px); }
+.slide-right { transform: translateX(80px); }
+.zoom-in { transform: scale(0.9); }
+
+/* Quand l’élément devient visible */
+.fade-up.visible,
+.slide-left.visible,
+.slide-right.visible,
+.zoom-in.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Animation du tracé de la courbe */
+.curve-path {
+  stroke: var(--accent);
+  stroke-width: 2px;
+  fill: none;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 3.5s ease-in-out;
+}
+
+/* Quand on scrolle jusqu’à la section */
+.curve-path.animate {
+  stroke-dashoffset: 0;
+}
+
+
+
+/* === Footer professionnel === */
+.footer {
+  background: var(--bg);
+  color: var(--text);
+  border-top: 1px solid var(--line);
+  padding: 60px 20px 30px;
+  position: relative;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.footer-logo img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.footer-logo h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.footer-contact h4,
+.footer-social h4 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.footer-contact p {
+  margin: 8px 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.footer-contact a {
+  color: var(--accent-2);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-contact a:hover {
+  color: var(--accent);
+}
+
+/* === Icône LinkedIn === */
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.footer-social .social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  font-size: 24px;
+  transition: all 0.3s ease;
+}
+
+.footer-social .social-link:hover {
+  background: var(--accent);
+  color: #001628;
+  transform: scale(1.05);
+}
+
+/* === Flèche retour haut === */
+.scroll-top {
+  position: absolute;
+  right: 40px;
+  top: 40px;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 32px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.scroll-top:hover {
+  color: var(--accent);
+  transform: translateY(-4px);
+}
+
+/* === Responsive === */
+@media (max-width: 960px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .footer-logo,
+  .footer-contact,
+  .footer-social {
+    align-items: center;
+  }
+
+  .scroll-top {
+    right: 20px;
+    top: 20px;
+  }
+}
+
+/* === MENU MOBILE PRO === */
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 34px;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.menu-btn:hover {
+  color: var(--accent-2);
+  transform: scale(1.1);
+}
+
+@media (max-width: 960px) {
+  .menu-btn {
+    display: block;
+  }
+
+  .navlinks {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: rgba(12, 16, 32, 0.98);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 80px 28px;
+    gap: 20px;
+    transition: right 0.4s ease;
+    z-index: 2000;
+    box-shadow: -6px 0 20px rgba(0,0,0,0.5);
+  }
+
+  .navlinks.show {
+    right: 0;
+  }
+
+  .navlinks a {
+    font-size: 18px;
+    color: var(--text);
+    text-decoration: none;
+    padding: 10px 0;
+    width: 100%;
+  }
+
+  .navlinks a:hover {
+    color: var(--accent);
+  }
+
+  .menu-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 32px;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .menu-close:hover {
+    color: var(--accent-2);
+    transform: scale(1.1);
+  }
+
+  .submenu {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    padding-left: 14px;
+  }
+
+  .dropdown.open .submenu {
+    display: flex;
+  }
+}
+
+/* ✅ Bouton "X" uniquement sur mobile */
+.menu-close {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .menu-close {
+    display: block;
+  }
+}
+
+
+
+
+/* ✅ Fixe la zone cliquable du bouton X */
+.menu-close {
+  display: none; /* caché sur PC */
+}
+
+@media (max-width: 960px) {
+  .menu-close {
+    display: flex;               /* ✅ pour centrer l’icône */
+    align-items: center;
+    justify-content: center;
+    width: 48px;                 /* ✅ surface cliquable */
+    height: 48px;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 32px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    z-index: 2100;               /* ✅ au-dessus du reste du menu */
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .menu-close:hover {
+    color: var(--accent-2);
+    transform: scale(1.1);
+  }
+
+  .menu-close i {
+    pointer-events: none;        /* ✅ pour éviter les décalages de clic */
+  }
+}
+
+/* === SECTIONS FIDÉLISATION + STATISTIQUES — ARRIÈRE-PLAN UNIFIÉ === */
+.ferro-premium,
+.ferro-stats {
+  background: linear-gradient(180deg, var(--bg-soft) 0%, var(--bg) 100%) !important;
+  color: var(--text);
+  position: relative;
+  overflow: hidden;
+  border: none;
+}
+
+/* === SECTION 1 — FIDÉLISATION === */
+.ferro-premium {
+  text-align: center;
+  padding: 100px 0 40px; /* espace ajusté */
+  border-bottom: none;
+}
+
+/* === SECTION 2 — STATISTIQUES === */
+.ferro-stats {
+  text-align: center;
+  padding: 40px 0 100px;
+  border-top: none;
+}
+
+
+
+
+/* === TEXTE ET CONTENUS === */
+.ferro-premium-header {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 60px;
+}
+
+.ferro-premium-header h2 {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--text);
+  margin: 0;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+}
+
+.ferro-premium-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--muted);
+  padding: 0 20px;
+}
+
+.ferro-premium-content strong {
+  color: var(--accent);
+}
+
+.ferro-premium-focus {
+  margin: 50px 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent-2);
+  text-shadow: 0 0 12px rgba(0,184,132,0.2);
+}
+
+/* === STATISTIQUES === */
+.ferro-stats h2 {
+  font-size: 34px;
+  font-weight: 800;
+  margin-bottom: 60px;
+  letter-spacing: 0.5px;
+}
+
+.stats-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  flex: 1 1 260px;
+  display: flex;
+  justify-content: center;
+}
+
+.stat-circle {
+  width: 200px;
+  height: 200px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.4s ease;
+  box-shadow: 0 0 20px rgba(107,211,255,0.08);
+  background: rgba(21,26,63,0.25);
+  backdrop-filter: blur(6px);
+}
+
+.stat-circle:hover {
+  transform: scale(1.05);
+  border-color: var(--accent-2);
+  box-shadow: 0 0 30px rgba(0,184,132,0.25);
+}
+
+.stat-circle p {
+  margin: 0;
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.stat-circle strong {
+  display: block;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .ferro-premium-header h2 {
+    font-size: 30px;
+  }
+  .ferro-premium-content {
+    font-size: 16px;
+  }
+  .ferro-stats h2 {
+    font-size: 26px;
+    margin-bottom: 40px;
+  }
+  .stat-circle {
+    width: 160px;
+    height: 160px;
+  }
+  .stat-circle p {
+    font-size: 15px;
+  }
+}
+
+
+
+
+
+/* === SECTION PROCESS - IMAGE À GAUCHE, ÉTAPES VERTICALES À DROITE === */
+.ferro-process {
+  background: linear-gradient(180deg, var(--bg-soft) 0%, var(--bg) 100%);
+  color: var(--text);
+  padding: 100px 0;
+}
+
+.process-layout {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: nowrap; /* ✅ empêche les éléments de passer en dessous */
+}
+
+/* Image à gauche */
+/* === Image à gauche (mise en valeur) === */
+.process-image {
+  flex: 0 0 40%; /* un peu plus d’espace pour l’image */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px; /* ✅ force une belle hauteur minimale */
+}
+
+.process-image img {
+  width: 100%;
+  max-width: 420px; /* ✅ légèrement plus large */
+  height: auto;
+  max-height: 450px; /* ✅ limite haute pour éviter les débordements */
+  object-fit: contain; /* garde les proportions */
+  border-radius: 20px;
+  box-shadow: 0 0 35px rgba(107,211,255,0.15);
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+  transform-origin: center;
+}
+
+/* Effet au survol */
+.process-image img:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 40px rgba(107,211,255,0.35),
+              0 0 80px rgba(0,184,132,0.25);
+}
+
+
+/* Étapes à droite */
+.process-steps {
+  flex: 0 0 55%; /* ✅ prend le reste de l’espace */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.process-steps h2 {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 30px;
+  line-height: 1.3;
+}
+
+/* Groupe d'étapes (colonne verticale) */
+.steps-group {
+  display: flex;
+  flex-direction: column;
+  gap: 28px; /* ✅ plus d’espace entre les étapes */
+  width: 100%;
+  max-width: 520px;
+}
+
+/* Chaque étape */
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(107,211,255,0.08);
+  border: 1px solid rgba(107,211,255,0.15);
+  border-radius: 14px;
+  padding: 18px 24px; /* ✅ un peu plus d’air à l’intérieur */
+  transition: all 0.35s ease;
+}
+
+.step-item:hover {
+  background: rgba(0,184,132,0.12);
+  transform: translateX(6px);
+  box-shadow: 0 0 14px rgba(0,184,132,0.15); /* ✅ effet léger au survol */
+}
+
+
+.step-item:hover {
+  background: rgba(0,184,132,0.12);
+  transform: translateX(6px);
+}
+
+.step-num {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #001628;
+  font-weight: 800;
+  font-size: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-item p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Liste et bouton */
+.process-list {
+  list-style: disc;
+  margin: 30px 0 40px 20px;
+  padding: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.process-list strong {
+  color: var(--accent);
+}
+
+.btn-contact {
+  display: inline-block;
+  padding: 12px 32px;
+  border: 2px solid var(--accent-2);
+  border-radius: 12px;
+  color: var(--accent-2);
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-contact:hover {
+  background: var(--accent-2);
+  color: #001628;
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .process-layout {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .process-image {
+    flex: none;
+  }
+
+  .process-image img {
+    max-width: 280px;
+    margin: 0 auto 30px;
+  }
+
+  .steps-group {
+    max-width: 100%;
+    align-items: center;
+  }
+
+  .btn-contact {
+    margin: 0 auto;
+  }
+}
+
+/* === Animation fluide depuis la droite (effet cascade) === */
+.slide-right {
+  opacity: 0;
+  transform: translateX(80px);
+  transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+}
+
+.slide-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Effet décalé pour chaque étape */
+.steps-group .step-item:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.steps-group .step-item:nth-child(2) {
+  transition-delay: 0.3s;
+}
+
+.steps-group .step-item:nth-child(3) {
+  transition-delay: 0.5s;
+}
+
+
+/* === Animation au survol de l’image === */
+.process-image img {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(107,211,255,0.15);
+  height: auto;
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+  transform-origin: center;
+}
+
+/* Effet au survol */
+.process-image img:hover {
+  transform: scale(1.05); /* ✅ petit zoom fluide */
+  box-shadow: 0 0 40px rgba(107,211,255,0.35),
+              0 0 80px rgba(0,184,132,0.25); /* ✅ halo bleu/vert subtil */
+}
+
+
+
+/* === Responsive mobile / tablette === */
+@media (max-width: 960px) {
+  .process-layout {
+    flex-direction: column; /* ✅ passe l'image au-dessus */
+    align-items: center;
+    text-align: center;
+    gap: 40px; /* espace entre image et texte */
+  }
+
+  .process-image {
+    flex: none;
+    min-height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .process-image img {
+    max-width: 300px; /* ✅ image centrée et bien visible */
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .process-steps {
+    flex: none;
+    width: 100%;
+    max-width: 600px; /* ✅ limite lisibilité */
+    align-items: center;
+  }
+
+  .steps-group {
+    width: 100%;
+    max-width: 480px;
+    gap: 24px; /* un peu d’air entre les étapes */
+  }
+
+  .step-item {
+    justify-content: center;
+    text-align: left;
+    width: 100%;
+  }
+
+  .btn-contact {
+    margin: 20px auto 0;
+  }
+}
+
+
+  </style>
+</head>
+
+<body>
+
+  <!-- === HEADER identique === -->
+  <header>
+    <div class="container nav">
+      <a href="accueil.html" class="brand" aria-label="Accueil – ASTROVIA">
+        <img src="astrovia.jpg" alt="Logo ASTROVIA" class="logo-img">
+        <span>ASTROVIA</span>
+      </a>
+      <nav>
+        <button class="menu-btn" aria-expanded="false" aria-controls="navlinks" aria-label="Ouvrir le menu">
+          <i data-lucide="menu"></i>
+        </button>
+        <ul id="navlinks" class="navlinks">
+          <li class="close-btn">
+            <button class="menu-close" aria-label="Fermer le menu">
+              <i data-lucide="x"></i>
+            </button>
+          </li>
+          <li><a href="accueil.html">Accueil</a></li>
+          <li class="dropdown">
+            <a href="expertises.html" class="cta">Nos expertises ▾</a>
+            <ul class="submenu">
+              <li><a href="consulting.html">Consulting</a></li>
+              <li><a href="cabinet-de-recrutement.html">Cabinet de recrutement</a></li>
+              <li><a href="solutions-de-fidelisation.html">Solutions de fidélisation</a></li>
+            </ul>
+          </li>
+          <li><a href="valeurs.html">Nos valeurs</a></li>
+          <li><a href="qui-sommes-nous.html">Qui sommes-nous</a></li>
+          <li class="dropdown">
+            <a href="rejoignez-nous.html">Rejoignez-nous ▾</a>
+            <ul class="submenu">
+              <li><a href="offres-consulting.html">offres Consulting</a></li>
+              <li><a href="offres-cabinet-de-recrutement.html">offres Cabinet de recrutement</a></li>
+              <li><a href="candidature-spontanee.html">Candidature spontanée</a></li>
+            </ul>
+          </li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+  <section class="ferro-premium reveal">
+    <div class="ferro-premium-header">
+      <h2>Une solution de fidélisation pensée pour les acteurs du ferroviaire</h2>
+    </div>
+  
+    <div class="container ferro-premium-content">
+      <p>
+        Dans un marché ferroviaire en pleine mutation, <strong>les profils qualifiés se font rares</strong> 
+        et les compétences spécifiques deviennent <strong>hautement convoitées</strong>. 
+        Les entreprises du secteur doivent désormais <strong>anticiper</strong> les mobilités 
+        et sécuriser leurs talents pour préserver la continuité de leurs projets.
+      </p>
+  
+      <p class="ferro-premium-focus">
+        <strong>Renforcez</strong> l’engagement de vos collaborateurs<br>
+        <strong>Réduisez</strong> durablement votre turnover
+      </p>
+  
+      <p>
+        Forts de <strong>plus de 3 ans d’expérience</strong> auprès de nos partenaires du ferroviaire, 
+        nous avons conçu une solution innovante alliant <strong>expertise métier</strong> et 
+        <strong>intelligence artificielle</strong>.  
+        Cette approche permet d’<strong>identifier les signaux de départ</strong> avant qu’ils ne surviennent, 
+        et d’agir concrètement sur la <strong>fidélisation à long terme</strong> de vos équipes.
+      </p>
+    </div>
+  </section>
+  
+
+
+
+  <section class="ferro-stats reveal">
+    <div class="container">
+      <h2>Une solution innovante qui a fait ses preuves</h2>
+  
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-circle">
+            <p>
+              <strong><span class="counter" data-target="40">0</span>%</strong>
+              Réduction du Turnover<br>de 25 à 40%
+            </p>
+          </div>
+        </div>
+  
+        <div class="stat-item">
+          <div class="stat-circle">
+            <p>
+              <strong><span class="counter" data-target="6200">0</span></strong>
+              collaborateurs<br>en gestion
+            </p>
+          </div>
+        </div>
+  
+        <div class="stat-item">
+          <div class="stat-circle">
+            <p>
+              <strong><span class="counter" data-target="90">0</span>%</strong>
+              Fiabilité des<br>prédictions
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  <section class="ferro-process reveal">
+    <div class="container process-layout">
+      
+      <!-- Image à gauche -->
+      <div class="process-image fade-up">
+        <img src="process-illustration.png" alt="Collaboration homme IA" />
+      </div>
+  
+      <!-- Étapes à droite -->
+      <div class="process-steps fade-up">
+        <h2>Une approche alliant expertise humaine et intelligence artificielle</h2>
+  
+        <div class="steps-group">
+          <div class="step-item slide-right">
+            <span class="step-num">1</span>
+            <p>Réalisation d’audits</p>
+          </div>
+        
+          <div class="step-item slide-right">
+            <span class="step-num ">2</span>
+            <p>Analyse des données RH avec l’IA</p>
+          </div>
+        
+          <div class="step-item slide-right">
+            <span class="step-num">3</span>
+            <p>Suggestions et suivi du plan d’action</p>
+          </div>
+        </div>
+        
+  
+        <ul class="process-list">
+          <li><strong>Co-conception :</strong> L’outil s’adapte à chaque entreprise</li>
+          <li><strong>Conformité et sécurité</strong> des données garantie</li>
+          <li><strong>Création de tableaux de bord RH</strong></li>
+          <li><strong>Analyse du marché</strong></li>
+        </ul>
+  
+        <a href="contact.html" class="btn-contact"><center>Nous contacter</center></a>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+
+
+
+  <!-- === FOOTER identique === -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-logo">
+        <img src="astrovia.jpg" alt="Logo ASTROVIA">
+        <h3>ASTROVIA</h3>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact</h4>
+        <p>158 Chemin du Rival Escur, 81800 RABASTENS, France</p>
+        <p>Tél. : <a href="tel:+33648283477">06 48 28 34 77</a></p>
+        <p>Email : <a href="mailto:contact@astrovia.fr">contact@astrovia.fr</a></p>
+      </div>
+      <div class="footer-social">
+        <h4>Suivez-nous</h4>
+        <a href="#" class="social-link" aria-label="LinkedIn ASTROVIA">
+          <i data-lucide="linkedin"></i>
+        </a>
+      </div>
+      <a href="#top" class="scroll-top" aria-label="Remonter en haut">
+        <i data-lucide="arrow-up"></i>
+      </a>
+    </div>
+  </footer>
+
+
+  <!-- === JS pour les icônes et le menu mobile === -->
+  <script>
+    lucide.createIcons();
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuBtn = document.querySelector('.menu-btn');
+      const menuClose = document.querySelector('.menu-close');
+      const navlinks = document.getElementById('navlinks');
+
+      // Ouvre le menu
+      if (menuBtn && navlinks) {
+        menuBtn.addEventListener('click', () => {
+          navlinks.classList.add('show');
+          menuBtn.setAttribute('aria-expanded', 'true');
+        });
+      }
+
+      // Ferme le menu
+      if (menuClose && navlinks) {
+        menuClose.addEventListener('click', () => {
+          navlinks.classList.remove('show');
+          menuBtn.setAttribute('aria-expanded', 'false');
+        });
+      }
+
+      // Ferme le menu quand on clique sur un lien sans sous-menu
+      navlinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          const parent = link.parentElement;
+          const hasSubmenu = parent.classList.contains('dropdown');
+
+          if (window.innerWidth <= 960 && hasSubmenu) {
+            e.preventDefault();
+            if (parent.classList.contains('open')) {
+              window.location.href = link.getAttribute('href');
+            } else {
+              document.querySelectorAll('.dropdown.open').forEach(el => el.classList.remove('open'));
+              parent.classList.add('open');
+            }
+            return;
+          }
+
+          if (window.innerWidth <= 960) {
+            navlinks.classList.remove('show');
+            menuBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+    });
+
+
+    // Animation d'apparition au scroll
+  document.addEventListener("DOMContentLoaded", () => {
+    const revealElements = document.querySelectorAll('.reveal, .fade-up, .slide-left, .slide-right, .zoom-in');
+
+    const revealOnScroll = () => {
+      const windowHeight = window.innerHeight;
+      revealElements.forEach(el => {
+        const elementTop = el.getBoundingClientRect().top;
+        if (elementTop < windowHeight * 0.85) {
+          el.classList.add('visible');
+        }
+      });
+    };
+
+    // Déclenche au chargement + au scroll
+    revealOnScroll();
+    window.addEventListener('scroll', revealOnScroll);
+  });
+
+
+  
+  // === Animation des compteurs ===
+  document.addEventListener("DOMContentLoaded", () => {
+    const counters = document.querySelectorAll(".counter");
+    let triggered = false;
+
+    const animateCounters = () => {
+      counters.forEach(counter => {
+        const update = () => {
+          const target = +counter.getAttribute("data-target");
+          const current = +counter.innerText;
+          const increment = target / 80; // durée totale ~2s
+
+          if (current < target) {
+            counter.innerText = Math.ceil(current + increment);
+            requestAnimationFrame(update);
+          } else {
+            counter.innerText = target;
+          }
+        };
+        update();
+      });
+    };
+
+    // Détection de la section visible pour déclencher l'animation une seule fois
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !triggered) {
+          animateCounters();
+          triggered = true;
+        }
+      });
+    }, { threshold: 0.4 });
+
+    const statsSection = document.querySelector('.ferro-stats');
+    if (statsSection) observer.observe(statsSection);
+  });
+
+
+  </script>
+
+</body>
+</html>

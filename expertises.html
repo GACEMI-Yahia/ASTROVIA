@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nos Expertises – ASTROVIA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    html, body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  scroll-padding-top: 0 !important;
+  overflow-x: hidden;
+}
+
+/* Fixe la section d'intro juste sous le header sans décalage */
+.intro-section {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+    :root{
+      --bg:#0c1020;          /* bleu nuit profond */
+      --bg-soft:#111634;     /* bleu plus doux */
+      --text:#e8ecf5;        /* texte principal */
+      --muted:#b9c2d6;       /* texte secondaire */
+      --accent:#6bd3ff;      /* bleu cyan accent */
+      --accent-2:#00b884;    /* vert accent secondaire */
+      --card:#151a3f;
+      --line:rgba(255,255,255,.08);
+      --warn:#f7b500;
+      --error:#ff5a5f;
+      --ok:#2ecc71;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',sans-serif;background:radial-gradient(1200px 600px at 10% -10%,rgba(107,211,255,.15),transparent 50%), radial-gradient(800px 400px at 90% -10%,rgba(0,184,132,.12),transparent 50%), var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1200px,92%);margin-inline:auto}
+
+    /* Header */
+    header {
+  position: fixed;        /* ✅ reste visible tout le temps */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;          /* au-dessus de tout */
+  background: rgba(12,16,32,0.85); /* fond semi-transparent */
+  backdrop-filter: blur(10px);     /* effet de flou doux */
+  border-bottom: 1px solid var(--line);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.3px}
+    .brand .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;color:#001628;font-weight:900}
+    .logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+    .nav a{color:var(--text);opacity:.9}
+    .navlinks{display:flex;gap:18px;align-items:center}
+    .navlinks a{padding:8px 10px;border-radius:10px}
+    .navlinks a:hover{background:var(--line)}
+    /* Dropdown menu */
+.navlinks ul, .navlinks li { list-style: none; margin: 0; padding: 0; }
+.navlinks > li { position: relative; }
+
+.dropdown > a::after {
+  content: "";
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(17, 22, 52, 0.95);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 0;
+  box-shadow: var(--shadow);
+  min-width: 220px;
+}
+
+.submenu li a {
+  display: block;
+  padding: 8px 14px;
+  color: var(--text);
+  opacity: 0.9;
+}
+
+.submenu li a:hover {
+  background: var(--line);
+}
+
+.dropdown:hover .submenu {
+  display: block;
+}
+
+/* Pour mobile : sous-menus visibles dans le menu déroulant */
+@media (max-width: 960px) {
+  .navlinks li { width: 100%; }
+  .submenu {
+    position: static;
+    display: none;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding-left: 10px;
+  }
+  .dropdown.open .submenu {
+    display: block;
+  }
+}
+
+    .cta{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#001628 !important;padding:10px 14px;border-radius:12px;font-weight:700}
+    .menu-btn{display:none}
+
+  
+
+
+
+/* --- Animations fluides --- */
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1; /* ✅ le logo reste visible */
+  }
+}
+
+
+@keyframes fadeInText {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* --- Animation d'apparition au scroll --- */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Animation d'apparition globale pour toutes les sections --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px) scale(0.98);
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  will-change: opacity, transform;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* --- Apparition fluide globale --- */
+.fade-up, .slide-left, .slide-right, .zoom-in {
+  opacity: 0;
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  will-change: opacity, transform;
+}
+
+/* Effets de départ */
+.fade-up { transform: translateY(60px); }
+.slide-left { transform: translateX(-80px); }
+.slide-right { transform: translateX(80px); }
+.zoom-in { transform: scale(0.9); }
+
+/* Quand l’élément devient visible */
+.fade-up.visible,
+.slide-left.visible,
+.slide-right.visible,
+.zoom-in.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Animation du tracé de la courbe */
+.curve-path {
+  stroke: var(--accent);
+  stroke-width: 2px;
+  fill: none;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 3.5s ease-in-out;
+}
+
+/* Quand on scrolle jusqu’à la section */
+.curve-path.animate {
+  stroke-dashoffset: 0;
+}
+
+/* --- Section Contact (nouvelle version stylisée) --- */
+.contact-section {
+  background: var(--bg);
+  color: var(--text);
+  padding: 120px 20px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+
+.contact-title {
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.contact-subtitle {
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.contact-line {
+  width: 60px;
+  height: 2px;
+  background: var(--accent);
+  border: none;
+  border-radius: 999px;
+  margin: 0 auto 60px;
+}
+
+.contact-form-title {
+  font-size: 22px;
+  font-weight: 700;
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+/* === Footer professionnel === */
+.footer {
+  background: var(--bg);
+  color: var(--text);
+  border-top: 1px solid var(--line);
+  padding: 60px 20px 30px;
+  position: relative;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.footer-logo img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.footer-logo h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.footer-contact h4,
+.footer-social h4 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.footer-contact p {
+  margin: 8px 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.footer-contact a {
+  color: var(--accent-2);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-contact a:hover {
+  color: var(--accent);
+}
+
+/* === Icône LinkedIn === */
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.footer-social .social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  font-size: 24px;
+  transition: all 0.3s ease;
+}
+
+.footer-social .social-link:hover {
+  background: var(--accent);
+  color: #001628;
+  transform: scale(1.05);
+}
+
+/* === Flèche retour haut === */
+.scroll-top {
+  position: absolute;
+  right: 40px;
+  top: 40px;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 32px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.scroll-top:hover {
+  color: var(--accent);
+  transform: translateY(-4px);
+}
+
+/* === Responsive === */
+@media (max-width: 960px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .footer-logo,
+  .footer-contact,
+  .footer-social {
+    align-items: center;
+  }
+
+  .scroll-top {
+    right: 20px;
+    top: 20px;
+  }
+}
+
+/* === MENU MOBILE PRO === */
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 34px;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.menu-btn:hover {
+  color: var(--accent-2);
+  transform: scale(1.1);
+}
+
+@media (max-width: 960px) {
+  .menu-btn {
+    display: block;
+  }
+
+  .navlinks {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: rgba(12, 16, 32, 0.98);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 80px 28px;
+    gap: 20px;
+    transition: right 0.4s ease;
+    z-index: 2000;
+    box-shadow: -6px 0 20px rgba(0,0,0,0.5);
+  }
+
+  .navlinks.show {
+    right: 0;
+  }
+
+  .navlinks a {
+    font-size: 18px;
+    color: var(--text);
+    text-decoration: none;
+    padding: 10px 0;
+    width: 100%;
+  }
+
+  .navlinks a:hover {
+    color: var(--accent);
+  }
+
+  .menu-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 32px;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .menu-close:hover {
+    color: var(--accent-2);
+    transform: scale(1.1);
+  }
+
+  .submenu {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    padding-left: 14px;
+  }
+
+  .dropdown.open .submenu {
+    display: flex;
+  }
+}
+
+/* ✅ Bouton "X" uniquement sur mobile */
+.menu-close {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .menu-close {
+    display: block;
+  }
+}
+
+
+
+
+/* ✅ Fixe la zone cliquable du bouton X */
+.menu-close {
+  display: none; /* caché sur PC */
+}
+
+@media (max-width: 960px) {
+  .menu-close {
+    display: flex;               /* ✅ pour centrer l’icône */
+    align-items: center;
+    justify-content: center;
+    width: 48px;                 /* ✅ surface cliquable */
+    height: 48px;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 32px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    z-index: 2100;               /* ✅ au-dessus du reste du menu */
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .menu-close:hover {
+    color: var(--accent-2);
+    transform: scale(1.1);
+  }
+
+  .menu-close i {
+    pointer-events: none;        /* ✅ pour éviter les décalages de clic */
+  }
+}
+
+
+
+/* --- CARTES D’EXPERTISE PROFESSIONNELLES --- */
+.expertises-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 50px;
+  justify-items: center;
+}
+
+.expertise-card {
+  position: relative;
+  background: linear-gradient(180deg, var(--card) 0%, #0f1435 100%);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+  max-width: 380px;
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.expertise-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.expertise-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.expertise-card:hover img {
+  transform: scale(1.08);
+}
+
+.expertise-card-content {
+  padding: 26px 24px 32px;
+  text-align: left;
+  position: relative;
+  z-index: 2;
+}
+
+.expertise-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent-2);
+  margin-bottom: 10px;
+  transition: color 0.3s ease;
+}
+
+.expertise-card p {
+  font-size: 15.5px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* --- Effet lumineux au survol --- */
+.expertise-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top center, rgba(107,211,255,0.12), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.expertise-card:hover::before {
+  opacity: 1;
+}
+
+.expertise-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+  border-color: var(--accent);
+}
+
+.expertise-card:hover h3 {
+  color: var(--accent);
+}
+
+/* --- Animation fluide au scroll --- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.expertise-card.visible {
+  animation: fadeUp 1.2s ease forwards;
+}
+
+
+
+
+/* --- Cartes cliquables --- */
+.expertise-card {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.expertise-card:hover {
+  text-decoration: none;
+}
+
+.expertise-card h3,
+.expertise-card p {
+  color: inherit;
+}
+
+
+
+/* --- Effet premium au survol du titre --- */
+.expertise-card:hover h3 {
+  color: var(--accent);
+  text-shadow: 0 0 8px rgba(107, 211, 255, 0.6);
+  transition: color 0.3s ease, text-shadow 0.4s ease;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- === HEADER identique à accueil === -->
+  <header>
+    <div class="container nav">
+      <a href="accueil.html" class="brand" aria-label="Accueil – ASTROVIA">
+        <img src="astrovia.jpg" alt="Logo ASTROVIA" class="logo-img">
+        <span>ASTROVIA</span>
+      </a>
+      <nav>
+        <button class="menu-btn" aria-expanded="false" aria-controls="navlinks" aria-label="Ouvrir le menu">
+          <i data-lucide="menu"></i>
+        </button>
+        <ul id="navlinks" class="navlinks">
+          <li class="close-btn">
+            <button class="menu-close" aria-label="Fermer le menu">
+              <i data-lucide="x"></i>
+            </button>
+          </li>
+          <li><a href="accueil.html">Accueil</a></li>
+          <li class="dropdown">
+            <a href="expertises.html" class="cta">Nos expertises ▾</a>
+            <ul class="submenu">
+              <li><a href="consulting.html">Consulting</a></li>
+              <li><a href="cabinet-de-recrutement.html">Cabinet de recrutement</a></li>
+              <li><a href="solutions-de-fidelisation.html">Solutions de fidélisation</a></li>
+            </ul>
+          </li>
+          <li><a href="valeurs.html">Nos valeurs</a></li>
+          <li><a href="qui-sommes-nous.html">Qui sommes-nous</a></li>
+          <li class="dropdown">
+            <a href="rejoignez-nous.html">Rejoignez-nous ▾</a>
+            <ul class="submenu">
+                <li><a href="offres-consulting.html">offres Consulting</a></li>
+                <li><a href="offres-cabinet-de-recrutement.html">offres Cabinet de recrutement</a></li>
+                <li><a href="candidature-spontanee.html">Candidature spontanée</a></li>
+            </ul>
+          </li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- === SECTION PRINCIPALE : NOS EXPERTISES === -->
+  <section class="expertises-section " style="padding:140px 20px 100px; text-align:center;">
+    <div class="container">
+      <h1 class=" fade-up" style="font-size:clamp(36px,4vw,54px); font-weight:800; color:var(--accent); margin-bottom:10px;">
+        NOS EXPERTISES
+      </h1>
+      <hr class=" fade-up" style="width:90px; height:3px; border:none; background:var(--accent); border-radius:999px; margin:20px auto 60px;">
+
+      <div class="expertises-grid">
+
+        <!-- Bloc 1 -->
+        <a href="consulting.html" class="expertise-card fade-up">
+          <img src="consulting.png" alt="Consulting">
+          <div class="expertise-card-content">
+            <h3>Consulting</h3>
+            <p>Accompagnement stratégique et opérationnel pour vos projets d’ingénierie.</p>
+          </div>
+        </a>
+      
+        <!-- Bloc 2 -->
+        <a href="cabinet-de-recrutement.html" class="expertise-card fade-up">
+          <img src="recrutement.png" alt="Cabinet de recrutement">
+          <div class="expertise-card-content">
+            <h3>Cabinet de recrutement</h3>
+            <p>Sélection et accompagnement de talents spécialisés dans le transport et l’ingénierie.</p>
+          </div>
+        </a>
+      
+        <!-- Bloc 3 -->
+        <a href="solutions-de-fidelisation.html" class="expertise-card fade-up">
+          <img src="fidelisation.png" alt="Solutions de fidélisation">
+          <div class="expertise-card-content">
+            <h3>Solutions de fidélisation</h3>
+            <p>Des solutions RH innovantes pour fidéliser vos équipes et développer leur engagement.</p>
+          </div>
+        </a>
+      
+      </div>
+      
+        
+      </div>
+      
+    </div>
+  </section>
+
+
+
+  <!-- === SECTION À PROPOS / PRÉSENTATION === -->
+<section class="about-section reveal fade-up" style="padding:120px 20px; text-align:center; background:var(--bg-soft); border-top:1px solid var(--line);">
+    <div class="container">
+      <h2 style="font-size:clamp(32px,3vw,48px); font-weight:800; color:var(--accent); margin-bottom:18px;">
+        À PROPOS D’ASTROVIA
+      </h2>
+      <hr style="width:80px; height:3px; border:none; background:var(--accent); border-radius:999px; margin:0 auto 50px;">
+  
+      <p style="max-width:900px; margin:0 auto; font-size:17px; color:var(--muted); line-height:1.8;">
+        ASTROVIA est une société de conseil spécialisée dans les <strong>infrastructures de transport</strong> et un <strong>cabinet de recrutement</strong> reconnu dans le <strong>secteur ferroviaire</strong>.
+        <br><br>
+        Nous proposons également une <strong>solution innovante de fidélisation</strong> conçue pour accompagner durablement les acteurs de ce domaine.
+        <br><br>
+        Notre priorité est d’apporter une <strong>expertise technique et humaine</strong> à la hauteur des exigences de nos partenaires, en garantissant un accompagnement sur mesure pour chaque projet.
+        <br><br>
+        Chez ASTROVIA, nous accordons une attention particulière à la <strong>valorisation des parcours professionnels</strong>, qu’il s’agisse de nos collaborateurs internes ou des talents que nous recrutons pour nos clients.
+      </p>
+    </div>
+  </section>
+  
+
+  <!-- === FOOTER identique à accueil === -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-logo">
+        <img src="astrovia.jpg" alt="Logo ASTROVIA">
+        <h3>ASTROVIA</h3>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact</h4>
+        <p>158 Chemin du Rival Escur, 81800 RABASTENS, France</p>
+        <p>Tél. : <a href="tel:+33648283477">06 48 28 34 77</a></p>
+        <p>Email : <a href="mailto:contact@astrovia.fr">contact@astrovia.fr</a></p>
+      </div>
+      <div class="footer-social">
+        <h4>Suivez-nous</h4>
+        <a href="#" class="social-link" aria-label="LinkedIn ASTROVIA">
+          <i data-lucide="linkedin"></i>
+        </a>
+      </div>
+      <a href="#top" class="scroll-top" aria-label="Remonter en haut">
+        <i data-lucide="arrow-up"></i>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+  
+    // --- Animation d'apparition ---
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.3 });
+  
+    document.querySelectorAll('.fade-up, .slide-left, .slide-right, .zoom-in, .reveal')
+      .forEach(el => observer.observe(el));
+  
+    // --- MENU MOBILE ---
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuBtn = document.querySelector('.menu-btn');
+      const menuClose = document.querySelector('.menu-close');
+      const navlinks = document.getElementById('navlinks');
+  
+      // Ouvre le menu
+      if (menuBtn && navlinks) {
+        menuBtn.addEventListener('click', () => {
+          navlinks.classList.add('show');
+          menuBtn.setAttribute('aria-expanded', 'true');
+        });
+      }
+  
+      // Ferme le menu
+      if (menuClose && navlinks) {
+        menuClose.addEventListener('click', () => {
+          navlinks.classList.remove('show');
+          menuBtn.setAttribute('aria-expanded', 'false');
+        });
+      }
+  
+      // ✅ Ferme le menu uniquement si on clique sur un lien **sans sous-menu**
+      navlinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          const parent = link.parentElement;
+          const hasSubmenu = parent.classList.contains('dropdown');
+  
+          // Si le lien ouvre un sous-menu, on ne ferme pas encore
+          if (window.innerWidth <= 960 && hasSubmenu) {
+            e.preventDefault();
+  
+            // Si déjà ouvert, deuxième clic => aller sur la page
+            if (parent.classList.contains('open')) {
+              window.location.href = link.getAttribute('href');
+            } else {
+              // Ferme les autres sous-menus avant d'ouvrir celui-ci
+              document.querySelectorAll('.dropdown.open').forEach(el => el.classList.remove('open'));
+              parent.classList.add('open');
+            }
+            return; // On ne ferme pas le menu principal ici
+          }
+  
+          // Sinon (pas de sous-menu) -> ferme le menu
+          if (window.innerWidth <= 960) {
+            navlinks.classList.remove('show');
+            menuBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+  
+      lucide.createIcons();
+    });
+  </script>
+  
+  
+
+</body>
+</html>

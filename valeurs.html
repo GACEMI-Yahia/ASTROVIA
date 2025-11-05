@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulting – ASTROVIA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+
+  <style>
+    html, body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  scroll-padding-top: 0 !important;
+  overflow-x: hidden;
+}
+
+
+    :root{
+      --bg:#0c1020;          /* bleu nuit profond */
+      --bg-soft:#111634;     /* bleu plus doux */
+      --text:#e8ecf5;        /* texte principal */
+      --muted:#b9c2d6;       /* texte secondaire */
+      --accent:#6bd3ff;      /* bleu cyan accent */
+      --accent-2:#00b884;    /* vert accent secondaire */
+      --card:#151a3f;
+      --line:rgba(255,255,255,.08);
+      --warn:#f7b500;
+      --error:#ff5a5f;
+      --ok:#2ecc71;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',sans-serif;background:radial-gradient(1200px 600px at 10% -10%,rgba(107,211,255,.15),transparent 50%), radial-gradient(800px 400px at 90% -10%,rgba(0,184,132,.12),transparent 50%), var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1200px,92%);margin-inline:auto}
+
+    /* Header */
+    header {
+  position: fixed;        /* ✅ reste visible tout le temps */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;          /* au-dessus de tout */
+  background: rgba(12,16,32,0.85); /* fond semi-transparent */
+  backdrop-filter: blur(10px);     /* effet de flou doux */
+  border-bottom: 1px solid var(--line);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.3px}
+    .brand .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;color:#001628;font-weight:900}
+    .logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+    .nav a{color:var(--text);opacity:.9}
+    .navlinks{display:flex;gap:18px;align-items:center}
+    .navlinks a{padding:8px 10px;border-radius:10px}
+    .navlinks a:hover{background:var(--line)}
+    /* Dropdown menu */
+.navlinks ul, .navlinks li { list-style: none; margin: 0; padding: 0; }
+.navlinks > li { position: relative; }
+
+.dropdown > a::after {
+  content: "";
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(17, 22, 52, 0.95);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 0;
+  box-shadow: var(--shadow);
+  min-width: 220px;
+}
+
+.submenu li a {
+  display: block;
+  padding: 8px 14px;
+  color: var(--text);
+  opacity: 0.9;
+}
+
+.submenu li a:hover {
+  background: var(--line);
+}
+
+.dropdown:hover .submenu {
+  display: block;
+}
+
+/* Pour mobile : sous-menus visibles dans le menu déroulant */
+@media (max-width: 960px) {
+  .navlinks li { width: 100%; }
+  .submenu {
+    position: static;
+    display: none;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding-left: 10px;
+  }
+  .dropdown.open .submenu {
+    display: block;
+  }
+}
+
+    .cta{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#001628 !important;padding:10px 14px;border-radius:12px;font-weight:700}
+    .menu-btn{display:none}
+
+
+
+
+
+
+/* --- Animation d'apparition au scroll --- */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Animation d'apparition globale pour toutes les sections --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px) scale(0.98);
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  will-change: opacity, transform;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* --- Apparition fluide globale --- */
+.fade-up, .slide-left, .slide-right, .zoom-in {
+  opacity: 0;
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  will-change: opacity, transform;
+}
+
+/* Effets de départ */
+.fade-up { transform: translateY(60px); }
+.slide-left { transform: translateX(-80px); }
+.slide-right { transform: translateX(80px); }
+.zoom-in { transform: scale(0.9); }
+
+/* Quand l’élément devient visible */
+.fade-up.visible,
+.slide-left.visible,
+.slide-right.visible,
+.zoom-in.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Animation du tracé de la courbe */
+.curve-path {
+  stroke: var(--accent);
+  stroke-width: 2px;
+  fill: none;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 3.5s ease-in-out;
+}
+
+/* Quand on scrolle jusqu’à la section */
+.curve-path.animate {
+  stroke-dashoffset: 0;
+}
+
+
+
+/* === Footer professionnel === */
+.footer {
+  background: var(--bg);
+  color: var(--text);
+  border-top: 1px solid var(--line);
+  padding: 60px 20px 30px;
+  position: relative;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.footer-logo img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.footer-logo h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.footer-contact h4,
+.footer-social h4 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.footer-contact p {
+  margin: 8px 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.footer-contact a {
+  color: var(--accent-2);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-contact a:hover {
+  color: var(--accent);
+}
+
+/* === Icône LinkedIn === */
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.footer-social .social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  font-size: 24px;
+  transition: all 0.3s ease;
+}
+
+.footer-social .social-link:hover {
+  background: var(--accent);
+  color: #001628;
+  transform: scale(1.05);
+}
+
+/* === Flèche retour haut === */
+.scroll-top {
+  position: absolute;
+  right: 40px;
+  top: 40px;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 32px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.scroll-top:hover {
+  color: var(--accent);
+  transform: translateY(-4px);
+}
+
+/* === Responsive === */
+@media (max-width: 960px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .footer-logo,
+  .footer-contact,
+  .footer-social {
+    align-items: center;
+  }
+
+  .scroll-top {
+    right: 20px;
+    top: 20px;
+  }
+}
+
+/* === MENU MOBILE PRO === */
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 34px;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.menu-btn:hover {
+  color: var(--accent-2);
+  transform: scale(1.1);
+}
+
+@media (max-width: 960px) {
+  .menu-btn {
+    display: block;
+  }
+
+  .navlinks {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: rgba(12, 16, 32, 0.98);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 80px 28px;
+    gap: 20px;
+    transition: right 0.4s ease;
+    z-index: 2000;
+    box-shadow: -6px 0 20px rgba(0,0,0,0.5);
+  }
+
+  .navlinks.show {
+    right: 0;
+  }
+
+  .navlinks a {
+    font-size: 18px;
+    color: var(--text);
+    text-decoration: none;
+    padding: 10px 0;
+    width: 100%;
+  }
+
+  .navlinks a:hover {
+    color: var(--accent);
+  }
+
+  .menu-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 32px;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .menu-close:hover {
+    color: var(--accent-2);
+    transform: scale(1.1);
+  }
+
+  .submenu {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    padding-left: 14px;
+  }
+
+  .dropdown.open .submenu {
+    display: flex;
+  }
+}
+
+/* ✅ Bouton "X" uniquement sur mobile */
+.menu-close {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .menu-close {
+    display: block;
+  }
+}
+
+
+
+
+/* ✅ Fixe la zone cliquable du bouton X */
+.menu-close {
+  display: none; /* caché sur PC */
+}
+
+@media (max-width: 960px) {
+  .menu-close {
+    display: flex;               /* ✅ pour centrer l’icône */
+    align-items: center;
+    justify-content: center;
+    width: 48px;                 /* ✅ surface cliquable */
+    height: 48px;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 32px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    z-index: 2100;               /* ✅ au-dessus du reste du menu */
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .menu-close:hover {
+    color: var(--accent-2);
+    transform: scale(1.1);
+  }
+
+  .menu-close i {
+    pointer-events: none;        /* ✅ pour éviter les décalages de clic */
+  }
+}
+
+
+
+
+
+/* === Section Nos valeurs === */
+.valeurs-section {
+  padding: 120px 20px;
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+  text-align: center;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.valeurs-title {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.valeurs-quote {
+  font-size: clamp(20px, 2vw, 26px);
+  color: var(--accent-2);
+  font-weight: 600;
+  margin-bottom: 60px;
+  letter-spacing: 0.3px;
+}
+
+.valeurs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+}
+
+.valeur-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 32px 24px;
+  box-shadow: var(--shadow);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.valeur-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.valeur-card h3 {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.valeur-card p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .valeurs-section {
+    padding: 80px 20px;
+  }
+  .valeurs-quote {
+    margin-bottom: 40px;
+  }
+}
+
+
+
+/* === Section Notre approche entreprise === */
+.approche-section {
+  padding: 120px 20px;
+  background: var(--bg-soft);
+  color: var(--text);
+}
+
+.approche-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+}
+
+.approche-image img {
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  object-fit: cover;
+}
+
+.approche-content {
+  text-align: left;
+}
+
+.quote-icon {
+  font-size: 42px;
+  color: var(--accent-2);
+  margin-bottom: 10px;
+}
+
+.approche-content h2 {
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.underline {
+  width: 80px;
+  height: 2px;
+  background: var(--accent-2);
+  margin: 12px 0 24px;
+}
+
+.approche-content p {
+  font-size: 16px;
+  color: var(--muted);
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+
+.approche-content strong {
+  color: var(--accent);
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .approche-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .approche-content {
+    text-align: center;
+  }
+  .underline {
+    margin-inline: auto;
+  }
+}
+
+
+.approche-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.approche-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+/* ✅ Effet au survol */
+.approche-image:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.1) contrast(1.05);
+}
+
+.approche-image:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* === Variante "approche candidats" (image à droite) === */
+.approche-section.alt {
+  background: var(--bg);
+}
+
+.approche-section.alt .approche-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.approche-section.alt .approche-content {
+  order: 1;
+}
+
+.approche-section.alt .approche-image {
+  order: 2;
+}
+
+/* ✅ Animation au survol déjà héritée du bloc précédent */
+.approche-section.alt .approche-image img {
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+.approche-section.alt .approche-image:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.1) contrast(1.05);
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .approche-section.alt .approche-grid {
+    grid-template-columns: 1fr;
+  }
+  .approche-section.alt .approche-content {
+    order: 2;
+    text-align: center;
+  }
+  .approche-section.alt .approche-image {
+    order: 1;
+  }
+  .underline {
+    margin-inline: auto;
+  }
+}
+
+/* === Section Notre vision (mêmes styles, image à gauche) === */
+.approche-section:nth-of-type(odd) {
+  background: var(--bg-soft);
+}
+
+.approche-section:nth-of-type(even) {
+  background: var(--bg);
+}
+
+
+
+/* === Section Notre méthode de travail === */
+.methode-section {
+  padding: 120px 20px;
+  background: var(--bg-soft);
+  text-align: center;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.methode-title {
+  font-size: clamp(32px, 4vw, 46px);
+  color: var(--accent);
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.methode-intro {
+  max-width: 800px;
+  margin: 0 auto 60px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.methode-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+@media (max-width: 1200px) {
+  .methode-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .methode-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.methode-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 40px 28px;
+  box-shadow: var(--shadow);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  text-align: center;
+}
+
+.methode-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+}
+
+.icon-box {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #001628;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 32px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.methode-card h3 {
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.methode-card p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .methode-section {
+    padding: 80px 20px;
+  }
+}
+
+
+  </style>
+</head>
+
+<body>
+
+  <!-- === HEADER identique === -->
+  <header>
+    <div class="container nav">
+      <a href="accueil.html" class="brand" aria-label="Accueil – ASTROVIA">
+        <img src="astrovia.jpg" alt="Logo ASTROVIA" class="logo-img">
+        <span>ASTROVIA</span>
+      </a>
+      <nav>
+        <button class="menu-btn" aria-expanded="false" aria-controls="navlinks" aria-label="Ouvrir le menu">
+          <i data-lucide="menu"></i>
+        </button>
+        <ul id="navlinks" class="navlinks">
+          <li class="close-btn">
+            <button class="menu-close" aria-label="Fermer le menu">
+              <i data-lucide="x"></i>
+            </button>
+          </li>
+          <li><a href="accueil.html">Accueil</a></li>
+          <li class="dropdown">
+            <a href="expertises.html" >Nos expertises ▾</a>
+            <ul class="submenu">
+              <li><a href="consulting.html">Consulting</a></li>
+              <li><a href="cabinet-de-recrutement.html">Cabinet de recrutement</a></li>
+              <li><a href="solutions-de-fidelisation.html">Solutions de fidélisation</a></li>
+            </ul>
+          </li>
+          <li><a href="valeurs.html" class="cta">Nos valeurs</a></li>
+          <li><a href="qui-sommes-nous.html">Qui sommes-nous</a></li>
+          <li class="dropdown">
+            <a href="rejoignez-nous.html">Rejoignez-nous ▾</a>
+            <ul class="submenu">
+                <li><a href="offres-consulting.html">offres Consulting</a></li>
+                <li><a href="offres-cabinet-de-recrutement.html">offres Cabinet de recrutement</a></li>
+                <li><a href="candidature-spontanee.html">Candidature spontanée</a></li>
+            </ul>
+          </li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+ <!-- === SECTION : Nos valeurs === -->
+<section class="valeurs-section reveal">
+    <div class="container">
+      <h2 class="valeurs-title">Nos valeurs</h2>
+      <p class="valeurs-quote">« Exigence, Qualité, Expertise, Communication »</p>
+      <div class="valeurs-grid">
+        <div class="valeur-card">
+          <h3>🎯 Exigence</h3>
+          <p>Nous plaçons la rigueur et la précision au cœur de chaque mission, pour garantir des résultats d’excellence.</p>
+        </div>
+        <div class="valeur-card">
+          <h3>⭐ Qualité</h3>
+          <p>Nos solutions reposent sur des standards élevés, assurant performance et satisfaction durable.</p>
+        </div>
+        <div class="valeur-card">
+          <h3>🧠 Expertise</h3>
+          <p>Une équipe de spécialistes passionnés, engagés à offrir des conseils stratégiques et pertinents.</p>
+        </div>
+        <div class="valeur-card">
+          <h3>💬 Communication</h3>
+          <p>Transparence, écoute et réactivité guident chaque relation avec nos partenaires et clients.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+
+
+
+  <!-- === SECTION : Notre approche entreprise === -->
+<section class="approche-section reveal">
+    <div class="container approche-grid">
+      <div class="approche-image">
+        <img src="approche.png" alt="Collaboration professionnelle illustrée par une poignée de main">
+      </div>
+      <div class="approche-content">
+        <div class="quote-icon">❝</div>
+        <h2>Notre approche entreprise</h2>
+        <div class="underline"></div>
+        <p>
+          Notre mission est de comprendre vos attentes et d’y répondre avec précision, jusqu’à atteindre votre entière satisfaction.
+        </p>
+        <p>
+          <strong>Une relation de confiance :</strong> chaque collaboration débute par une écoute attentive de vos besoins afin de concevoir des solutions parfaitement adaptées.  
+          Nous vous accompagnons à chaque étape de vos projets, avec une approche fondée sur la transparence, la réactivité et le sens du résultat.  
+          Conscients des enjeux humains et stratégiques liés au recrutement, nous mettons tout en œuvre pour offrir un accompagnement sur mesure et durable.
+        </p>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- === SECTION : Notre approche candidats === -->
+<section class="approche-section alt reveal">
+    <div class="container approche-grid">
+      <div class="approche-content">
+        <div class="quote-icon">❝</div>
+        <h2>Notre approche candidats</h2>
+        <div class="underline"></div>
+        <p>
+          Quelle que soit la nature de votre démarche, nous mettons en place une approche individualisée afin de vous accompagner au mieux dans votre parcours professionnel.
+        </p>
+        <p>
+          <strong>Notre engagement envers nos candidats :</strong> nous prenons le temps de comprendre votre parcours, vos aspirations et vos motivations pour vous orienter vers des opportunités en adéquation avec vos objectifs.  
+          Nous vous soutenons tout au long de votre évolution professionnelle grâce à un accompagnement humain, des conseils personnalisés et une écoute attentive.
+        </p>
+        <p>
+          Votre bien-être et votre développement sont au cœur de nos priorités : c’est pourquoi nous veillons à vous offrir un environnement professionnel épanouissant et des perspectives concrètes d’évolution.
+        </p>
+      </div>
+      <div class="approche-image">
+        <img src="approche-candidats.png" alt="Entretien professionnel entre un candidat et un recruteur">
+      </div>
+    </div>
+  </section>
+  
+
+
+  <!-- === SECTION : Notre vision === -->
+<section class="approche-section reveal">
+    <div class="container approche-grid">
+      <div class="approche-image">
+        <img src="notre-vision.png" alt="Illustration représentant la vision et l'avenir professionnel">
+      </div>
+      <div class="approche-content">
+        <div class="quote-icon">❝</div>
+        <h2>Notre vision</h2>
+        <div class="underline"></div>
+        <p>
+          Chez ASTROVIA, nous croyons que la performance durable repose sur l’alliance entre l’humain, la stratégie et l’innovation.
+        </p>
+        <p>
+          <strong>Notre ambition :</strong> accompagner entreprises et talents vers un futur où chaque collaboration est source de valeur et d’épanouissement.  
+          Nous plaçons la confiance, la transparence et la progression continue au cœur de notre démarche, afin de construire des partenariats solides et durables.
+        </p>
+        <p>
+          Notre vision s’inscrit dans une dynamique d’excellence : anticiper les besoins de demain, encourager la montée en compétences et favoriser un environnement professionnel éthique et stimulant.
+        </p>
+      </div>
+    </div>
+  </section>
+  
+
+
+  <!-- === SECTION : Notre méthode de travail === -->
+<section class="methode-section reveal">
+    <div class="container">
+      <h2 class="methode-title">Notre méthode de travail</h2>
+      <p class="methode-intro">
+        Chez <strong>ASTROVIA</strong>, chaque mission repose sur une approche structurée, alliant exigence, transparence et accompagnement humain.  
+        Notre objectif : transformer vos besoins en réussites concrètes.
+      </p>
+  
+      <div class="methode-grid">
+        <div class="methode-card fade-up">
+          <div class="icon-box"><i data-lucide="search"></i></div>
+          <h3>1. Analyse du besoin</h3>
+          <p>
+            Nous commençons par une écoute attentive de vos attentes afin de comprendre vos enjeux, votre culture d’entreprise et vos objectifs.
+          </p>
+        </div>
+  
+        <div class="methode-card fade-up">
+          <div class="icon-box"><i data-lucide="target"></i></div>
+          <h3>2. Stratégie sur mesure</h3>
+          <p>
+            Nous concevons une solution adaptée à votre situation, en intégrant des leviers d’efficacité et des outils innovants.
+          </p>
+        </div>
+  
+        <div class="methode-card fade-up">
+          <div class="icon-box"><i data-lucide="users"></i></div>
+          <h3>3. Mise en œuvre & accompagnement</h3>
+          <p>
+            Nos experts assurent un suivi continu tout au long de la mission, garantissant réactivité et qualité à chaque étape.
+          </p>
+        </div>
+  
+        <div class="methode-card fade-up">
+          <div class="icon-box"><i data-lucide="bar-chart-3"></i></div>
+          <h3>4. Suivi & amélioration continue</h3>
+          <p>
+            Nous évaluons les résultats et ajustons nos actions pour maximiser la performance et la satisfaction de nos partenaires.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- === FOOTER identique === -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-logo">
+        <img src="astrovia.jpg" alt="Logo ASTROVIA">
+        <h3>ASTROVIA</h3>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact</h4>
+        <p>158 Chemin du Rival Escur, 81800 RABASTENS, France</p>
+        <p>Tél. : <a href="tel:+33648283477">06 48 28 34 77</a></p>
+        <p>Email : <a href="mailto:contact@astrovia.fr">contact@astrovia.fr</a></p>
+      </div>
+      <div class="footer-social">
+        <h4>Suivez-nous</h4>
+        <a href="#" class="social-link" aria-label="LinkedIn ASTROVIA">
+          <i data-lucide="linkedin"></i>
+        </a>
+      </div>
+      <a href="#top" class="scroll-top" aria-label="Remonter en haut">
+        <i data-lucide="arrow-up"></i>
+      </a>
+    </div>
+  </footer>
+
+
+  <!-- === JS pour les icônes et le menu mobile === -->
+  <script>
+    lucide.createIcons();
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuBtn = document.querySelector('.menu-btn');
+      const menuClose = document.querySelector('.menu-close');
+      const navlinks = document.getElementById('navlinks');
+
+      // Ouvre le menu
+      if (menuBtn && navlinks) {
+        menuBtn.addEventListener('click', () => {
+          navlinks.classList.add('show');
+          menuBtn.setAttribute('aria-expanded', 'true');
+        });
+      }
+
+      // Ferme le menu
+      if (menuClose && navlinks) {
+        menuClose.addEventListener('click', () => {
+          navlinks.classList.remove('show');
+          menuBtn.setAttribute('aria-expanded', 'false');
+        });
+      }
+
+      // Ferme le menu quand on clique sur un lien sans sous-menu
+      navlinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          const parent = link.parentElement;
+          const hasSubmenu = parent.classList.contains('dropdown');
+
+          if (window.innerWidth <= 960 && hasSubmenu) {
+            e.preventDefault();
+            if (parent.classList.contains('open')) {
+              window.location.href = link.getAttribute('href');
+            } else {
+              document.querySelectorAll('.dropdown.open').forEach(el => el.classList.remove('open'));
+              parent.classList.add('open');
+            }
+            return;
+          }
+
+          if (window.innerWidth <= 960) {
+            navlinks.classList.remove('show');
+            menuBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+    });
+
+
+
+     // === Apparition au scroll ===
+  const revealElements = document.querySelectorAll(".reveal, .fade-up, .slide-left, .slide-right, .zoom-in");
+
+function revealOnScroll() {
+  const windowHeight = window.innerHeight;
+  revealElements.forEach(el => {
+    const elementTop = el.getBoundingClientRect().top;
+    if (elementTop < windowHeight - 100) {
+      el.classList.add("visible");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
+  </script>
+
+</body>
+</html>
