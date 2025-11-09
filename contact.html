@@ -629,64 +629,54 @@
   </header>
 
 
-  <section class="contact-premium reveal" id="contact">
-    <div class="container">
-      <h2>Parlons de votre projet</h2>
-      <p class="subtitle">Nous serons ravis d’échanger avec vous pour concrétiser vos idées.</p>
-  
-      <form class="contact-form" action="https://formsubmit.co/gasmiyahia50@gmail.com" method="POST">
+  <form class="contact-form" action="https://formsubmit.co/gasmiyahia50@gmail.com" method="POST">
 
-        <div class="form-group">
-          <label for="prenom">Prénom</label>
-          <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required>
-        </div>
-  
-        <div class="form-group">
-          <label for="nom">Nom</label>
-          <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
-        </div>
-  
-        <div class="form-group">
-          <label for="email">E-mail</label>
-          <input type="email" id="email" name="email" placeholder="Votre e-mail" required>
-        </div>
-  
-        <div class="form-group">
-          <label for="telephone">Téléphone</label>
-          <input type="tel" id="telephone" name="telephone" placeholder="+33 ..." required>
-        </div>
-  
-        <div class="form-group">
-          <label for="objet">Objet</label>
-          <input type="text" id="objet" name="objet" placeholder="Sujet de votre message" required>
-        </div>
-  
-        <div class="form-group full">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="5" placeholder="Décrivez votre projet..." required></textarea>
-        </div>
-  
+  <input type="hidden" name="_subject" value="📩 Nouveau message – ASTROVIA">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_template" value="box">
+  <input type="hidden" name="_next" value="https://astrovia.fr/merci.html">
 
-        <input type="hidden" name="_subject" value="Nouveau message depuis le site ASTROVIA">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_next" value="https://astrovia.fr/accueil.html">
+  <!-- ✅ En-tête visuel dans l’e-mail -->
+  <input type="hidden" name="_honey" style="display:none">
+  <input type="hidden" name="_formtitle" value='<img src="https://astrovia.fr/astrovia.jpg" width="80" style="border-radius:10px;"><br><strong>ASTROVIA</strong><br>💬 Nouveau message reçu depuis le site'>
+  <input type="hidden" name="_autoresponse" value="Bonjour,  
+Merci pour votre message !  
+Nous avons bien reçu votre demande et nous vous répondrons très prochainement.  
+— L’équipe ASTROVIA">
 
+  <div class="form-group">
+    <label for="prenom">Prénom</label>
+    <input type="text" id="prenom" name="👤 Prénom" placeholder="Votre prénom" required>
+  </div>
 
-        <button type="submit" class="btn-gradient">Envoyer</button>
-        <div class="form-success" id="formSuccess">
-          <div class="checkmark">
-            <svg viewBox="0 0 52 52">
-              <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
-              <path class="checkmark-check" fill="none" d="M14 27l7 7 17-17"/>
-            </svg>
-          </div>
-          <p>Message envoyé avec succès !</p>
-        </div>
-        
-      </form>
-    </div>
-  </section>
+  <div class="form-group">
+    <label for="nom">Nom</label>
+    <input type="text" id="nom" name="👤 Nom" placeholder="Votre nom" required>
+  </div>
+
+  <div class="form-group">
+    <label for="email">E-mail</label>
+    <input type="email" id="email" name="📧 E-mail" placeholder="Votre e-mail" required>
+  </div>
+
+  <div class="form-group">
+    <label for="telephone">Téléphone</label>
+    <input type="tel" id="telephone" name="📞 Téléphone" placeholder="+33 ..." required>
+  </div>
+
+  <div class="form-group">
+    <label for="objet">Objet</label>
+    <input type="text" id="objet" name="📌 Objet" placeholder="Sujet de votre message" required>
+  </div>
+
+  <div class="form-group full">
+    <label for="message">Message</label>
+    <textarea id="message" name="💬 Message" rows="5" placeholder="Décrivez votre projet..." required></textarea>
+  </div>
+
+  <button type="submit" class="btn-gradient">Envoyer</button>
+</form>
+
 
   
 
@@ -782,6 +772,7 @@
 
 </body>
 </html>
+
 
 
 
