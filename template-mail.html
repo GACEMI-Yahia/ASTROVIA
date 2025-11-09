@@ -1,20 +1,47 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head><meta charset="UTF-8"><title>Message ASTROVIA</title></head>
-<body style="font-family:Inter, sans-serif; background:#f9fbff; color:#222;">
-  <div style="max-width:600px;margin:auto;padding:30px;background:white;border-radius:12px;">
-    <img src="https://astrovia.fr/astrovia.jpg" width="80" style="border-radius:10px;margin-bottom:10px;">
-    <h2 style="color:#00b884;">🌟 Nouveau message reçu sur ASTROVIA</h2>
-    <p>Vous avez reçu une nouvelle demande depuis le formulaire de contact du site.</p>
-    <hr>
-    <p><strong>Prénom :</strong> {{👤 Prénom}}</p>
-    <p><strong>Nom :</strong> {{👤 Nom}}</p>
-    <p><strong>Email :</strong> {{📧 E-mail}}</p>
-    <p><strong>Téléphone :</strong> {{📞 Téléphone}}</p>
-    <p><strong>Objet :</strong> {{📌 Objet}}</p>
-    <p><strong>Message :</strong> {{💬 Message}}</p>
-    <hr>
-    <p style="font-size:13px;color:#666;">Cet e-mail vous a été envoyé automatiquement par le site <a href="https://astrovia.fr">astrovia.fr</a>.</p>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nouveau message – ASTROVIA</title>
+</head>
+<body style="margin:0;padding:0;font-family:'Inter',Arial,sans-serif;background:#0c1020;color:#e8ecf5;">
+
+  <div style="max-width:650px;margin:40px auto;background:#111634;border-radius:16px;overflow:hidden;
+              box-shadow:0 10px 30px rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.08);">
+
+    <!-- En-tête -->
+    <div style="background:linear-gradient(135deg,#6bd3ff,#00b884);padding:30px;text-align:center;">
+      <img src="https://astrovia.fr/astrovia.jpg" alt="Logo ASTROVIA" width="80" style="border-radius:12px;">
+      <h1 style="color:#001628;font-weight:800;margin-top:10px;">ASTROVIA</h1>
+    </div>
+
+    <!-- Contenu principal -->
+    <div style="padding:40px 30px;">
+      <h2 style="color:#6bd3ff;">💬 Nouveau message reçu depuis le site</h2>
+      <p style="color:#b9c2d6;">Vous avez reçu une nouvelle demande via le formulaire de contact :</p>
+
+      <div style="margin-top:25px;background:rgba(255,255,255,0.05);border-radius:12px;padding:20px;">
+        <p><strong>👤 Prénom :</strong> {{👤 Prénom}}</p>
+        <p><strong>👤 Nom :</strong> {{👤 Nom}}</p>
+        <p><strong>📧 E-mail :</strong> {{📧 E-mail}}</p>
+        <p><strong>📞 Téléphone :</strong> {{📞 Téléphone}}</p>
+        <p><strong>📌 Objet :</strong> {{📌 Objet}}</p>
+        <p><strong>💬 Message :</strong><br>{{💬 Message}}</p>
+      </div>
+
+      <p style="margin-top:30px;color:#b9c2d6;font-size:14px;">
+        Ce message vous a été envoyé automatiquement depuis le site 
+        <a href="https://astrovia.fr" style="color:#6bd3ff;text-decoration:none;">astrovia.fr</a>.
+      </p>
+    </div>
+
+    <!-- Pied de mail -->
+    <div style="background:#151a3f;padding:20px;text-align:center;font-size:13px;color:#9aa3c2;">
+      <p>© 2025 ASTROVIA — Tous droits réservés</p>
+    </div>
+
   </div>
+
 </body>
 </html>
