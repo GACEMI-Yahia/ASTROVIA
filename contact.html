@@ -579,6 +579,71 @@
   margin: 0 auto; /* ✅ centre le SVG horizontalement */
 }
 
+    /* === Animation du checkmark === */
+.checkmark__circle {
+  stroke: var(--accent-2);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+.checkmark {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 3;
+  stroke: var(--accent-2);
+  stroke-miterlimit: 10;
+  box-shadow: inset 0 0 0 var(--accent-2);
+  animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+  margin: 0 auto;
+}
+.checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
+}
+@keyframes stroke {
+  100% { stroke-dashoffset: 0; }
+}
+@keyframes scale {
+  0%, 100% { transform: none; }
+  50% { transform: scale3d(1.1, 1.1, 1); }
+}
+@keyframes fill {
+  100% { box-shadow: inset 0 0 0 40px var(--accent-2); }
+}
+
+/* === Apparition du message === */
+.form-success {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 25px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.form-success.show {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.form-success p {
+  color: var(--accent-2);
+  font-weight: 600;
+  margin-top: 12px;
+  text-shadow: 0 0 8px rgba(0,184,132,0.3);
+  font-size: 1.05rem;
+}
+
 
 
   </style>
@@ -665,6 +730,14 @@
   </div>
 
   <button type="submit" class="btn-gradient">Envoyer</button>
+    <div class="form-success" id="formSuccess">
+  <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+    <path class="checkmark__check" fill="none" d="M14 27l7 7 16-16"/>
+  </svg>
+  <p>✅ Merci ! Votre message a bien été envoyé.</p>
+</div>
+
 </form>
 
 
@@ -791,15 +864,24 @@
           console.error("Erreur EmailJS :", error);
           alert("❌ Une erreur est survenue. Veuillez réessayer plus tard.");
         })
-        .finally(() => {
-          button.disabled = false;
-          button.textContent = originalText;
-        });
+        .then(() => {
+  const successBox = document.getElementById("formSuccess");
+  successBox.classList.add("show");
+
+  // Réinitialiser le formulaire après un petit délai
+  form.reset();
+
+  // Masquer le message après 5 secondes
+  setTimeout(() => {
+    successBox.classList.remove("show");
+  }, 5000);
+});
     });
   });
 </script>
 </body>
 </html>
+
 
 
 
