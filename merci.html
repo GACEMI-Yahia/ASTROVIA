@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merci – ASTROVIA</title>
+  <link rel="icon" type="image/png" href="astrovia.jpg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --bg:#0c1020;
+      --bg-soft:#111634;
+      --text:#e8ecf5;
+      --muted:#b9c2d6;
+      --accent:#6bd3ff;
+      --accent-2:#00b884;
+      --line:rgba(255,255,255,.08);
+      --radius:16px;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background: radial-gradient(1000px 500px at 10% -10%, rgba(107,211,255,.15), transparent 50%), 
+                  radial-gradient(800px 400px at 90% -10%, rgba(0,184,132,.12), transparent 50%), 
+                  var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .card {
+      background: rgba(21, 26, 63, 0.75);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 60px 40px;
+      max-width: 500px;
+      backdrop-filter: blur(10px);
+    }
+
+    .card h1 {
+      color: var(--accent);
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 40px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #001628;
+      font-weight: 700;
+      padding: 14px 26px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(107,211,255,0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(107,211,255,0.4);
+    }
+
+    /* Checkmark animé */
+    .checkmark {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: block;
+      stroke-width: 2;
+      stroke: var(--accent-2);
+      stroke-miterlimit: 10;
+      margin: 0 auto 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="checkmark">
+      <svg viewBox="0 0 52 52">
+        <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+        <path class="checkmark-check" fill="none" stroke-width="4" d="M14 27l7 7 17-17"/>
+      </svg>
+    </div>
+    <h1>Merci pour votre message !</h1>
+    <p>Nous avons bien reçu votre demande et nous vous répondrons dans les plus brefs délais.</p>
+    <a href="accueil.html" class="btn">Retour à l’accueil</a>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
