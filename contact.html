@@ -634,52 +634,57 @@
       <p class="subtitle">Nous serons ravis d’échanger avec vous pour concrétiser vos idées.</p>
   <form class="contact-form" action="https://formsubmit.co/gasmiyahia50@gmail.com" method="POST">
 
+  <!-- Configuration principale -->
   <input type="hidden" name="_subject" value="📩 Nouveau message – ASTROVIA">
   <input type="hidden" name="_captcha" value="false">
   <input type="hidden" name="_template" value="custom">
   <input type="hidden" name="_emailtemplate" value="https://www.astrovia.fr/template-mail.html">
-  <input type="hidden" name="_next" value="https://astrovia.fr/merci.html">
+  <input type="hidden" name="_next" value="https://www.astrovia.fr/merci.html">
 
-  <!-- ✅ En-tête visuel dans l’e-mail -->
+  <!-- Anti-spam (honeypot) -->
   <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-  <input type="hidden" name="_formtitle" value='<img src="https://astrovia.fr/astrovia.jpg" width="80" style="border-radius:10px;"><br><strong>ASTROVIA</strong><br>💬 Nouveau message reçu depuis le site'>
+
+  <!-- En-tête visuel + message automatique -->
+  <input type="hidden" name="_formtitle" value='<img src="https://www.astrovia.fr/astrovia.jpg" width="80" style="border-radius:10px;"><br><strong>ASTROVIA</strong><br>💬 Nouveau message reçu depuis le site'>
   <input type="hidden" name="_autoresponse" value="Bonjour,  
 Merci pour votre message !  
 Nous avons bien reçu votre demande et nous vous répondrons très prochainement.  
 — L’équipe ASTROVIA">
 
+  <!-- === Champs visibles (sans emoji dans les “name”) === -->
   <div class="form-group">
     <label for="prenom">Prénom</label>
-    <input type="text" id="prenom" name="👤 Prénom" placeholder="Votre prénom" required>
+    <input type="text" id="prenom" name="Prenom" placeholder="Votre prénom" required>
   </div>
 
   <div class="form-group">
     <label for="nom">Nom</label>
-    <input type="text" id="nom" name="👤 Nom" placeholder="Votre nom" required>
+    <input type="text" id="nom" name="Nom" placeholder="Votre nom" required>
   </div>
 
   <div class="form-group">
     <label for="email">E-mail</label>
-    <input type="email" id="email" name="📧 E-mail" placeholder="Votre e-mail" required>
+    <input type="email" id="email" name="Email" placeholder="Votre e-mail" required>
   </div>
 
   <div class="form-group">
     <label for="telephone">Téléphone</label>
-    <input type="tel" id="telephone" name="📞 Téléphone" placeholder="+33 ..." required>
+    <input type="tel" id="telephone" name="Telephone" placeholder="+33 ..." required>
   </div>
 
   <div class="form-group">
     <label for="objet">Objet</label>
-    <input type="text" id="objet" name="📌 Objet" placeholder="Sujet de votre message" required>
+    <input type="text" id="objet" name="Objet" placeholder="Sujet de votre message" required>
   </div>
 
   <div class="form-group full">
     <label for="message">Message</label>
-    <textarea id="message" name="💬 Message" rows="5" placeholder="Décrivez votre projet..." required></textarea>
+    <textarea id="message" name="Message" rows="5" placeholder="Décrivez votre projet..." required></textarea>
   </div>
 
   <button type="submit" class="btn-gradient">Envoyer</button>
 </form>
+
 </div>
   </section>
 
@@ -777,6 +782,7 @@ Nous avons bien reçu votre demande et nous vous répondrons très prochainement
 
 </body>
 </html>
+
 
 
 
