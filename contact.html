@@ -632,58 +632,35 @@
     <div class="container">
       <h2>Parlons de votre projet</h2>
       <p class="subtitle">Nous serons ravis d’échanger avec vous pour concrétiser vos idées.</p>
-  <form class="contact-form" action="https://formsubmit.co/gasmiyahia50@gmail.com" method="POST">
-
-  <!-- Configuration principale -->
-  <input type="hidden" name="_subject" value="📩 Nouveau message – ASTROVIA">
-  <input type="hidden" name="_captcha" value="false">
-  <input type="hidden" name="_template" value="custom">
-  <input type="hidden" name="_emailtemplate" value="https://www.astrovia.fr/template-mail.html">
-  <input type="hidden" name="_next" value="https://www.astrovia.fr/merci.html">
-
-  <!-- Anti-spam (honeypot) -->
-  <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-
-  <!-- En-tête visuel + message automatique -->
-  <input type="hidden" name="_formtitle" value='<img src="https://www.astrovia.fr/astrovia.jpg" width="80" style="border-radius:10px;"><br><strong>ASTROVIA</strong><br>💬 Nouveau message reçu depuis le site'>
-  <input type="hidden" name="_autoresponse" value="Bonjour,  
-Merci pour votre message !  
-Nous avons bien reçu votre demande et nous vous répondrons très prochainement.  
-— L’équipe ASTROVIA">
-
-  <!-- === Champs visibles (sans emoji dans les “name”) === -->
+  <form class="contact-form">
   <div class="form-group">
     <label for="prenom">Prénom</label>
-    <input type="text" id="prenom" name="Prenom" placeholder="Votre prénom" required>
-  </div>
-
-  <div class="form-group">
-    <label for="nom">Nom</label>
-    <input type="text" id="nom" name="Nom" placeholder="Votre nom" required>
+    <input type="text" id="prenom" name="from_name" placeholder="Votre prénom" required>
   </div>
 
   <div class="form-group">
     <label for="email">E-mail</label>
-    <input type="email" id="email" name="Email" placeholder="Votre e-mail" required>
+    <input type="email" id="email" name="from_email" placeholder="Votre e-mail" required>
   </div>
 
   <div class="form-group">
     <label for="telephone">Téléphone</label>
-    <input type="tel" id="telephone" name="Telephone" placeholder="+33 ..." required>
+    <input type="tel" id="telephone" name="telephone" placeholder="+33 ..." required>
   </div>
 
   <div class="form-group">
     <label for="objet">Objet</label>
-    <input type="text" id="objet" name="Objet" placeholder="Sujet de votre message" required>
+    <input type="text" id="objet" name="subject" placeholder="Sujet de votre message" required>
   </div>
 
   <div class="form-group full">
     <label for="message">Message</label>
-    <textarea id="message" name="Message" rows="5" placeholder="Décrivez votre projet..." required></textarea>
+    <textarea id="message" name="message" rows="5" placeholder="Décrivez votre projet..." required></textarea>
   </div>
 
   <button type="submit" class="btn-gradient">Envoyer</button>
 </form>
+
 
 </div>
   </section>
@@ -779,9 +756,45 @@ Nous avons bien reçu votre demande et nous vous répondrons très prochainement
   window.addEventListener("scroll", revealOnScroll);
   window.addEventListener("load", revealOnScroll);
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="text/javascript">
+  (function(){
+    emailjs.init("lMmH9CDieJ7Zg9kI8"); // ✅ Ta Public Key
+  })();
 
+  // Gestion de l'envoi du formulaire
+  document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector(".contact-form");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      // Animation d’envoi
+      const button = form.querySelector("button[type='submit']");
+      const originalText = button.textContent;
+      button.disabled = true;
+      button.textContent = "Envoi en cours...";
+
+      emailjs.sendForm("service_we5d0ta", "template_lhqwckm", this)
+        .then(() => {
+          // ✅ Message envoyé avec succès
+          alert("✅ Merci ! Votre message a bien été envoyé.");
+          form.reset();
+        }, (error) => {
+          // ❌ En cas d'erreur
+          console.error("Erreur EmailJS :", error);
+          alert("❌ Une erreur est survenue. Veuillez réessayer plus tard.");
+        })
+        .finally(() => {
+          button.disabled = false;
+          button.textContent = originalText;
+        });
+    });
+  });
+</script>
 </body>
 </html>
+
 
 
 
