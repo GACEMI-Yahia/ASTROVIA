@@ -836,58 +836,66 @@ window.addEventListener("load", revealOnScroll);
 
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector(".candidature-form");
-  const message = document.querySelector(".confirmation-message");
 
-  form.addEventListener("submit", (e) => {
-    e.preventDefault(); // empêche l'envoi réel
-    message.style.display = "block"; // affiche le message
-    form.reset(); // vide les champs du formulaire
-
-    // effet temporaire du bouton
-    const btn = form.querySelector(".btn-primary");
-    btn.disabled = true;
-    btn.textContent = "Envoi en cours...";
-
-    setTimeout(() => {
-      btn.disabled = false;
-      btn.textContent = "Envoyer ma candidature";
-      message.textContent = "✅ Merci ! Votre candidature a été envoyée avec succès.";
-      message.style.color = "var(--accent-2)";
-    }, 1500);
-  });
-});
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector(".candidature-form");
-  const message = document.querySelector(".confirmation-message");
-  const btn = form.querySelector(".btn-primary");
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    btn.disabled = true;
-    btn.textContent = "Envoi en cours...";
-
-    setTimeout(() => {
-      form.reset();
-      btn.disabled = false;
-      btn.textContent = "Envoyer ma candidature";
-      message.style.display = "block";
-
-      // Masquer la confirmation après 6 secondes
-      setTimeout(() => {
-        message.style.display = "none";
-      }, 6000);
-    }, 1500);
-  });
-});
 
 
   </script>
+<!-- === EMAILJS pour Candidature Spontanée === -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+(function(){
+  // ✅ Initialise EmailJS avec ta clé publique
+  emailjs.init("lMmH9CDieJ7Zg9kI8");
+})();
+
+document.addEventListener("DOMContentLoaded", function() {
+  const form = document.querySelector(".candidature-form");
+  const message = document.querySelector(".confirmation-message");
+  const button = form.querySelector(".btn-primary");
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    // Désactive le bouton temporairement
+    button.disabled = true;
+    const originalText = button.textContent;
+    button.textContent = "Envoi en cours...";
+
+    // ✅ Envoi via EmailJS
+    emailjs.sendForm("service_we5d0ta", "template_ssleo9k", this)
+      .then(() => {
+        // ✅ Message de confirmation
+        message.style.display = "block";
+        message.innerHTML = `
+          <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+            <path class="checkmark__check" fill="none" d="M14 27l7 7 16-16"/>
+          </svg>
+          <p>Merci ! Votre candidature a été envoyée avec succès.<br>
+          📎 Pour vos fichiers, envoyez-les à <strong>contact@astrovia.fr</strong></p>
+        `;
+
+        form.reset();
+
+        // ✅ Masque le message après 6 secondes
+        setTimeout(() => message.style.display = "none", 6000);
+      })
+      .catch((error) => {
+        console.error("Erreur EmailJS :", error);
+        message.style.display = "block";
+        message.innerHTML = `<p style="color:#ff5a5f;">❌ Une erreur est survenue. Veuillez réessayer plus tard.</p>`;
+      })
+      .finally(() => {
+        // Réactive le bouton
+        button.disabled = false;
+        button.textContent = originalText;
+      });
+  });
+});
+</script>
 
 </body>
 </html>
+
 
 
