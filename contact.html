@@ -537,98 +537,67 @@
 }
 
 /* === Animation de validation === */
-/* === Animation de validation centrée === */
+/* ✅ Animation de validation réussie (identique à accueil) */
 .form-success {
-  grid-column: 1 / -1; /* ✅ prend toute la largeur du formulaire */
   display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 25px;
+  text-align: center;
+  margin-top: 30px;
   opacity: 0;
-  transform: translateY(20px);
+  transform: scale(0.95);
   transition: opacity 0.6s ease, transform 0.6s ease;
-  text-align: center; /* ✅ centre aussi le texte */
+
+  /* ✅ centrage parfait dans le formulaire */
+  grid-column: 1 / -1;
+  justify-self: center;
 }
+
 
 .form-success.show {
-  display: flex;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.form-success p {
-  color: var(--accent-2);
-  font-weight: 600;
-  margin-top: 12px;
-  text-shadow: 0 0 8px rgba(0,184,132,0.3);
-  font-size: 1.05rem;
-}
-
-
-    /* === Animation du checkmark === */
-.checkmark__circle {
-  stroke: var(--accent-2);
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-dasharray: 166;
-  stroke-dashoffset: 166;
-  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
-}
-.checkmark {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
   display: block;
-  stroke-width: 3;
-  stroke: var(--accent-2);
-  stroke-miterlimit: 10;
-  box-shadow: inset 0 0 0 var(--accent-2);
-  animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
-  margin: 0 auto;
+  opacity: 1;
+  transform: scale(1);
 }
-.checkmark__check {
-  transform-origin: 50% 50%;
+
+.success-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background: var(--accent-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: popIn 0.6s ease forwards;
+}
+
+.success-icon svg {
+  width: 36px;
+  height: 36px;
+  stroke: #001628;
+  stroke-width: 5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
   stroke-dasharray: 48;
   stroke-dashoffset: 48;
-  animation: stroke 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
-}
-@keyframes stroke {
-  100% { stroke-dashoffset: 0; }
-}
-@keyframes scale {
-  0%, 100% { transform: none; }
-  50% { transform: scale3d(1.1, 1.1, 1); }
-}
-@keyframes fill {
-  100% { box-shadow: inset 0 0 0 40px var(--accent-2); }
-}
-
-/* === Apparition du message === */
-.form-success {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin-top: 25px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.form-success.show {
-  display: flex;
-  opacity: 1;
-  transform: translateY(0);
+  animation: drawCheck 0.8s ease forwards 0.3s;
 }
 
 .form-success p {
   color: var(--accent-2);
   font-weight: 600;
-  margin-top: 12px;
-  text-shadow: 0 0 8px rgba(0,184,132,0.3);
-  font-size: 1.05rem;
+  font-size: 18px;
+  margin-top: 4px;
+}
+
+@keyframes drawCheck {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  80% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 
@@ -717,13 +686,14 @@
   </div>
 
   <button type="submit" class="btn-gradient">Envoyer</button>
-    <div class="form-success" id="formSuccess">
-  <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
-    <path class="checkmark__check" fill="none" d="M14 27l8 8 16-16"/>
-  </svg>
-  <p>✅ Merci ! Votre message a bien été envoyé.</p>
+   <!-- ✅ Message de validation animé -->
+<div id="formSuccess" class="form-success">
+  <div class="success-icon">
+    <svg viewBox="0 0 52 52"><path d="M14 27l7 7 17-17" /></svg>
+  </div>
+  <p>Message envoyé avec succès !</p>
 </div>
+
 
 </form>
 
@@ -841,33 +811,37 @@
       button.disabled = true;
       button.textContent = "Envoi en cours...";
 
-      emailjs.sendForm("service_we5d0ta", "template_lhqwckm", this)
-        .then(() => {
-  const successBox = document.getElementById("formSuccess");
-  successBox.classList.add("show");
+emailjs.sendForm("service_we5d0ta", "template_lhqwckm", this)
+  .then(() => {
+    const successBox = document.getElementById("formSuccess");
+    successBox.classList.add("show");
+    form.reset();
 
-  // Réinitialiser le formulaire
-  form.reset();
+    // Masquer le message après 4 secondes
+    setTimeout(() => {
+      successBox.classList.remove("show");
+    }, 4000);
+  })
+  .catch((error) => {
+    console.error("Erreur EmailJS :", error);
+    const successBox = document.getElementById("formSuccess");
+successBox.innerHTML = `<p style="color:#ff5a5f;font-weight:600;">❌ Une erreur est survenue. Réessayez plus tard.</p>`;
+successBox.classList.add("show");
+setTimeout(() => successBox.classList.remove("show"), 4000);
 
-  // Masquer le message après 5 secondes
-  setTimeout(() => {
-    successBox.classList.remove("show");
-  }, 5000);
-})
-.catch((error) => {
-  console.error("Erreur EmailJS :", error);
-  alert("❌ Une erreur est survenue. Veuillez réessayer plus tard.");
-})
-.finally(() => {
-  button.disabled = false;
-  button.textContent = originalText;
-});
+  })
+  .finally(() => {
+    button.disabled = false;
+    button.textContent = originalText;
+  });
+
 
     });
   });
 </script>
 </body>
 </html>
+
 
 
 
