@@ -634,7 +634,8 @@
       <h2>Parlons de votre projet</h2>
       <p class="subtitle">Nous serons ravis d’échanger avec vous pour concrétiser vos idées.</p>
   
-      <form class="contact-form">
+      <form class="contact-form" action="https://formsubmit.co/gasmiyahia50@gmail.com" method="POST">
+
         <div class="form-group">
           <label for="prenom">Prénom</label>
           <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required>
@@ -665,6 +666,13 @@
           <textarea id="message" name="message" rows="5" placeholder="Décrivez votre projet..." required></textarea>
         </div>
   
+
+        <input type="hidden" name="_subject" value="Nouveau message depuis le site ASTROVIA">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://astrovia.fr/accueil.html">
+
+
         <button type="submit" class="btn-gradient">Envoyer</button>
         <div class="form-success" id="formSuccess">
           <div class="checkmark">
@@ -808,5 +816,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
 
 
