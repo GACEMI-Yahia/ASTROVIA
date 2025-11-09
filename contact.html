@@ -719,103 +719,70 @@
 
   <!-- === JS pour les icônes et le menu mobile === -->
   <script>
-    lucide.createIcons();
+  lucide.createIcons();
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const menuBtn = document.querySelector('.menu-btn');
-      const menuClose = document.querySelector('.menu-close');
-      const navlinks = document.getElementById('navlinks');
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuBtn = document.querySelector('.menu-btn');
+    const menuClose = document.querySelector('.menu-close');
+    const navlinks = document.getElementById('navlinks');
 
-      // Ouvre le menu
-      if (menuBtn && navlinks) {
-        menuBtn.addEventListener('click', () => {
-          navlinks.classList.add('show');
-          menuBtn.setAttribute('aria-expanded', 'true');
-        });
-      }
+    // --- Menu mobile ---
+    if (menuBtn && navlinks) {
+      menuBtn.addEventListener('click', () => {
+        navlinks.classList.add('show');
+        menuBtn.setAttribute('aria-expanded', 'true');
+      });
+    }
 
-      // Ferme le menu
-      if (menuClose && navlinks) {
-        menuClose.addEventListener('click', () => {
+    if (menuClose && navlinks) {
+      menuClose.addEventListener('click', () => {
+        navlinks.classList.remove('show');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    navlinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const parent = link.parentElement;
+        const hasSubmenu = parent.classList.contains('dropdown');
+
+        if (window.innerWidth <= 960 && hasSubmenu) {
+          e.preventDefault();
+          if (parent.classList.contains('open')) {
+            window.location.href = link.getAttribute('href');
+          } else {
+            document.querySelectorAll('.dropdown.open').forEach(el => el.classList.remove('open'));
+            parent.classList.add('open');
+          }
+          return;
+        }
+
+        if (window.innerWidth <= 960) {
           navlinks.classList.remove('show');
           menuBtn.setAttribute('aria-expanded', 'false');
-        });
-      }
-
-      // Ferme le menu quand on clique sur un lien sans sous-menu
-      navlinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', (e) => {
-          const parent = link.parentElement;
-          const hasSubmenu = parent.classList.contains('dropdown');
-
-          if (window.innerWidth <= 960 && hasSubmenu) {
-            e.preventDefault();
-            if (parent.classList.contains('open')) {
-              window.location.href = link.getAttribute('href');
-            } else {
-              document.querySelectorAll('.dropdown.open').forEach(el => el.classList.remove('open'));
-              parent.classList.add('open');
-            }
-            return;
-          }
-
-          if (window.innerWidth <= 960) {
-            navlinks.classList.remove('show');
-            menuBtn.setAttribute('aria-expanded', 'false');
-          }
-        });
+        }
       });
     });
-
-
-            // === Apparition au scroll ===
-  const revealElements = document.querySelectorAll(".reveal, .fade-up, .slide-left, .slide-right, .zoom-in");
-
-function revealOnScroll() {
-  const windowHeight = window.innerHeight;
-  revealElements.forEach(el => {
-    const elementTop = el.getBoundingClientRect().top;
-    if (elementTop < windowHeight - 100) {
-      el.classList.add("visible");
-    }
   });
-}
 
-window.addEventListener("scroll", revealOnScroll);
-window.addEventListener("load", revealOnScroll);
-
-// === Animation de validation du formulaire ===
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector(".contact-form");
-  const successBox = document.getElementById("formSuccess");
-
-  if (form && successBox) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault(); // empêche le rechargement pour la démo
-
-      // Simulation d'envoi (tu peux ici appeler ton backend avec fetch)
-      form.classList.add("sending");
-      setTimeout(() => {
-        form.reset(); // vide les champs
-        successBox.classList.add("show");
-
-        // Cache le message après 4 secondes
-        setTimeout(() => {
-          successBox.classList.remove("show");
-        }, 4000);
-      }, 1200); // petit délai de "traitement"
+  // --- Animation au scroll ---
+  const revealElements = document.querySelectorAll(".reveal, .fade-up, .slide-left, .slide-right, .zoom-in");
+  function revealOnScroll() {
+    const windowHeight = window.innerHeight;
+    revealElements.forEach(el => {
+      const elementTop = el.getBoundingClientRect().top;
+      if (elementTop < windowHeight - 100) {
+        el.classList.add("visible");
+      }
     });
   }
-});
-
-
-
-
-
-  </script>
+  window.addEventListener("scroll", revealOnScroll);
+  window.addEventListener("load", revealOnScroll);
+</script>
 
 </body>
 </html>
+
 
 
 
