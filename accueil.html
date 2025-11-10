@@ -1545,25 +1545,52 @@
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
     
-    // --- Formulaire contact (simulation) ---
-    const form = document.getElementById('contactForm');
-    const formSuccess = document.getElementById('formSuccess');
+   
     
-    if (form) {
-      form.addEventListener('submit', e => {
-        e.preventDefault();
-        form.querySelector('button').disabled = true;
-    
-        setTimeout(() => {
-          form.reset();
-          formSuccess.classList.add('show');
-          form.querySelector('button').disabled = false;
-    
-          setTimeout(() => formSuccess.classList.remove('show'), 4000);
-        }, 1200);
-      });
-    }
     </script>
-    
+    <!-- === EMAILJS pour le formulaire de contact === -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+(function(){
+  // ✅ Initialisation EmailJS avec ta clé publique
+  emailjs.init("YJzz-OgaLVwXWT_5i");
+})();
+
+document.addEventListener("DOMContentLoaded", function() {
+  const form = document.getElementById("contactForm");
+  const formSuccess = document.getElementById("formSuccess");
+  const button = form.querySelector("button");
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    // Désactive le bouton pendant l’envoi
+    button.disabled = true;
+    const originalText = button.textContent;
+    button.textContent = "Envoi en cours...";
+
+    // ✅ Envoi via EmailJS
+    emailjs.sendForm("service_i6e6q6b", "template_6bx0c48", this)
+      .then(() => {
+        // ✅ Affiche le message de succès animé
+        form.reset();
+        formSuccess.classList.add("show");
+
+        // ✅ Le message reste affiché 2 minutes (120 000 ms)
+        setTimeout(() => formSuccess.classList.remove("show"), 120000);
+      })
+      .catch((error) => {
+        console.error("❌ Erreur EmailJS :", error);
+        alert("Une erreur est survenue lors de l’envoi. Veuillez réessayer plus tard.");
+      })
+      .finally(() => {
+        // Réactive le bouton
+        button.disabled = false;
+        button.textContent = originalText;
+      });
+  });
+});
+</script>
+
 </body>
 </html>
