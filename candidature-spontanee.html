@@ -875,12 +875,13 @@ document.addEventListener("DOMContentLoaded", function() {
             <path class="checkmark__check" fill="none" d="M14 27l7 7 16-16"/>
           </svg>
           <p>Merci ! Votre candidature a été envoyée avec succès.<br>
-          📎 Pour vos fichiers, envoyez-les à <strong>contact@astrovia.fr</strong></p>
+          📎 Pour vos fichiers, envoyez-les à <strong>raouf.gacemi@astrovia.fr</strong></p>
         `;
         form.reset();
 
         // ✅ Masque le message après 6 secondes
-        setTimeout(() => message.style.display = "none", 6000);
+        setTimeout(() => message.style.display = "none", 120000);
+
       })
       .catch((error) => {
         console.error("Erreur EmailJS :", error);
@@ -898,6 +899,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 </body>
 </html>
+
 
 
 
