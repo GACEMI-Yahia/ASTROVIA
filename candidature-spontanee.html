@@ -847,28 +847,76 @@ window.addEventListener("load", revealOnScroll);
 
   <!-- === EMAILJS pour Candidature Spontanée === -->
 <script>
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("candidatureForm");
   const message = document.querySelector(".confirmation-message");
   const button = form.querySelector(".btn-primary");
 
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxIsEnxE0rINoigdgSJit6c9SEoR_uLqnQeZE09JJYEAyqftmBGDGqCh9bOhm4W3HmI/exec";
 
-  form.addEventListener("submit", function(e) {
+  // Lit un fichier en base64 (retourne une Promise)
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      if (!file) return resolve(null);
+      const reader = new FileReader();
+      reader.onload = () => {
+        // reader.result = "data:xxx/xxx;base64,AAAA..."
+        const result = reader.result;
+        const base64 = result.split(",")[1]; // on enlève "data:..;base64,"
+        resolve(base64);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
     button.disabled = true;
     const originalText = button.textContent;
     button.textContent = "Envoi en cours...";
 
-    const formData = new FormData(form);
+    try {
+      // Récupération des champs texte
+      const nom       = form.nom.value;
+      const prenom    = form.prenom.value;
+      const email     = form.email.value;
+      const telephone = form.telephone.value;
+      const messageTxt= form.message.value;
 
-    fetch(SCRIPT_URL, {
-      method: "POST",
-      body: formData
-    })
-    .then(res => res.json())
-    .then(data => {
+      // Fichiers
+      const cvFile    = form.cv.files[0] || null;
+      const autreFile = form.autre.files[0] || null;
+
+      // Conversion en base64
+      const cvBase64    = await fileToBase64(cvFile);
+      const autreBase64 = await fileToBase64(autreFile);
+
+      const payload = {
+        nom,
+        prenom,
+        email,
+        telephone,
+        message: messageTxt,
+
+        cvName:    cvFile    ? cvFile.name    : null,
+        cvType:    cvFile    ? cvFile.type    : null,
+        cvData:    cvBase64  || null,
+
+        autreName: autreFile ? autreFile.name : null,
+        autreType: autreFile ? autreFile.type : null,
+        autreData: autreBase64 || null
+      };
+
+      const res = await fetch(SCRIPT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+
       if (data.ok) {
         message.style.display = "block";
         message.innerHTML = `
@@ -879,29 +927,27 @@ document.addEventListener("DOMContentLoaded", function() {
           <p>Merci ! Votre candidature et votre CV ont été envoyés avec succès.</p>
         `;
         form.reset();
-        setTimeout(() => message.style.display = "none", 120000);
+        setTimeout(() => { message.style.display = "none"; }, 120000);
       } else {
         console.error(data.error);
         message.style.display = "block";
         message.innerHTML = `<p style="color:#ff5a5f;">❌ Une erreur est survenue. Veuillez réessayer plus tard.</p>`;
       }
-    })
-    .catch(err => {
+    } catch (err) {
       console.error(err);
       message.style.display = "block";
       message.innerHTML = `<p style="color:#ff5a5f;">❌ Erreur réseau. Veuillez réessayer.</p>`;
-    })
-    .finally(() => {
+    } finally {
       button.disabled = false;
       button.textContent = originalText;
-    });
+    }
   });
 });
 </script>
 
-
 </body>
 </html>
+
 
 
 
