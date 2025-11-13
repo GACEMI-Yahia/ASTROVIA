@@ -691,7 +691,7 @@
       Vous souhaitez rejoindre l’aventure ASTROVIA ? Envoyez-nous votre candidature, nous serons ravis d’en savoir plus sur vous.
     </p>
 
-    <form class="candidature-form" action="#" method="post" enctype="multipart/form-data">
+    <form class="candidature-form" id="candidatureForm" action="#" method="post" enctype="multipart/form-data">
       <div class="form-grid">
         <div class="form-group">
           <label>Nom</label>
@@ -846,17 +846,13 @@ window.addEventListener("load", revealOnScroll);
 
 
   <!-- === EMAILJS pour Candidature Spontanée === -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-(function(){
-  // ✅ initialise EmailJS avec ta clé publique (OK qu’elle soit visible)
-  emailjs.init("lMmH9CDieJ7Zg9kI8");
-})();
-
 document.addEventListener("DOMContentLoaded", function() {
-  const form = document.querySelector(".candidature-form");
+  const form = document.getElementById("candidatureForm");
   const message = document.querySelector(".confirmation-message");
   const button = form.querySelector(".btn-primary");
+
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxIsEnxE0rINoigdgSJit6c9SEoR_uLqnQeZE09JJYEAyqftmBGDGqCh9bOhm4W3HmI/exec";
 
   form.addEventListener("submit", function(e) {
     e.preventDefault();
@@ -865,10 +861,15 @@ document.addEventListener("DOMContentLoaded", function() {
     const originalText = button.textContent;
     button.textContent = "Envoi en cours...";
 
-    // ✅ Envoi du formulaire *avec* les fichiers (CV, autre)
-    emailjs.sendForm("service_we5d0ta", "template_ssleo9k", this)
-      .then(() => {
-        // ✅ Message de confirmation
+    const formData = new FormData(form);
+
+    fetch(SCRIPT_URL, {
+      method: "POST",
+      body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.ok) {
         message.style.display = "block";
         message.innerHTML = `
           <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
@@ -878,26 +879,30 @@ document.addEventListener("DOMContentLoaded", function() {
           <p>Merci ! Votre candidature et votre CV ont été envoyés avec succès.</p>
         `;
         form.reset();
-
         setTimeout(() => message.style.display = "none", 120000);
-      })
-      .catch((error) => {
-        console.error("Erreur EmailJS :", error);
+      } else {
+        console.error(data.error);
         message.style.display = "block";
         message.innerHTML = `<p style="color:#ff5a5f;">❌ Une erreur est survenue. Veuillez réessayer plus tard.</p>`;
-      })
-      .finally(() => {
-        button.disabled = false;
-        button.textContent = originalText;
-      });
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      message.style.display = "block";
+      message.innerHTML = `<p style="color:#ff5a5f;">❌ Erreur réseau. Veuillez réessayer.</p>`;
+    })
+    .finally(() => {
+      button.disabled = false;
+      button.textContent = originalText;
+    });
   });
 });
 </script>
 
-</script>
 
 </body>
 </html>
+
 
 
 
