@@ -848,11 +848,24 @@ window.addEventListener("load", revealOnScroll);
   <!-- === EMAILJS pour Candidature Spontanée === -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("candidatureForm");
-  const message = document.querySelector(".confirmation-message");
-  const button = form.querySelector(".btn-primary");
+  const form     = document.getElementById("candidatureForm");
+  const message  = document.querySelector(".confirmation-message");
+  const button   = form.querySelector(".btn-primary");
 
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzWJ7jzqcfXPjD8vXIvGVR-vZ3q_FsACb63TznyAh5ltuSt_YqaJrY48L01EODv3BIx/exec";
+
+  // Affichage du message (succès ou erreur)
+  function showMessage(html, isError = false) {
+    message.style.display = "block";
+    message.style.color   = isError ? "#ff5a5f" : "var(--accent-2)";
+    message.innerHTML     = html;
+
+    // Scroll jusqu’au message
+    message.scrollIntoView({ behavior: "smooth", block: "center" });
+
+    // Masque après 2 minutes
+    setTimeout(() => { message.style.display = "none"; }, 120000);
+  }
 
   // Lit un fichier en base64 (retourne une Promise)
   function fileToBase64(file) {
@@ -873,17 +886,26 @@ document.addEventListener("DOMContentLoaded", function () {
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
+    // Vérif rapide côté front
+    if (!form.nom.value.trim() ||
+        !form.prenom.value.trim() ||
+        !form.email.value.trim() ||
+        !form.cv.files[0]) {
+      showMessage("❌ Merci de remplir tous les champs obligatoires et de joindre votre CV.", true);
+      return;
+    }
+
     button.disabled = true;
     const originalText = button.textContent;
     button.textContent = "Envoi en cours...";
 
     try {
       // Récupération des champs texte
-      const nom       = form.nom.value;
-      const prenom    = form.prenom.value;
-      const email     = form.email.value;
-      const telephone = form.telephone.value;
-      const messageTxt= form.message.value;
+      const nom        = form.nom.value.trim();
+      const prenom     = form.prenom.value.trim();
+      const email      = form.email.value.trim();
+      const telephone  = form.telephone.value.trim();
+      const messageTxt = form.message.value.trim();
 
       // Fichiers
       const cvFile    = form.cv.files[0] || null;
@@ -909,36 +931,32 @@ document.addEventListener("DOMContentLoaded", function () {
         autreData: autreBase64 || null
       };
 
-            // ENVOI vers Apps Script sans CORS strict
+      // ENVOI vers Apps Script sans CORS strict
       await fetch(SCRIPT_URL, {
         method: "POST",
-        mode: "no-cors", // ✅ évite le blocage CORS
+        mode: "no-cors", // évite le blocage CORS
         headers: {
           "Content-Type": "text/plain;charset=utf-8" // simple, pas de preflight
         },
         body: JSON.stringify(payload)
       });
 
-      // Ici on NE PEUT PAS lire la réponse à cause de no-cors,
-      // mais la requête est bien partie vers Apps Script.
-      message.style.display = "block";
-      message.innerHTML = `
+      // On ne peut pas lire la réponse avec no-cors,
+      // mais la requête est bien envoyée.
+      showMessage(`
         <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
           <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
           <path class="checkmark__check" fill="none" d="M14 27l7 7 16-16"/>
         </svg>
-        <p>Merci ! Votre candidature et votre CV ont été envoyés avec succès.</p>
-      `;
+        <p>Merci, votre candidature a bien été transmise à nos équipes.<br>
+        Vous recevrez une réponse si votre profil correspond à nos besoins.</p>
+      `);
+
       form.reset();
-      setTimeout(() => { message.style.display = "none"; }, 120000);
-
-
-      
 
     } catch (err) {
       console.error(err);
-      message.style.display = "block";
-      message.innerHTML = `<p style="color:#ff5a5f;">❌ Erreur réseau. Veuillez réessayer.</p>`;
+      showMessage("❌ Erreur réseau lors de l’envoi de votre candidature. Veuillez réessayer.", true);
     } finally {
       button.disabled = false;
       button.textContent = originalText;
@@ -946,6 +964,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
+
 
 </body>
 </html>
