@@ -849,7 +849,7 @@ window.addEventListener("load", revealOnScroll);
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 (function(){
-  // ✅ Initialise EmailJS avec ta clé publique
+  // ✅ initialise EmailJS avec ta clé publique (OK qu’elle soit visible)
   emailjs.init("lMmH9CDieJ7Zg9kI8");
 })();
 
@@ -861,33 +861,25 @@ document.addEventListener("DOMContentLoaded", function() {
   form.addEventListener("submit", function(e) {
     e.preventDefault();
 
-    // Désactive le bouton pendant l’envoi
     button.disabled = true;
     const originalText = button.textContent;
     button.textContent = "Envoi en cours...";
 
-    // 🧩 Ignore les fichiers pour éviter l’erreur EmailJS
-    const fileInputs = form.querySelectorAll('input[type="file"]');
-    fileInputs.forEach(input => input.removeAttribute("name"));
-
-    // ✅ Envoi via EmailJS
+    // ✅ Envoi du formulaire *avec* les fichiers (CV, autre)
     emailjs.sendForm("service_we5d0ta", "template_ssleo9k", this)
       .then(() => {
-        // ✅ Message de confirmation avec animation
+        // ✅ Message de confirmation
         message.style.display = "block";
         message.innerHTML = `
           <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
             <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
             <path class="checkmark__check" fill="none" d="M14 27l7 7 16-16"/>
           </svg>
-          <p>Merci ! Votre candidature a été envoyée avec succès.<br>
-          📎 Pour vos fichiers, envoyez-les à <strong>raouf.gacemi@astrovia.fr</strong></p>
+          <p>Merci ! Votre candidature et votre CV ont été envoyés avec succès.</p>
         `;
         form.reset();
 
-        // ✅ Masque le message après 6 secondes
         setTimeout(() => message.style.display = "none", 120000);
-
       })
       .catch((error) => {
         console.error("Erreur EmailJS :", error);
@@ -895,7 +887,6 @@ document.addEventListener("DOMContentLoaded", function() {
         message.innerHTML = `<p style="color:#ff5a5f;">❌ Une erreur est survenue. Veuillez réessayer plus tard.</p>`;
       })
       .finally(() => {
-        // Réactive le bouton
         button.disabled = false;
         button.textContent = originalText;
       });
@@ -903,8 +894,11 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
+</script>
+
 </body>
 </html>
+
 
 
 
