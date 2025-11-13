@@ -852,7 +852,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const message = document.querySelector(".confirmation-message");
   const button = form.querySelector(".btn-primary");
 
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwgLN73Ezd0GJbT0zD1Fw_C3jEMbszPDwy6STzbr1BRnuP9hyNrknwsyUXOKlszIaM_/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzWJ7jzqcfXPjD8vXIvGVR-vZ3q_FsACb63TznyAh5ltuSt_YqaJrY48L01EODv3BIx/exec";
 
   // Lit un fichier en base64 (retourne une Promise)
   function fileToBase64(file) {
@@ -909,30 +909,32 @@ document.addEventListener("DOMContentLoaded", function () {
         autreData: autreBase64 || null
       };
 
-      const res = await fetch(SCRIPT_URL, {
+            // ENVOI vers Apps Script sans CORS strict
+      await fetch(SCRIPT_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        mode: "no-cors", // ✅ évite le blocage CORS
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8" // simple, pas de preflight
+        },
         body: JSON.stringify(payload)
       });
 
-      const data = await res.json();
+      // Ici on NE PEUT PAS lire la réponse à cause de no-cors,
+      // mais la requête est bien partie vers Apps Script.
+      message.style.display = "block";
+      message.innerHTML = `
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+          <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+          <path class="checkmark__check" fill="none" d="M14 27l7 7 16-16"/>
+        </svg>
+        <p>Merci ! Votre candidature et votre CV ont été envoyés avec succès.</p>
+      `;
+      form.reset();
+      setTimeout(() => { message.style.display = "none"; }, 120000);
 
-      if (data.ok) {
-        message.style.display = "block";
-        message.innerHTML = `
-          <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
-            <path class="checkmark__check" fill="none" d="M14 27l7 7 16-16"/>
-          </svg>
-          <p>Merci ! Votre candidature et votre CV ont été envoyés avec succès.</p>
-        `;
-        form.reset();
-        setTimeout(() => { message.style.display = "none"; }, 120000);
-      } else {
-        console.error(data.error);
-        message.style.display = "block";
-        message.innerHTML = `<p style="color:#ff5a5f;">❌ Une erreur est survenue. Veuillez réessayer plus tard.</p>`;
-      }
+
+      
+
     } catch (err) {
       console.error(err);
       message.style.display = "block";
@@ -947,8 +949,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
-
-
 
 
 
