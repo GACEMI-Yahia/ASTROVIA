@@ -724,6 +724,9 @@
         <textarea name="message" rows="5" placeholder="Votre message..."></textarea>
       </div>
 
+      <!-- 🔒 Widget reCAPTCHA -->
+      <div class="g-recaptcha" data-sitekey="6LdWmA0sAAAAAOaucZUCEnXKWkfq11kfqKNQJ44N"></div>
+
       <button type="submit" class="btn-primary">Envoyer ma candidature</button>
 
 <div class="confirmation-message">
@@ -912,6 +915,22 @@ document.addEventListener("DOMContentLoaded", function () {
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
+
+        // 🔒 Vérification reCAPTCHA côté front
+    if (typeof grecaptcha === "undefined") {
+      showMessage("❌ reCAPTCHA non chargé. Vérifiez votre connexion et réessayez.", true);
+      return;
+    }
+
+    const recaptchaToken = grecaptcha.getResponse();
+    if (!recaptchaToken) {
+      showMessage("❌ Merci de cocher la case « Je ne suis pas un robot ».", true);
+      return;
+    }
+
+
+
+
     // Vérif champs obligatoires
     if (!form.nom.value.trim() ||
         !form.prenom.value.trim() ||
@@ -934,11 +953,13 @@ document.addEventListener("DOMContentLoaded", function () {
     button.textContent = "Envoi en cours...";
 
     try {
-      const nom        = form.nom.value.trim();
+            const nom        = form.nom.value.trim();
       const prenom     = form.prenom.value.trim();
       const email      = form.email.value.trim();
       const telephone  = form.telephone.value.trim();
       const messageTxt = form.message.value.trim();
+
+      const recaptchaToken = grecaptcha.getResponse(); // 🔒 récupéré plus haut
 
       // Conversion en base64
       const cvBase64    = await fileToBase64(cvFile);
@@ -951,6 +972,9 @@ document.addEventListener("DOMContentLoaded", function () {
         telephone,
         message: messageTxt,
 
+        // 🔐 on envoie aussi le token reCAPTCHA au script
+        recaptchaToken,
+
         cvName:    cvFile    ? cvFile.name    : null,
         cvType:    cvFile    ? cvFile.type    : null,
         cvData:    cvBase64  || null,
@@ -959,6 +983,7 @@ document.addEventListener("DOMContentLoaded", function () {
         autreType: autreFile ? autreFile.type : null,
         autreData: autreBase64 || null
       };
+
 
       // ENVOI vers Apps Script (no-cors → on ne lit pas la réponse)
       await fetch(SCRIPT_URL, {
@@ -993,6 +1018,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 </body>
 </html>
