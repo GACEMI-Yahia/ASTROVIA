@@ -711,11 +711,11 @@
         </div>
         <div class="form-group file">
           <label>CV</label>
-          <input type="file" name="cv" accept=".pdf,.doc,.docx" required>
+          <input type="file" name="cv" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
         </div>
         <div class="form-group file">
           <label>Autre fichier</label>
-          <input type="file" name="autre">
+          <input type="file" name="autre" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
         </div>
       </div>
 
@@ -845,14 +845,17 @@ window.addEventListener("load", revealOnScroll);
 </script>
 
 
-  <!-- === EMAILJS pour Candidature Spontanée === -->
+ 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const form     = document.getElementById("candidatureForm");
   const message  = document.querySelector(".confirmation-message");
   const button   = form.querySelector(".btn-primary");
 
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwb8b7Q7L0AJCvK72uzz07F1zjO13AUjiwhh_NNyoV6ZU5DCGdwSL9Jwi4sxpoZqscd/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZZuRk1OAhS1FoB1H8itIDO_1Euq778CrPZ6p18z_Ax35Mku84D_fDLOPNX2weKkj_/exec";
+
+  // Limite côté navigateur (5 Mo)
+  const MAX_SIZE_FRONT = 5 * 1024 * 1024;
 
   // Affichage du message (succès ou erreur)
   function showMessage(html, isError = false) {
@@ -860,11 +863,34 @@ document.addEventListener("DOMContentLoaded", function () {
     message.style.color   = isError ? "#ff5a5f" : "var(--accent-2)";
     message.innerHTML     = html;
 
-    // Scroll jusqu’au message
     message.scrollIntoView({ behavior: "smooth", block: "center" });
 
-    // Masque après 2 minutes
     setTimeout(() => { message.style.display = "none"; }, 120000);
+  }
+
+  // Vérification d'un fichier (taille + type)
+  function validateFileInput(file, label) {
+    if (!file) return true; // champ optionnel
+
+    if (file.size > MAX_SIZE_FRONT) {
+      showMessage(`❌ Le fichier <strong>"${label}"</strong> dépasse la limite de 5 Mo.`, true);
+      return false;
+    }
+
+    const allowed = [
+      "application/pdf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "image/jpeg",
+      "image/png"
+    ];
+
+    if (!allowed.includes(file.type)) {
+      showMessage(`❌ Type de fichier non autorisé pour <strong>${label}</strong>.`, true);
+      return false;
+    }
+
+    return true;
   }
 
   // Lit un fichier en base64 (retourne une Promise)
@@ -873,9 +899,8 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!file) return resolve(null);
       const reader = new FileReader();
       reader.onload = () => {
-        // reader.result = "data:xxx/xxx;base64,AAAA..."
-        const result = reader.result;
-        const base64 = result.split(",")[1]; // on enlève "data:..;base64,"
+        const result = reader.result;      // "data:xxx/xxx;base64,AAAA..."
+        const base64 = result.split(",")[1];
         resolve(base64);
       };
       reader.onerror = reject;
@@ -883,10 +908,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // Soumission du formulaire
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    // Vérif rapide côté front
+    // Vérif champs obligatoires
     if (!form.nom.value.trim() ||
         !form.prenom.value.trim() ||
         !form.email.value.trim() ||
@@ -895,21 +921,24 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
+    // Fichiers
+    const cvFile    = form.cv.files[0] || null;
+    const autreFile = form.autre.files[0] || null;
+
+    // Validation fichiers avant envoi
+    if (!validateFileInput(cvFile, "CV")) return;
+    if (!validateFileInput(autreFile, "Autre fichier")) return;
+
     button.disabled = true;
     const originalText = button.textContent;
     button.textContent = "Envoi en cours...";
 
     try {
-      // Récupération des champs texte
       const nom        = form.nom.value.trim();
       const prenom     = form.prenom.value.trim();
       const email      = form.email.value.trim();
       const telephone  = form.telephone.value.trim();
       const messageTxt = form.message.value.trim();
-
-      // Fichiers
-      const cvFile    = form.cv.files[0] || null;
-      const autreFile = form.autre.files[0] || null;
 
       // Conversion en base64
       const cvBase64    = await fileToBase64(cvFile);
@@ -931,32 +960,30 @@ document.addEventListener("DOMContentLoaded", function () {
         autreData: autreBase64 || null
       };
 
-      // ENVOI vers Apps Script sans CORS strict
+      // ENVOI vers Apps Script (no-cors → on ne lit pas la réponse)
       await fetch(SCRIPT_URL, {
         method: "POST",
-        mode: "no-cors", // évite le blocage CORS
+        mode: "no-cors",
         headers: {
-          "Content-Type": "text/plain;charset=utf-8" // simple, pas de preflight
+          "Content-Type": "text/plain;charset=utf-8"
         },
         body: JSON.stringify(payload)
       });
 
-      // On ne peut pas lire la réponse avec no-cors,
-      // mais la requête est bien envoyée.
       showMessage(`
         <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
           <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
           <path class="checkmark__check" fill="none" d="M14 27l7 7 16-16"/>
         </svg>
         <p>Merci, votre candidature a bien été transmise à nos équipes.<br>
-        Vous recevrez une réponse si votre profil correspond à nos besoins.</p>
+        Vous serez recontacté(e) si votre profil correspond à nos besoins.</p>
       `);
 
       form.reset();
 
     } catch (err) {
       console.error(err);
-      showMessage("❌ Erreur réseau lors de l’envoi de votre candidature. Veuillez réessayer.", true);
+      showMessage("❌ Erreur lors de l’envoi de votre candidature. Veuillez réessayer.", true);
     } finally {
       button.disabled = false;
       button.textContent = originalText;
@@ -964,6 +991,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
+
 
 
 </body>
