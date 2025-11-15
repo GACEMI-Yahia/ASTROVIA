@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <link rel="icon" type="image/png" href="astrovia.jpg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Politique de confidentialité – ASTROVIA</title>
+<meta name="description" content="Politique de confidentialité d’ASTROVIA : traitement des données personnelles dans le cadre de nos activités de consulting, recrutement et candidatures.">
+<meta property="og:title" content="Politique de confidentialité – ASTROVIA">
+<meta property="og:description" content="Découvrez comment ASTROVIA traite et protège vos données personnelles conformément au RGPD.">
+<meta property="og:image" content="https://www.astrovia.fr/astrovia.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.astrovia.fr/politique-de-confidentialite.html">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+
+  <style>
+    html, body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  scroll-padding-top: 0 !important;
+  overflow-x: hidden;
+}
+
+
+    :root{
+      --bg:#0c1020;          /* bleu nuit profond */
+      --bg-soft:#111634;     /* bleu plus doux */
+      --text:#e8ecf5;        /* texte principal */
+      --muted:#b9c2d6;       /* texte secondaire */
+      --accent:#6bd3ff;      /* bleu cyan accent */
+      --accent-2:#00b884;    /* vert accent secondaire */
+      --card:#151a3f;
+      --line:rgba(255,255,255,.08);
+      --warn:#f7b500;
+      --error:#ff5a5f;
+      --ok:#2ecc71;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',sans-serif;background:radial-gradient(1200px 600px at 10% -10%,rgba(107,211,255,.15),transparent 50%), radial-gradient(800px 400px at 90% -10%,rgba(0,184,132,.12),transparent 50%), var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1200px,92%);margin-inline:auto}
+
+    /* Header */
+    header {
+  position: fixed;        /* ✅ reste visible tout le temps */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;          /* au-dessus de tout */
+  background: rgba(12,16,32,0.85); /* fond semi-transparent */
+  backdrop-filter: blur(10px);     /* effet de flou doux */
+  border-bottom: 1px solid var(--line);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.3px}
+    .brand .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;color:#001628;font-weight:900}
+    .logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+    .nav a{color:var(--text);opacity:.9}
+    .navlinks{display:flex;gap:18px;align-items:center}
+    .navlinks a{padding:8px 10px;border-radius:10px}
+    .navlinks a:hover{background:var(--line)}
+    /* Dropdown menu */
+.navlinks ul, .navlinks li { list-style: none; margin: 0; padding: 0; }
+.navlinks > li { position: relative; }
+
+.dropdown > a::after {
+  content: "";
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(17, 22, 52, 0.95);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 0;
+  box-shadow: var(--shadow);
+  min-width: 220px;
+}
+
+.submenu li a {
+  display: block;
+  padding: 8px 14px;
+  color: var(--text);
+  opacity: 0.9;
+}
+
+.submenu li a:hover {
+  background: var(--line);
+}
+
+.dropdown:hover .submenu {
+  display: block;
+}
+
+/* Pour mobile : sous-menus visibles dans le menu déroulant */
+@media (max-width: 960px) {
+  .navlinks li { width: 100%; }
+  .submenu {
+    position: static;
+    display: none;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding-left: 10px;
+  }
+  .dropdown.open .submenu {
+    display: block;
+  }
+}
+
+    .cta{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#001628 !important;padding:10px 14px;border-radius:12px;font-weight:700}
+    .menu-btn{display:none}
+
+
+
+
+
+
+/* --- Animation d'apparition au scroll --- */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Animation d'apparition globale pour toutes les sections --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px) scale(0.98);
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  will-change: opacity, transform;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* --- Apparition fluide globale --- */
+.fade-up, .slide-left, .slide-right, .zoom-in {
+  opacity: 0;
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  will-change: opacity, transform;
+}
+
+/* Effets de départ */
+.fade-up { transform: translateY(60px); }
+.slide-left { transform: translateX(-80px); }
+.slide-right { transform: translateX(80px); }
+.zoom-in { transform: scale(0.9); }
+
+/* Quand l’élément devient visible */
+.fade-up.visible,
+.slide-left.visible,
+.slide-right.visible,
+.zoom-in.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Animation du tracé de la courbe */
+.curve-path {
+  stroke: var(--accent);
+  stroke-width: 2px;
+  fill: none;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 3.5s ease-in-out;
+}
+
+/* Quand on scrolle jusqu’à la section */
+.curve-path.animate {
+  stroke-dashoffset: 0;
+}
+
+
+
+/* === Footer professionnel === */
+.footer {
+  background: var(--bg);
+  color: var(--text);
+  border-top: 1px solid var(--line);
+  padding: 60px 20px 30px;
+  position: relative;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.footer-logo img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.footer-logo h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.footer-contact h4,
+.footer-social h4 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.footer-contact p {
+  margin: 8px 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.footer-contact a {
+  color: var(--accent-2);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-contact a:hover {
+  color: var(--accent);
+}
+
+/* === Icône LinkedIn === */
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.footer-social .social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  font-size: 24px;
+  transition: all 0.3s ease;
+}
+
+.footer-social .social-link:hover {
+  background: var(--accent);
+  color: #001628;
+  transform: scale(1.05);
+}
+
+/* === Flèche retour haut === */
+.scroll-top {
+  position: absolute;
+  right: 40px;
+  top: 40px;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 32px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.scroll-top:hover {
+  color: var(--accent);
+  transform: translateY(-4px);
+}
+
+/* === Responsive === */
+@media (max-width: 960px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .footer-logo,
+  .footer-contact,
+  .footer-social {
+    align-items: center;
+  }
+
+  .scroll-top {
+    right: 20px;
+    top: 20px;
+  }
+}
+
+/* === MENU MOBILE PRO === */
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 34px;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.menu-btn:hover {
+  color: var(--accent-2);
+  transform: scale(1.1);
+}
+
+@media (max-width: 960px) {
+  .menu-btn {
+    display: block;
+  }
+
+  .navlinks {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: rgba(12, 16, 32, 0.98);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 80px 28px;
+    gap: 20px;
+    transition: right 0.4s ease;
+    z-index: 2000;
+    box-shadow: -6px 0 20px rgba(0,0,0,0.5);
+  }
+
+  .navlinks.show {
+    right: 0;
+  }
+
+  .navlinks a {
+    font-size: 18px;
+    color: var(--text);
+    text-decoration: none;
+    padding: 10px 0;
+    width: 100%;
+  }
+
+  .navlinks a:hover {
+    color: var(--accent);
+  }
+
+  .menu-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 32px;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .menu-close:hover {
+    color: var(--accent-2);
+    transform: scale(1.1);
+  }
+
+  .submenu {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    padding-left: 14px;
+  }
+
+  .dropdown.open .submenu {
+    display: flex;
+  }
+}
+
+/* ✅ Bouton "X" uniquement sur mobile */
+.menu-close {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .menu-close {
+    display: block;
+  }
+}
+
+
+
+
+/* ✅ Fixe la zone cliquable du bouton X */
+.menu-close {
+  display: none; /* caché sur PC */
+}
+
+@media (max-width: 960px) {
+  .menu-close {
+    display: flex;               /* ✅ pour centrer l’icône */
+    align-items: center;
+    justify-content: center;
+    width: 48px;                 /* ✅ surface cliquable */
+    height: 48px;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 32px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    z-index: 2100;               /* ✅ au-dessus du reste du menu */
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .menu-close:hover {
+    color: var(--accent-2);
+    transform: scale(1.1);
+  }
+
+  .menu-close i {
+    pointer-events: none;        /* ✅ pour éviter les décalages de clic */
+  }
+}
+
+
+/* === Section Politique de confidentialité === */
+.legal-header {
+  margin-bottom: 24px;
+  padding: 20px 22px;
+  border-radius: var(--radius);
+  background: rgba(7, 11, 30, 0.95);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.legal-section {
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+
+.legal-header h1 {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.legal-subtitle {
+  color: var(--muted);
+  max-width: 650px;
+  font-size: 15px;
+}
+
+.legal-meta {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.legal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(107,211,255,.5);
+  background: rgba(107,211,255,0.08);
+  margin-bottom: 10px;
+}
+
+.legal-badge .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-2);
+}
+
+.legal-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(260px, 1.2fr);
+  gap: 28px;
+  margin-top: 280px;
+}
+
+@media (max-width: 960px) {
+  .legal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.legal-card {
+  scroll-margin-top: 120px;
+  background: rgba(10, 15, 45, 0.95);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  padding: 20px 18px;
+  margin-bottom: 18px;
+}
+
+.legal-card h2 {
+  font-size: 18px;
+  margin: 0 0 10px;
+  color: var(--accent);
+}
+
+.legal-card h3 {
+  font-size: 15px;
+  margin: 14px 0 6px;
+  color: var(--text);
+}
+
+.legal-card p {
+  font-size: 14px;
+  margin: 6px 0 8px;
+  color: var(--muted);
+}
+
+.legal-card ul {
+  font-size: 14px;
+  padding-left: 20px;
+  margin: 4px 0 8px;
+  color: var(--muted);
+}
+
+.legal-aside {
+  position: static;
+  
+  align-self: flex-start;
+}
+
+@media (max-width: 960px) {
+  .legal-aside {
+    position: static;
+  }
+}
+
+.legal-aside-card {
+  background: rgba(11,16,50,0.95);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  padding: 18px 16px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.legal-aside-card h3 {
+  font-size: 15px;
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+
+.legal-aside-card ul {
+  padding-left: 18px;
+  margin: 6px 0 10px;
+}
+
+.legal-aside-card li {
+  margin-bottom: 4px;
+}
+
+.aside-contact {
+  font-size: 13px;
+}
+
+
+.legal-header {
+  margin-bottom: 24px;
+}
+
+.legal-header h1 {
+  font-size: 32px;
+  margin: 4px 0 8px;
+}
+
+@media (max-width: 960px) {
+  .legal-header h1 {
+    font-size: 26px;
+  }
+}
+
+.footer-bottom {
+  grid-column: 1 / -1;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.footer-bottom a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.footer-bottom a:hover {
+  color: var(--accent-2);
+}
+
+.legal-header {
+  position: relative;
+  z-index: 1;
+}
+
+.legal-grid {
+  position: relative;
+  z-index: 0;
+}
+
+ </style>
+</head>
+
+<body id="top">
+
+  <!-- === HEADER identique === -->
+  <header>
+    <div class="container nav">
+      <a href="index.html" class="brand" aria-label="Accueil – ASTROVIA">
+        <img src="astrovia.jpg" alt="Logo ASTROVIA" class="logo-img">
+        <span>ASTROVIA</span>
+      </a>
+      <nav>
+        <button class="menu-btn" aria-expanded="false" aria-controls="navlinks" aria-label="Ouvrir le menu">
+          <i data-lucide="menu"></i>
+        </button>
+        <ul id="navlinks" class="navlinks">
+          <li class="close-btn">
+            <button class="menu-close" aria-label="Fermer le menu">
+              <i data-lucide="x"></i>
+            </button>
+          </li>
+          <li><a href="accueil.html">Accueil</a></li>
+          <li class="dropdown">
+            <a href="expertises.html" >Nos expertises ▾</a>
+            <ul class="submenu">
+              <li><a href="consulting.html">Consulting</a></li>
+              <li><a href="cabinet-de-recrutement.html">Cabinet de recrutement</a></li>
+              <li><a href="solutions-de-fidelisation.html">Solutions de fidélisation</a></li>
+            </ul>
+          </li>
+          <li><a href="valeurs.html">Nos valeurs</a></li>
+          <li><a href="qui-sommes-nous.html">Qui sommes-nous</a></li>
+          <li class="dropdown">
+            <a href="rejoignez-nous.html" class="">Rejoignez-nous ▾</a>
+            <ul class="submenu">
+              <li><a href="offres-consulting.html">offres Consulting</a></li>
+              <li><a href="offres-cabinet-de-recrutement.html">offres Cabinet de recrutement</a></li>
+              <li><a href="candidature-spontanee.html">Candidature spontanée</a></li>
+            </ul>
+          </li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+ <main style="padding-top: 90px; padding-bottom: 80px;">
+  <section class="legal-section container reveal">
+    <header class="legal-header">
+      <div class="legal-badge">
+        <span class="dot"></span>
+        <span>Protection des données</span>
+      </div>
+      <h1>Politique de confidentialité</h1>
+      <p class="legal-subtitle">
+        Cette politique explique comment ASTROVIA collecte, utilise et protège vos données personnelles,
+        notamment dans le cadre de vos candidatures et de vos échanges avec nos équipes.
+      </p>
+      <p class="legal-meta">
+        Dernière mise à jour : 15/11/2025 – ASTROVIA, 6 Rue d'Armaillé, 75017 Paris.
+      </p>
+    </header>
+
+    <div class="legal-content">
+  <!-- 1. Responsable -->
+  <section class="legal-card" id="responsable">
+    <h2>1. Responsable du traitement</h2>
+    <p>
+      Le traitement de vos données personnelles est réalisé par :
+    </p>
+    <p>
+      <strong>ASTROVIA</strong><br>
+      6 RUE D'ARMAILLE, 75017 PARIS – France<br>
+      E-mail : <a href="mailto:raouf.gacemi@astrovia.fr">raouf.gacemi@astrovia.fr</a><br>
+      Téléphone : <a href="tel:+33766518706">07 66 51 87 06</a>
+    </p>
+    <p>
+      ASTROVIA intervient en particulier dans les domaines du consulting, du recrutement
+      et de l’accompagnement des entreprises dans la fidélisation de leurs talents.
+    </p>
+  </section>
+
+  <!-- 2. Données collectées -->
+  <section class="legal-card" id="donnees">
+    <h2>2. Données personnelles collectées</h2>
+    <p>
+      Dans le cadre de nos activités et de vos échanges avec nous, nous pouvons collecter
+      les catégories de données suivantes :
+    </p>
+
+    <h3>2.1. Données d’identification et de contact</h3>
+    <ul>
+      <li>Nom, prénom</li>
+      <li>Adresse e-mail professionnelle ou personnelle</li>
+      <li>Numéro de téléphone</li>
+      <li>Éventuellement, fonction, société, secteur d’activité</li>
+    </ul>
+
+    <h3>2.2. Données liées à votre candidature</h3>
+    <ul>
+      <li>Curriculum vitae (CV)</li>
+      <li>Lettre de motivation</li>
+      <li>Informations professionnelles et académiques</li>
+      <li>Rémunération actuelle et souhaitée, disponibilité, préférences de mobilité</li>
+      <li>Échanges par e-mail ou par téléphone avec nos équipes</li>
+      <li>Tout document ou information que vous choisissez de nous transmettre</li>
+    </ul>
+
+    <h3>2.3. Données de navigation (cookies techniques)</h3>
+    <p>
+      Des informations de navigation peuvent être collectées de manière limitée
+      (par exemple : pages consultées, appareil utilisé) afin d’assurer le bon
+      fonctionnement du site et la sécurité des formulaires.
+    </p>
+  </section>
+
+  <!-- 3. Finalités et bases légales -->
+  <section class="legal-card" id="finalites">
+    <h2>3. Finalités et bases légales</h2>
+    <p>
+      ASTROVIA traite vos données pour des finalités strictement professionnelles
+      et proportionnées à ses besoins d’activité :
+    </p>
+
+    <h3>3.1. Gestion et suivi des candidatures</h3>
+    <p>
+      Étude de votre profil, qualification de votre candidature, organisation
+      d’entretiens, prise de références le cas échéant, et plus largement
+      gestion de l’ensemble du processus de recrutement.
+      <br><strong>Base légale :</strong> exécution de mesures précontractuelles
+      prises à votre demande et intérêt légitime d’ASTROVIA à évaluer les candidatures.
+    </p>
+
+    <h3>3.2. Constitution d’un vivier / talent pool</h3>
+    <p>
+      Conservation de votre profil pour vous recontacter en cas d’opportunités
+      futures correspondant à vos compétences et à vos attentes.
+      <br><strong>Base légale :</strong> intérêt légitime d’ASTROVIA à organiser
+      et développer son vivier de talents, sans porter atteinte à vos droits.
+    </p>
+
+    <h3>3.3. Relation commerciale et développement de l’activité</h3>
+    <p>
+      Gestion des contacts clients et prospects, réponses aux demandes,
+      envoi d’informations ciblées relatives à nos prestations ou à des
+      opportunités de collaboration.
+      <br><strong>Base légale :</strong> exécution du contrat lorsque vous êtes client,
+      et intérêt légitime pour la prospection professionnelle modérée (B2B).
+    </p>
+
+    <h3>3.4. Respect de nos obligations légales</h3>
+    <p>
+      Gestion de la conformité sociale, fiscale, comptable ou encore
+      de la lutte contre la fraude.
+      <br><strong>Base légale :</strong> obligations légales applicables à ASTROVIA.
+    </p>
+  </section>
+
+  <!-- 4. Destinataires des données -->
+  <section class="legal-card" id="destinataires">
+    <h2>4. Destinataires des données</h2>
+    <p>
+      Vos données peuvent être communiquées, dans la limite de leurs attributions,
+      aux destinataires suivants :
+    </p>
+    <ul>
+      <li>Équipes internes d’ASTROVIA en charge du recrutement, du consulting et du commercial,</li>
+      <li>Clients d’ASTROVIA susceptibles d’être intéressés par votre profil, après échange avec vous,</li>
+      <li>Prestataires techniques intervenant pour le compte d’ASTROVIA
+          (hébergement, outils de messagerie, etc.), soumis à des obligations strictes de confidentialité.</li>
+    </ul>
+    <p>
+      ASTROVIA ne vend pas vos données personnelles à des tiers.
+    </p>
+  </section>
+
+  <!-- 5. Durée de conservation -->
+  <section class="legal-card" id="duree">
+    <h2>5. Durée de conservation</h2>
+    <ul>
+      <li>
+        <strong>Dossiers de candidature :</strong> en règle générale jusqu’à
+        <strong>2 ans après le dernier échange</strong> avec vous,
+        afin de pouvoir vous recontacter pour des opportunités pertinentes,
+        sauf opposition de votre part.
+      </li>
+      <li>
+        <strong>Données clients et prospects :</strong> pendant la durée de la relation
+        contractuelle, puis archivage pour la durée de prescription légale applicable.
+      </li>
+      <li>
+        <strong>Données techniques de navigation :</strong> pendant une durée limitée,
+        strictement nécessaire aux finalités poursuivies (sécurité, bon fonctionnement du site).
+      </li>
+    </ul>
+    <p>
+      Au-delà de ces durées, les données sont supprimées ou anonymisées,
+      sauf obligation légale de conservation plus longue.
+    </p>
+  </section>
+
+  <!-- 6. Vos droits -->
+  <section class="legal-card" id="droits">
+    <h2>6. Vos droits</h2>
+    <p>
+      Conformément à la réglementation applicable en matière de protection des données,
+      vous disposez des droits suivants sur les données qui vous concernent :
+    </p>
+    <ul>
+      <li><strong>Droit d’accès</strong> : obtenir la confirmation que des données sont traitées et en recevoir une copie ;</li>
+      <li><strong>Droit de rectification</strong> : corriger des données inexactes ou incomplètes ;</li>
+      <li><strong>Droit à l’effacement</strong> (dans certains cas) ;</li>
+      <li><strong>Droit à la limitation</strong> du traitement ;</li>
+      <li><strong>Droit d’opposition</strong>, notamment en cas de prospection ou de conservation dans un vivier ;</li>
+      <li><strong>Droit à la portabilité</strong> des données que vous nous avez fournies, lorsque le traitement est fondé sur votre consentement ou un contrat et réalisé à l’aide de procédés automatisés.</li>
+    </ul>
+    <p>
+      Pour exercer vos droits, vous pouvez nous contacter à l’adresse suivante :
+      <a href="mailto:raouf.gacemi@astrovia.fr">raouf.gacemi@astrovia.fr</a>.
+    </p>
+    <p>
+      En cas de difficulté non résolue, vous pouvez également saisir la
+      <strong>CNIL</strong> (<a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer">www.cnil.fr</a>).
+    </p>
+  </section>
+
+  <!-- 7. Cookies et sécurité -->
+  <section class="legal-card" id="cookies">
+    <h2>7. Cookies, sécurité et hébergement</h2>
+    <p>
+      Notre site utilise principalement des cookies techniques nécessaires à
+      son fonctionnement (affichage, sécurité des formulaires, éventuels systèmes anti-spam).
+    </p>
+    <p>
+      Vous pouvez configurer votre navigateur pour limiter ou refuser certains cookies.
+      Cela peut cependant dégrader certaines fonctionnalités du site.
+    </p>
+    <p>
+      ASTROVIA met en œuvre des mesures organisationnelles et techniques raisonnables
+      pour protéger vos données contre la perte, l’accès non autorisé ou la divulgation.
+    </p>
+  </section>
+
+  <!-- 8. Mise à jour de la politique -->
+  <section class="legal-card" id="maj">
+    <h2>8. Mise à jour de la politique</h2>
+    <p>
+      La présente politique peut être amenée à évoluer afin de refléter les
+      changements de nos pratiques ou de la réglementation.
+    </p>
+    <p>
+      En cas de modification importante, nous pourrons vous en informer par tout
+      moyen approprié. La date de dernière mise à jour figure en haut de page.
+    </p>
+  </section>
+</div>
+
+  </section>
+</main>
+
+
+
+
+
+   <!-- === FOOTER identique === -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-logo">
+        <img src="astrovia.jpg" alt="Logo ASTROVIA">
+        <h3>ASTROVIA</h3>
+      </div>
+     <div class="footer-contact">
+        <h4>Contact</h4>
+        <p>Où nous trouver :<br>
+         6 Rue d'Armaillé, 75017 Paris
+        </p>
+        <p>Nous appeler :<br>
+          <a href="tel:+33648283477">07 66 51 87 06</a>
+        </p>
+        <p>E-mail :<br>
+          <a href="mailto:contact@astrovia.fr">raouf.gacemi@astrovia.fr</a>
+        </p>
+      </div>
+      <div class="footer-social">
+        <h4>Suivez-nous</h4>
+        <a href="#" class="social-link" aria-label="LinkedIn ASTROVIA">
+          <i data-lucide="linkedin"></i>
+        </a>
+      </div>
+      <a href="#top" class="scroll-top" aria-label="Remonter en haut">
+        <i data-lucide="arrow-up"></i>
+      </a>
+    </div>
+
+    <div class="footer-bottom">
+  © ASTROVIA – Tous droits réservés •
+  <a href="mentions-legales.html">Mentions légales</a> •
+  <a href="politique-de-confidentialite.html">Politique de confidentialité</a>
+</div>
+
+  </footer>
+  <script>
+    lucide.createIcons();
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuBtn = document.querySelector('.menu-btn');
+      const menuClose = document.querySelector('.menu-close');
+      const navlinks = document.getElementById('navlinks');
+
+      // Ouvre le menu
+      if (menuBtn && navlinks) {
+        menuBtn.addEventListener('click', () => {
+          navlinks.classList.add('show');
+          menuBtn.setAttribute('aria-expanded', 'true');
+        });
+      }
+
+      // Ferme le menu
+      if (menuClose && navlinks) {
+        menuClose.addEventListener('click', () => {
+          navlinks.classList.remove('show');
+          menuBtn.setAttribute('aria-expanded', 'false');
+        });
+      }
+
+      // Ferme le menu quand on clique sur un lien sans sous-menu
+      navlinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          const parent = link.parentElement;
+          const hasSubmenu = parent.classList.contains('dropdown');
+
+          if (window.innerWidth <= 960 && hasSubmenu) {
+            e.preventDefault();
+            if (parent.classList.contains('open')) {
+              window.location.href = link.getAttribute('href');
+            } else {
+              document.querySelectorAll('.dropdown.open').forEach(el => el.classList.remove('open'));
+              parent.classList.add('open');
+            }
+            return;
+          }
+
+          if (window.innerWidth <= 960) {
+            navlinks.classList.remove('show');
+            menuBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+    });
+
+            // === Apparition au scroll ===
+  const revealElements = document.querySelectorAll(".reveal, .fade-up, .slide-left, .slide-right, .zoom-in");
+
+function revealOnScroll() {
+  const windowHeight = window.innerHeight;
+  revealElements.forEach(el => {
+    const elementTop = el.getBoundingClientRect().top;
+    if (elementTop < windowHeight - 100) {
+      el.classList.add("visible");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
+
+
+
+</script>
+
+
+ 
+</body>
+</html>
