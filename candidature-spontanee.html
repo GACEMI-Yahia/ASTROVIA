@@ -792,19 +792,19 @@
       <div class="form-grid">
         <div class="form-group">
           <label>Nom</label>
-          <input type="text" name="nom" placeholder="Votre nom" required>
+          <input type="text" name="nom" autocomplete="family-name" placeholder="Votre nom" required>
         </div>
         <div class="form-group">
           <label>Prénom</label>
-          <input type="text" name="prenom" placeholder="Votre prénom" required>
+          <input type="text" name="prenom" autocomplete="given-name" placeholder="Votre prénom" required>
         </div>
         <div class="form-group">
           <label>Email</label>
-          <input type="email" name="email" placeholder="votre@email.com" required>
+          <input type="email" name="email" autocomplete="email" placeholder="votre@email.com" required>
         </div>
         <div class="form-group">
           <label>Téléphone</label>
-          <input type="tel" name="telephone" placeholder="+33 6 12 34 56 78">
+          <input type="tel" name="telephone" placeholder="+33 6 12 34 56 78" inputmode="tel" autocomplete="tel">
         </div>
         <div class="form-group file">
           <label>CV</label>
@@ -1141,6 +1141,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
 
 
 
