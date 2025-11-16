@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <link rel="icon" type="image/png" href="astrovia.jpg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentions légales – ASTROVIA</title>
+<meta name="description" content="Mentions légales du site ASTROVIA : éditeur du site, hébergeur, propriété intellectuelle, responsabilité et données personnelles.">
+<meta property="og:title" content="Mentions légales – ASTROVIA">
+<meta property="og:description" content="Consultez les mentions légales du site ASTROVIA : informations sur l’éditeur, l’hébergeur et les conditions d’utilisation du site.">
+<meta property="og:url" content="https://www.astrovia.fr/mentions-legales.html">
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+
+  <style>
+    html, body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  scroll-padding-top: 0 !important;
+  overflow-x: hidden;
+}
+
+
+    :root{
+      --bg:#0c1020;          /* bleu nuit profond */
+      --bg-soft:#111634;     /* bleu plus doux */
+      --text:#e8ecf5;        /* texte principal */
+      --muted:#b9c2d6;       /* texte secondaire */
+      --accent:#6bd3ff;      /* bleu cyan accent */
+      --accent-2:#00b884;    /* vert accent secondaire */
+      --card:#151a3f;
+      --line:rgba(255,255,255,.08);
+      --warn:#f7b500;
+      --error:#ff5a5f;
+      --ok:#2ecc71;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',sans-serif;background:radial-gradient(1200px 600px at 10% -10%,rgba(107,211,255,.15),transparent 50%), radial-gradient(800px 400px at 90% -10%,rgba(0,184,132,.12),transparent 50%), var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1200px,92%);margin-inline:auto}
+
+    /* Header */
+    header {
+  position: fixed;        /* ✅ reste visible tout le temps */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;          /* au-dessus de tout */
+  background: rgba(12,16,32,0.85); /* fond semi-transparent */
+  backdrop-filter: blur(10px);     /* effet de flou doux */
+  border-bottom: 1px solid var(--line);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.3px}
+    .brand .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;color:#001628;font-weight:900}
+    .logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+    .nav a{color:var(--text);opacity:.9}
+    .navlinks{display:flex;gap:18px;align-items:center}
+    .navlinks a{padding:8px 10px;border-radius:10px}
+    .navlinks a:hover{background:var(--line)}
+    /* Dropdown menu */
+.navlinks ul, .navlinks li { list-style: none; margin: 0; padding: 0; }
+.navlinks > li { position: relative; }
+
+.dropdown > a::after {
+  content: "";
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(17, 22, 52, 0.95);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 0;
+  box-shadow: var(--shadow);
+  min-width: 220px;
+}
+
+.submenu li a {
+  display: block;
+  padding: 8px 14px;
+  color: var(--text);
+  opacity: 0.9;
+}
+
+.submenu li a:hover {
+  background: var(--line);
+}
+
+.dropdown:hover .submenu {
+  display: block;
+}
+
+/* Pour mobile : sous-menus visibles dans le menu déroulant */
+@media (max-width: 960px) {
+  .navlinks li { width: 100%; }
+  .submenu {
+    position: static;
+    display: none;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding-left: 10px;
+  }
+  .dropdown.open .submenu {
+    display: block;
+  }
+}
+
+    .cta{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#001628 !important;padding:10px 14px;border-radius:12px;font-weight:700}
+    .menu-btn{display:none}
+
+
+
+
+
+
+/* --- Animation d'apparition au scroll --- */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Animation d'apparition globale pour toutes les sections --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px) scale(0.98);
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  will-change: opacity, transform;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* --- Apparition fluide globale --- */
+.fade-up, .slide-left, .slide-right, .zoom-in {
+  opacity: 0;
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  will-change: opacity, transform;
+}
+
+/* Effets de départ */
+.fade-up { transform: translateY(60px); }
+.slide-left { transform: translateX(-80px); }
+.slide-right { transform: translateX(80px); }
+.zoom-in { transform: scale(0.9); }
+
+/* Quand l’élément devient visible */
+.fade-up.visible,
+.slide-left.visible,
+.slide-right.visible,
+.zoom-in.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Animation du tracé de la courbe */
+.curve-path {
+  stroke: var(--accent);
+  stroke-width: 2px;
+  fill: none;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 3.5s ease-in-out;
+}
+
+/* Quand on scrolle jusqu’à la section */
+.curve-path.animate {
+  stroke-dashoffset: 0;
+}
+
+
+
+/* === Footer professionnel === */
+.footer {
+  background: var(--bg);
+  color: var(--text);
+  border-top: 1px solid var(--line);
+  padding: 60px 20px 30px;
+  position: relative;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.footer-logo img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.footer-logo h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.footer-contact h4,
+.footer-social h4 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.footer-contact p {
+  margin: 8px 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.footer-contact a {
+  color: var(--accent-2);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-contact a:hover {
+  color: var(--accent);
+}
+
+/* === Icône LinkedIn === */
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.footer-social .social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  font-size: 24px;
+  transition: all 0.3s ease;
+}
+
+.footer-social .social-link:hover {
+  background: var(--accent);
+  color: #001628;
+  transform: scale(1.05);
+}
+
+/* === Flèche retour haut === */
+.scroll-top {
+  position: absolute;
+  right: 40px;
+  top: 40px;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 32px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.scroll-top:hover {
+  color: var(--accent);
+  transform: translateY(-4px);
+}
+
+/* === Responsive === */
+@media (max-width: 960px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .footer-logo,
+  .footer-contact,
+  .footer-social {
+    align-items: center;
+  }
+
+  .scroll-top {
+    right: 20px;
+    top: 20px;
+  }
+}
+
+/* === MENU MOBILE PRO === */
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 34px;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.menu-btn:hover {
+  color: var(--accent-2);
+  transform: scale(1.1);
+}
+
+@media (max-width: 960px) {
+  .menu-btn {
+    display: block;
+  }
+
+  .navlinks {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: rgba(12, 16, 32, 0.98);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 80px 28px;
+    gap: 20px;
+    transition: right 0.4s ease;
+    z-index: 2000;
+    box-shadow: -6px 0 20px rgba(0,0,0,0.5);
+  }
+
+  .navlinks.show {
+    right: 0;
+  }
+
+  .navlinks a {
+    font-size: 18px;
+    color: var(--text);
+    text-decoration: none;
+    padding: 10px 0;
+    width: 100%;
+  }
+
+  .navlinks a:hover {
+    color: var(--accent);
+  }
+
+  .menu-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 32px;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .menu-close:hover {
+    color: var(--accent-2);
+    transform: scale(1.1);
+  }
+
+  .submenu {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    padding-left: 14px;
+  }
+
+  .dropdown.open .submenu {
+    display: flex;
+  }
+}
+
+/* ✅ Bouton "X" uniquement sur mobile */
+.menu-close {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .menu-close {
+    display: block;
+  }
+}
+
+
+
+
+/* ✅ Fixe la zone cliquable du bouton X */
+.menu-close {
+  display: none; /* caché sur PC */
+}
+
+@media (max-width: 960px) {
+  .menu-close {
+    display: flex;               /* ✅ pour centrer l’icône */
+    align-items: center;
+    justify-content: center;
+    width: 48px;                 /* ✅ surface cliquable */
+    height: 48px;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 32px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    z-index: 2100;               /* ✅ au-dessus du reste du menu */
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .menu-close:hover {
+    color: var(--accent-2);
+    transform: scale(1.1);
+  }
+
+  .menu-close i {
+    pointer-events: none;        /* ✅ pour éviter les décalages de clic */
+  }
+}
+
+
+/* === Section Politique de confidentialité === */
+.legal-header {
+  margin-bottom: 24px;
+  padding: 20px 22px;
+  border-radius: var(--radius);
+  background: rgba(7, 11, 30, 0.95);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.legal-section {
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+
+.legal-header h1 {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.legal-subtitle {
+  color: var(--muted);
+  max-width: 650px;
+  font-size: 15px;
+}
+
+.legal-meta {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.legal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(107,211,255,.5);
+  background: rgba(107,211,255,0.08);
+  margin-bottom: 10px;
+}
+
+.legal-badge .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-2);
+}
+
+.legal-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(260px, 1.2fr);
+  gap: 28px;
+  margin-top: 30px;
+}
+
+@media (max-width: 960px) {
+  .legal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.legal-card {
+  scroll-margin-top: 120px;
+  background: rgba(10, 15, 45, 0.95);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  padding: 20px 18px;
+  margin-bottom: 18px;
+}
+
+.legal-card h2 {
+  font-size: 18px;
+  margin: 0 0 10px;
+  color: var(--accent);
+}
+
+.legal-card h3 {
+  font-size: 15px;
+  margin: 14px 0 6px;
+  color: var(--text);
+}
+
+.legal-card p {
+  font-size: 14px;
+  margin: 6px 0 8px;
+  color: var(--muted);
+}
+
+.legal-card ul {
+  font-size: 14px;
+  padding-left: 20px;
+  margin: 4px 0 8px;
+  color: var(--muted);
+}
+
+.legal-aside {
+  position: static;
+  
+  align-self: flex-start;
+}
+
+@media (max-width: 960px) {
+  .legal-aside {
+    position: static;
+  }
+}
+
+.legal-aside-card {
+  background: rgba(11,16,50,0.95);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  padding: 18px 16px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.legal-aside-card h3 {
+  font-size: 15px;
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+
+.legal-aside-card ul {
+  padding-left: 18px;
+  margin: 6px 0 10px;
+}
+
+.legal-aside-card li {
+  margin-bottom: 4px;
+}
+
+.aside-contact {
+  font-size: 13px;
+}
+
+
+.legal-header {
+  margin-bottom: 24px;
+}
+
+.legal-header h1 {
+  font-size: 32px;
+  margin: 4px 0 8px;
+}
+
+@media (max-width: 960px) {
+  .legal-header h1 {
+    font-size: 26px;
+  }
+}
+
+.footer-bottom {
+  grid-column: 1 / -1;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.footer-bottom a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.footer-bottom a:hover {
+  color: var(--accent-2);
+}
+
+.legal-header {
+  position: relative;
+  z-index: 1;
+}
+
+.legal-grid {
+  position: relative;
+  z-index: 0;
+}
+
+ </style>
+</head>
+
+<body id="top">
+
+  <!-- === HEADER identique === -->
+  <header>
+    <div class="container nav">
+      <a href="index.html" class="brand" aria-label="Accueil – ASTROVIA">
+        <img src="astrovia.jpg" alt="Logo ASTROVIA" class="logo-img">
+        <span>ASTROVIA</span>
+      </a>
+      <nav>
+        <button class="menu-btn" aria-expanded="false" aria-controls="navlinks" aria-label="Ouvrir le menu">
+          <i data-lucide="menu"></i>
+        </button>
+        <ul id="navlinks" class="navlinks">
+          <li class="close-btn">
+            <button class="menu-close" aria-label="Fermer le menu">
+              <i data-lucide="x"></i>
+            </button>
+          </li>
+          <li><a href="accueil.html">Accueil</a></li>
+          <li class="dropdown">
+            <a href="expertises.html" >Nos expertises ▾</a>
+            <ul class="submenu">
+              <li><a href="consulting.html">Consulting</a></li>
+              <li><a href="cabinet-de-recrutement.html">Cabinet de recrutement</a></li>
+              <li><a href="solutions-de-fidelisation.html">Solutions de fidélisation</a></li>
+            </ul>
+          </li>
+          <li><a href="valeurs.html">Nos valeurs</a></li>
+          <li><a href="qui-sommes-nous.html">Qui sommes-nous</a></li>
+          <li class="dropdown">
+            <a href="rejoignez-nous.html" class="">Rejoignez-nous ▾</a>
+            <ul class="submenu">
+              <li><a href="offres-consulting.html">offres Consulting</a></li>
+              <li><a href="offres-cabinet-de-recrutement.html">offres Cabinet de recrutement</a></li>
+              <li><a href="candidature-spontanee.html">Candidature spontanée</a></li>
+            </ul>
+          </li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+
+  <main style="padding-top: 90px; padding-bottom: 80px;">
+  <section class="legal-section container reveal">
+    <header class="legal-header">
+      <div class="legal-badge">
+        <span class="dot"></span>
+        <span>Informations légales</span>
+      </div>
+      <h1>Mentions légales</h1>
+      <p class="legal-subtitle">
+        Les présentes mentions légales ont pour objet de préciser les informations relatives
+        à l’éditeur du site, à son hébergeur ainsi que les conditions d’utilisation du site
+        <strong>astrovia.fr</strong>.
+      </p>
+      <p class="legal-meta">
+        Dernière mise à jour : 15/11/2025 – ASTROVIA, 6 Rue d'Armaillé, 75017 Paris.
+      </p>
+    </header>
+
+    <div class="legal-grid">
+      <!-- Colonne principale -->
+      <div class="legal-content">
+        <!-- 1. Éditeur du site -->
+        <section class="legal-card" id="editeur">
+          <h2>1. Éditeur du site</h2>
+          <p>
+            Le site <strong>astrovia.fr</strong> est édité par :
+          </p>
+          <p>
+            <strong>ASTROVIA</strong><br>
+            6 Rue d'Armaillé, 75017 Paris – France<br>
+            Téléphone : <a href="tel:+33766518706">07&nbsp;66&nbsp;51&nbsp;87&nbsp;06</a><br>
+            E-mail : <a href="mailto:raouf.gacemi@astrovia.fr">raouf.gacemi@astrovia.fr</a>
+          </p>
+          <p>
+            ASTROVIA intervient notamment dans les domaines du consulting, du recrutement
+            et de l’accompagnement des entreprises dans la fidélisation de leurs talents.
+          </p>
+          <!-- À COMPLÉTER SI TU LE SOUHAITES :
+          <p>
+            Forme juridique : …<br>
+            Capital social : …<br>
+            RCS / SIREN : …<br>
+            N° TVA intracommunautaire : …
+          </p>
+          -->
+        </section>
+
+        <!-- 2. Hébergement -->
+        <section class="legal-card" id="hebergeur">
+  <h2>2. Hébergement du site</h2>
+  <p>
+    Le site <strong>astrovia.fr</strong> est hébergé sur la plateforme :
+  </p>
+  <p>
+    <strong>GitHub Pages</strong><br>
+    Service édité par GitHub, Inc., société de droit américain<br>
+    Siège social situé à San Francisco, Californie (États-Unis)<br>
+    Site : <a href="https://pages.github.com" target="_blank" rel="noopener noreferrer">
+      https://pages.github.com
+    </a>
+  </p>
+  <p style="font-size:12px;color:var(--muted);">
+    L’infrastructure technique (serveurs, stockage, diffusion de contenus) est assurée
+    par GitHub, Inc. ASTROVIA n’exploite pas directement ces infrastructures et utilise
+    GitHub Pages comme solution d’hébergement statique.
+  </p>
+</section>
+
+
+        <!-- 3. Responsable de publication -->
+        <section class="legal-card" id="publication">
+          <h2>3. Responsable de la publication</h2>
+          <p>
+            Le responsable de la publication est :
+          </p>
+          <p>
+            <strong>Raouf GACEMI</strong>, en qualité de représentant d’ASTROVIA.
+          </p>
+          <p>
+            Pour toute question relative au site ou à son contenu, vous pouvez nous contacter
+            à l’adresse suivante :
+            <a href="mailto:raouf.gacemi@astrovia.fr">raouf.gacemi@astrovia.fr</a>.
+          </p>
+        </section>
+
+        <!-- 4. Propriété intellectuelle -->
+        <section class="legal-card" id="propriete">
+          <h2>4. Propriété intellectuelle</h2>
+          <p>
+            L’ensemble du site <strong>astrovia.fr</strong> (structure, textes, visuels,
+            graphismes, logos, icônes, etc.) est protégé par le droit de la propriété
+            intellectuelle et reste la propriété exclusive d’ASTROVIA ou de ses partenaires.
+          </p>
+          <p>
+            Toute reproduction, représentation, adaptation, modification, traduction,
+            partielle ou totale, du site ou de l’un de ses éléments, par quelque procédé
+            que ce soit, sans autorisation écrite préalable d’ASTROVIA est strictement
+            interdite et susceptible de constituer une contrefaçon.
+          </p>
+          <p>
+            Les dénominations sociales, marques et logos cités sur le site demeurent
+            la propriété de leurs titulaires respectifs.
+          </p>
+        </section>
+
+        <!-- 5. Utilisation du site -->
+        <section class="legal-card" id="utilisation">
+          <h2>5. Conditions d’utilisation du site</h2>
+          <p>
+            L’utilisateur s’engage à consulter et utiliser le site <strong>astrovia.fr</strong>
+            dans le respect de la législation en vigueur et des présentes mentions légales.
+          </p>
+          <p>
+            Il lui appartient notamment de :
+          </p>
+          <ul>
+            <li>ne pas détourner le site de sa finalité (information, contact, candidature) ;</li>
+            <li>ne pas porter atteinte à la sécurité ou au bon fonctionnement du site ;</li>
+            <li>ne pas transmettre, via les formulaires, de contenus manifestement illicites,
+                injurieux ou inappropriés.</li>
+          </ul>
+        </section>
+
+        <!-- 6. Données personnelles -->
+        <section class="legal-card" id="donnees">
+          <h2>6. Données personnelles</h2>
+          <p>
+            Dans le cadre de l’utilisation du site, certaines données personnelles peuvent
+            être collectées, notamment via les formulaires de contact et de candidature.
+          </p>
+          <p>
+            Pour plus d’informations sur la nature des données collectées, les finalités
+            de traitement, vos droits ainsi que la manière de les exercer, nous vous
+            invitons à consulter notre
+            <a href="politique-de-confidentialite.html">Politique de confidentialité</a>.
+          </p>
+        </section>
+
+        <!-- 7. Liens hypertextes -->
+        <section class="legal-card" id="liens">
+          <h2>7. Liens hypertextes</h2>
+          <p>
+            Le site peut contenir des liens vers des sites ou services tiers.
+            ASTROVIA ne dispose d’aucun contrôle sur ces ressources externes et
+            ne saurait être tenue responsable de leur contenu, de leur fonctionnement
+            ou de tout dommage pouvant résulter de leur utilisation.
+          </p>
+          <p>
+            La mise en place de liens vers le site <strong>astrovia.fr</strong> est
+            possible sous réserve d’une information préalable et d’une absence
+            d’utilisation trompeuse ou dénigrante d’ASTROVIA.
+          </p>
+        </section>
+
+        <!-- 8. Responsabilité -->
+        <section class="legal-card" id="responsabilite">
+          <h2>8. Limitation de responsabilité</h2>
+          <p>
+            ASTROVIA met tout en œuvre pour assurer l’exactitude et l’actualisation
+            des informations publiées sur le site. Toutefois, ces informations sont
+            fournies à titre indicatif et ne sauraient se substituer à un conseil
+            personnalisé ou contractuel.
+          </p>
+          <p>
+            ASTROVIA ne pourra être tenue responsable des conséquences directes ou
+            indirectes liées :
+          </p>
+          <ul>
+            <li>à l’utilisation ou à l’impossibilité d’utilisation du site,</li>
+            <li>à la présence éventuelle d’erreurs typographiques ou techniques,</li>
+            <li>à tout dommage résultant d’un événement échappant raisonnablement à son contrôle
+                (interruption de service, attaque informatique, problème de réseau, etc.).</li>
+          </ul>
+        </section>
+
+        <!-- 9. Droit applicable -->
+        <section class="legal-card" id="droit">
+          <h2>9. Droit applicable et juridiction compétente</h2>
+          <p>
+            Les présentes mentions légales sont régies par le droit français.
+            En cas de litige et à défaut de résolution amiable, les tribunaux
+            français seront seuls compétents.
+          </p>
+        </section>
+      </div>
+
+      <!-- Colonne latérale (résumé) -->
+      <aside class="legal-aside">
+        <div class="legal-aside-card">
+          <h3>Résumé</h3>
+<p>Cette page présente l’ensemble des informations légales du site ASTROVIA : identité de l’éditeur,
+hébergeur, responsabilités, droits de propriété intellectuelle et règles d’utilisation.</p>
+
+<ul>
+  <li>ASTROVIA est l’éditeur officiel du site</li>
+  <li>Hébergement assuré par GitHub Pages</li>
+  <li>Contenus protégés par les droits d'auteur</li>
+  <li>Responsabilité limitée de l’éditeur</li>
+</ul>
+
+<p class="aside-contact">
+Pour toute demande légale ou signalement :<br>
+<a href="mailto:raouf.gacemi@astrovia.fr">raouf.gacemi@astrovia.fr</a>
+</p>
+
+        </div>
+      </aside>
+    </div>
+  </section>
+</main>
+
+
+
+
+
+
+  <!-- === FOOTER identique === -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-logo">
+        <img src="astrovia.jpg" alt="Logo ASTROVIA">
+        <h3>ASTROVIA</h3>
+      </div>
+     <div class="footer-contact">
+        <h4>Contact</h4>
+        <p>Où nous trouver :<br>
+         6 Rue d'Armaillé, 75017 Paris
+        </p>
+        <p>Nous appeler :<br>
+          <a href="tel:+33648283477">07 66 51 87 06</a>
+        </p>
+        <p>E-mail :<br>
+          <a href="mailto:contact@astrovia.fr">raouf.gacemi@astrovia.fr</a>
+        </p>
+      </div>
+      <div class="footer-social">
+        <h4>Suivez-nous</h4>
+        <a href="#" class="social-link" aria-label="LinkedIn ASTROVIA">
+          <i data-lucide="linkedin"></i>
+        </a>
+      </div>
+      <a href="#top" class="scroll-top" aria-label="Remonter en haut">
+        <i data-lucide="arrow-up"></i>
+      </a>
+    </div>
+
+    <div class="footer-bottom">
+  © ASTROVIA – Tous droits réservés •
+  <a href="mentions-legales.html">Mentions légales</a> •
+  <a href="politique-de-confidentialite.html">Politique de confidentialité</a>
+</div>
+
+  </footer>
+  <script>
+    lucide.createIcons();
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuBtn = document.querySelector('.menu-btn');
+      const menuClose = document.querySelector('.menu-close');
+      const navlinks = document.getElementById('navlinks');
+
+      // Ouvre le menu
+      if (menuBtn && navlinks) {
+        menuBtn.addEventListener('click', () => {
+          navlinks.classList.add('show');
+          menuBtn.setAttribute('aria-expanded', 'true');
+        });
+      }
+
+      // Ferme le menu
+      if (menuClose && navlinks) {
+        menuClose.addEventListener('click', () => {
+          navlinks.classList.remove('show');
+          menuBtn.setAttribute('aria-expanded', 'false');
+        });
+      }
+
+      // Ferme le menu quand on clique sur un lien sans sous-menu
+      navlinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          const parent = link.parentElement;
+          const hasSubmenu = parent.classList.contains('dropdown');
+
+          if (window.innerWidth <= 960 && hasSubmenu) {
+            e.preventDefault();
+            if (parent.classList.contains('open')) {
+              window.location.href = link.getAttribute('href');
+            } else {
+              document.querySelectorAll('.dropdown.open').forEach(el => el.classList.remove('open'));
+              parent.classList.add('open');
+            }
+            return;
+          }
+
+          if (window.innerWidth <= 960) {
+            navlinks.classList.remove('show');
+            menuBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+    });
+
+            // === Apparition au scroll ===
+  const revealElements = document.querySelectorAll(".reveal, .fade-up, .slide-left, .slide-right, .zoom-in");
+
+function revealOnScroll() {
+  const windowHeight = window.innerHeight;
+  revealElements.forEach(el => {
+    const elementTop = el.getBoundingClientRect().top;
+    if (elementTop < windowHeight - 100) {
+      el.classList.add("visible");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
+
+
+
+</script>
+
+
+ 
+</body>
+</html>
