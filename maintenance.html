@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASTROVIA – Maintenance en cours</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#0c1020;
+    --text:#e8ecf5;
+    --muted:#b9c2d6;
+    --accent:#6bd3ff;
+    --accent-2:#00b884;
+    --line:rgba(255,255,255,.08);
+  }
+
+  body {
+    margin: 0;
+    font-family: Inter, sans-serif;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(107, 211, 255, 0.15), transparent 50%),
+      radial-gradient(800px 400px at 90% -10%, rgba(0, 184, 132, 0.12), transparent 50%),
+      var(--bg);
+    color: var(--text);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .box {
+    max-width: 500px;
+    padding: 40px 28px;
+    background: rgba(15,20,40,0.75);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    backdrop-filter: blur(10px);
+    animation: fadeUp 1.2s ease-out forwards;
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  .logo {
+    width: 85px;
+    height: 85px;
+    border-radius: 14px;
+    object-fit: cover;
+    margin-bottom: 14px;
+    box-shadow: 0 0 20px rgba(107,211,255,0.25);
+  }
+
+  h1 {
+    font-size: 28px;
+    margin: 0 0 14px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+</head>
+<body>
+
+  <div class="box">
+    <img src="astrovia.jpg" alt="Logo ASTROVIA" class="logo">
+    <h1>Maintenance en cours</h1>
+    <p>
+      Le site <strong>ASTROVIA</strong> est actuellement en cours de mise à jour.<br>
+      Nous revenons très vite pour vous offrir la meilleure expérience possible.
+    </p>
+  </div>
+
+</body>
+</html>
