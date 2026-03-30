@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
+<head> 
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="icon" type="image/jpeg" href="astrovia.jpg">
   <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="shortcut icon" href="astrovia.jpg" type="image/jpeg">
+  <link rel="shortcut icon" href="astrovia.jpg" type="image/jpeg"> 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Accueil – ASTROVIA</title>
-  <meta name="description" content="Entreprise de conseil en ingénierie des infrastructures de transport et cabinet de recrutement spécialisé.">
-  <!-- Mots-clés principaux -->
+  <title>ASTROVIA | Ingénierie Infrastructures Transport & Recrutement Spécialisé</title>
+<meta name="description" content="ASTROVIA : expertise en ingénierie des infrastructures de transport (ferroviaire, voie, télécom) et cabinet de recrutement spécialisé. Consulting, accompagnement projets et recrutement de talents. Paris.">  <!-- Mots-clés principaux -->
+<meta name="robots" content="index, follow">
+<meta name="googlebot" content="index, follow">
 <meta name="keywords" content="ASTROVIA, ingénierie des infrastructures, transport ferroviaire, transport, cabinet de recrutement, ingénieurs, projets d'infrastructure, mobilité, rail, génie civil">
 
 <!-- URL canonique -->
@@ -1213,60 +1214,281 @@
   }
 }
 
+/* ====================== BOUTON CHAT FLOTTANT ====================== */
+.chat-float {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 66px;
+  height: 66px;
+  background: var(--accent-2);
+  color: #001628;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  box-shadow: 0 10px 30px rgba(0, 184, 132, 0.4);
+  z-index: 9999;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
 
+.chat-float:hover {
+  transform: scale(1.12);
+  box-shadow: 0 15px 35px rgba(0, 184, 132, 0.5);
+}
+
+@media (max-width: 768px) {
+  .chat-float { bottom: 20px; right: 20px; width: 58px; height: 58px; font-size: 28px; }
+}
+
+
+
+/* ====================== BARRE DE PROGRESSION (derrière les menus) ====================== */
+#scrollProgress {
+  position: fixed;
+  top: 0;                    /* ← changé pour être tout en haut */
+  left: 0;
+  height: 4px;
+  background: linear-gradient(to right, var(--accent), var(--accent-2));
+  width: 0%;
+  z-index: 10;               /* ← très bas pour rester derrière tout */
+  transition: width 0.08s linear;
+}
+
+
+/* ====================== FOOTER-BOTTOM (ligne du bas) ====================== */
+.footer-bottom {
+  grid-column: 1 / -1;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.footer-bottom a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  color: var(--accent-2);
+}
+/* Fix icône LinkedIn dans le footer */
+.footer-social .social-link i {
+  width: 28px;
+  height: 28px;
+  stroke-width: 2.5;
+}
+
+
+
+/* ====================== MODE CLAIR (version améliorée) ====================== */
+html[data-theme="light"] {
+  --bg: #f8f9fa;
+  --text: #1a2333;
+  --muted: #475569;
+  --card: #ffffff;
+  --line: #e2e8f0;
+  --accent: #00a8e0;
+  --accent-2: #00b884;
+}
+
+/* Garde l’image de fond bien visible en mode clair */
+
+
+html[data-theme="light"] .intro-title {
+  color: #00a8e0;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+html[data-theme="light"] header {
+  background: rgba(255,255,255,0.96) !important;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+html[data-theme="light"] .nav a,
+html[data-theme="light"] .brand span {
+  color: #1a2333;
+}
+
+html[data-theme="light"] .submenu {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+/* Bouton toggle */
+.theme-toggle {
+  background: none;
+  border: none;
+  color: #00a8e0;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background: rgba(0,168,224,0.15);
+  transform: rotate(25deg);
+}
+
+html[data-theme="light"] .contact-form input,
+html[data-theme="light"] .contact-form textarea {
+  background: #ffffff !important;
+  color: #1a2333 !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+html[data-theme="light"] .contact-form input:focus,
+html[data-theme="light"] .contact-form textarea:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(0, 168, 224, 0.2) !important;
+}
+
+html[data-theme="light"] .contact-form label {
+  color: #334155 !important;
+}
+
+
+/* ====================== MENU MOBILE EN MODE CLAIR ====================== */
+html[data-theme="light"] .navlinks {
+  background: rgba(255,255,255,0.98) !important;
+  color: #1a2333 !important;
+}
+
+html[data-theme="light"] .navlinks a {
+  color: #1a2333 !important;
+}
+
+html[data-theme="light"] .navlinks a:hover {
+  background: #f1f5f9 !important;
+  color: #00a8e0 !important;
+}
+
+/* Sous-menus en mode clair */
+html[data-theme="light"] .submenu {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+}
+
+html[data-theme="light"] .submenu li a {
+  color: #1a2333 !important;
+}
+
+html[data-theme="light"] .submenu li a:hover {
+  background: #f1f5f9 !important;
+}
+
+/* Bouton fermer (X) en mode clair */
+html[data-theme="light"] .menu-close {
+  color: #1a2333 !important;
+}
   </style>
   <meta name="google-site-verification" content="vWDc__LqGniDIEoBcmQsjoOYosPfmuw_J-leBWZmP5M" />
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "ASTROVIA",
+  "url": "https://www.astrovia.fr",
+  "logo": "https://www.astrovia.fr/astrovia.jpg",
+  "description": "ASTROVIA accompagne les acteurs du transport dans leurs projets d’ingénierie des infrastructures et propose un cabinet de recrutement spécialisé.",
+  "foundingDate": "2020",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "6 Rue d'Armaille",
+    "addressLocality": "Paris",
+    "postalCode": "75017",
+    "addressCountry": "FR"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+33-7-66-51-87-06",
+    "contactType": "customer service",
+    "email": "contact@astrovia.fr"
+  },
+  "sameAs": ["https://www.linkedin.com/company/astrovia"],
+  "knowsAbout": ["Ingénierie ferroviaire", "Recrutement spécialisé transport", "Consulting infrastructures", "Projets voie ferrée", "Télécom ferroviaire"]
+}
+</script>
 </head>
+
+
+
+
+
+  
+
+
+
 <body>
  
   
-  <!-- Header -->
-  <header>
-    <div class="container nav">
-      <a href="accueil.html" class="brand" aria-label="Accueil – ASTROVIA">
-        <img src="astrovia.jpg" alt="Logo ASTROVIA" class="logo-img">
-        <span>ASTROVIA</span>
-      </a>
-      <nav>
-        <button class="menu-btn" aria-expanded="false" aria-controls="navlinks" aria-label="Ouvrir le menu">
-          <i data-lucide="menu"></i>
-        </button>
-        
-                <ul id="navlinks" class="navlinks">
-                  <li class="close-btn">
-                    <button class="menu-close" aria-label="Fermer le menu">
-                      <i data-lucide="x"></i>
-                    </button>
-                  </li>
-                  
-          <li><a href="accueil.html" class="cta">Accueil</a></li>
-          <li class="dropdown">
-            <a href="expertises.html " class="">Nos expertises ▾</a>
-            <ul class="submenu">
-              <li><a href="consulting.html">Consulting</a></li>
-              <li><a href="cabinet-de-recrutement.html">Cabinet de recrutement</a></li>
-              <li><a href="solutions-de-fidelisation.html">Solutions de fidélisation</a></li>
-            </ul>
-          </li>
-  
-          <li><a href="valeurs.html">Nos valeurs</a></li>
-          <li><a href="qui-sommes-nous.html">Qui sommes-nous</a></li>
-  
-          <li class="dropdown">
-            <a href="rejoignez-nous.html">Rejoignez-nous ▾</a>
-            <ul class="submenu">
-              <li><a href="offres-consulting.html">offres Consulting</a></li>
-              <li><a href="offres-cabinet-de-recrutement.html">offres Cabinet de recrutement</a></li>
-              <li><a href="candidature-spontanee.html">Candidature spontanée</a></li>
-            </ul>
-          </li>
-  
-          <li><a href="contact.html" class="">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  
+ <!-- Header corrigé pour mobile -->
+<header>
+  <!-- Barre de progression -->
+  <div id="scrollProgress"></div>
+
+  <div class="container nav">
+    <!-- Logo -->
+    <a href="accueil.html" class="brand" aria-label="Accueil – ASTROVIA">
+      <img src="astrovia.jpg" alt="Logo ASTROVIA" class="logo-img">
+      <span>ASTROVIA</span>
+    </a>
+
+    <!-- Navigation + boutons à droite -->
+    <nav style="display:flex; align-items:center; gap:16px;">
+      
+      <!-- Liens de navigation (cachés sur mobile) -->
+      <ul id="navlinks" class="navlinks">
+        <li class="close-btn">
+          <button class="menu-close" aria-label="Fermer le menu">
+            <i data-lucide="x"></i>
+          </button>
+        </li>
+        <li><a href="accueil.html" class="cta">Accueil</a></li>
+        <li class="dropdown">
+          <a href="expertises.html">Nos expertises ▾</a>
+          <ul class="submenu">
+            <li><a href="consulting.html">Consulting</a></li>
+            <li><a href="cabinet-de-recrutement.html">Cabinet de recrutement</a></li>
+            <li><a href="solutions-de-fidelisation.html">Solutions de fidélisation</a></li>
+          </ul>
+        </li>
+        <li><a href="valeurs.html">Nos valeurs</a></li>
+        <li><a href="qui-sommes-nous.html">Qui sommes-nous</a></li>
+        <li class="dropdown">
+          <a href="rejoignez-nous.html">Rejoignez-nous ▾</a>
+          <ul class="submenu">
+            <li><a href="offres-consulting.html">offres Consulting</a></li>
+            <li><a href="offres-cabinet-de-recrutement.html">offres Cabinet de recrutement</a></li>
+            <li><a href="candidature-spontanee.html">Candidature spontanée</a></li>
+          </ul>
+        </li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <!-- Bouton Mode Clair -->
+      <button class="theme-toggle" id="themeToggle" aria-label="Changer de mode">
+        <i data-lucide="sun"></i>
+      </button>
+
+      <!-- Bouton Menu Hamburger (visible uniquement sur mobile) -->
+      <button class="menu-btn" aria-expanded="false" aria-controls="navlinks" aria-label="Ouvrir le menu">
+        <i data-lucide="menu"></i>
+      </button>
+
+    </nav>
+  </div>
+</header>
+ 
   
     <!-- Section d’intro avec fond TGV -->
     <section id="home" class="intro-section reveal zoom-in">
@@ -1341,6 +1563,7 @@
           <div class="accompagnement-card">Prestation de service</div>
         </a>
         </div>
+       
       
         <div class="accompagnement-item slide-left">
           <a href="consulting.html" class="accompagnement-item">
@@ -1441,179 +1664,194 @@
     </div>
   </section>
 
-  <!-- === Footer professionnel === -->
+<!-- === FOOTER FINAL (exactement comme la page Candidature) === -->
 <footer class="footer">
-    <div class="container footer-grid">
-      
-      <!-- Logo et nom -->
-      <div class="footer-logo">
-        <img src="astrovia.jpg" alt="Logo ASTROVIA">
-        <h3>ASTROVIA</h3>
-      </div>
-  
-      <!-- Informations de contact -->
-      <div class="footer-contact">
-        <h4>Contact</h4>
-        <p>Où nous trouver :<br>
-          6 RUE D'ARMAILLE, 75017 PARIS
-        </p>
-        <p>Nous appeler :<br>
-          <a href="tel:+33648283477">07 66 51 87 06</a>
-        </p>
-        <p>E-mail :<br>
-          <a href="mailto:contact@astrovia.fr">raouf.gacemi@astrovia.fr</a>
-        </p>
-      </div>
-  
-      <!-- Réseaux sociaux -->
-      <div class="footer-social">
-        <h4>Suivez-nous</h4>
-        <a href="#" class="social-link" aria-label="LinkedIn ASTROVIA">
-          <i data-lucide="linkedin"></i>
-        </a>
-      </div>
-  
-      <!-- Bouton retour haut -->
-      <a href="#top" class="scroll-top" aria-label="Remonter en haut">
-        <i data-lucide="arrow-up"></i>
-      </a>
+  <div class="container footer-grid">
+    <div class="footer-logo">
+      <img src="astrovia.jpg" alt="Logo ASTROVIA">
+      <h3>ASTROVIA</h3>
     </div>
-  </footer>
-  
-  
 
+    <div class="footer-contact">
+      <h4>Contact</h4>
+      <p>Où nous trouver :<br>
+        6 RUE D'ARMAILLE, 75017 PARIS
+      </p>
+      <p>Nous appeler :<br>
+        <a href="tel:+33648283477">07 66 51 87 06</a>
+      </p>
+      <p>E-mail :<br>
+        <a href="mailto:contact@astrovia.fr">raouf.gacemi@astrovia.fr</a>
+      </p>
+    </div>
 
+    <div class="footer-social">
+  <h4>Suivez-nous</h4>
+  <a href="#" class="social-link" aria-label="LinkedIn ASTROVIA" style="width:56px;height:56px;">
+    <!-- SVG LinkedIn direct (plus fiable que Lucide) -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="#00b884" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+      <rect x="2" y="9" width="4" height="12"></rect>
+      <circle cx="4" cy="4" r="2"></circle>
+    </svg>
+  </a>
+</div>
 
-  <script>
-    lucide.createIcons();
-    
-    // --- Animations ---
-    const observer = new IntersectionObserver((entries) => {
+    <a href="#top" class="scroll-top" aria-label="Remonter en haut">
+      <i data-lucide="arrow-up"></i>
+    </a>
+  </div>
+
+  <div class="footer-bottom">
+    © ASTROVIA – Tous droits réservés •
+    <a href="mentions-legales.html">Mentions légales</a> •
+    <a href="politique-de-confidentialite.html">Politique de confidentialité</a>
+  </div>
+</footer>
+
+<!-- Bouton flottant contact (doit être ici) -->
+<a href="#contact" class="chat-float" aria-label="Aller à la section Contact">
+  <i data-lucide="message-circle"></i>
+</a>
+
+<script>
+  lucide.createIcons();
+
+  // --- Animations ---
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.fade-up, .slide-left, .slide-right, .zoom-in, .join-card, .reveal')
+    .forEach(el => observer.observe(el));
+
+  // --- Courbe accompagnement ---
+  const accompagnementSection = document.querySelector('.accompagnement-section');
+  if (accompagnementSection) {
+    const curvePath = accompagnementSection.querySelector('.accompagnement-curve path');
+    curvePath.style.animation = 'none';
+    const observerCourbe = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+          curvePath.style.animation = 'drawCurve 2.8s ease-out forwards';
+          observerCourbe.unobserve(accompagnementSection);
         }
       });
-    }, { threshold: 0.3 });
-    
-    document.querySelectorAll('.fade-up, .slide-left, .slide-right, .zoom-in, .join-card, .reveal')
-      .forEach(el => observer.observe(el));
-    
-    // --- Courbe accompagnement ---
-    const accompagnementSection = document.querySelector('.accompagnement-section');
-    if (accompagnementSection) {
-      const curvePath = accompagnementSection.querySelector('.accompagnement-curve path');
-      curvePath.style.animation = 'none';
-      const observerCourbe = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            curvePath.style.animation = 'drawCurve 2.8s ease-out forwards';
-            observerCourbe.unobserve(accompagnementSection);
-          }
-        });
-      }, { threshold: 0.4 });
-      observerCourbe.observe(accompagnementSection);
-    }
-    
-    // --- MENU MOBILE ---
-    const menuBtn = document.querySelector('.menu-btn');
-    const menuClose = document.querySelector('.menu-close');
-    const navlinks = document.getElementById('navlinks');
-    
-    if (menuBtn && navlinks) {
-      menuBtn.addEventListener('click', () => {
-        navlinks.classList.add('show');
-        menuBtn.setAttribute('aria-expanded', 'true');
-      });
-    }
-    
-    if (menuClose && navlinks) {
-      menuClose.addEventListener('click', () => {
-        navlinks.classList.remove('show');
-        menuBtn.setAttribute('aria-expanded', 'false');
-      });
-    }
-    
-    // Ferme le menu quand on clique sur un lien
-    if (navlinks) {
-      navlinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          if (window.innerWidth <= 960) {
-            navlinks.classList.remove('show');
-            menuBtn.setAttribute('aria-expanded', 'false');
-          }
-        });
-      });
-    }
-    
-    // --- Sous-menus mobile (corrigé) ---
-    document.querySelectorAll('.dropdown > a').forEach(link => {
-      link.addEventListener('click', e => {
+    }, { threshold: 0.4 });
+    observerCourbe.observe(accompagnementSection);
+  }
+
+  // --- MENU MOBILE ---
+  const menuBtn = document.querySelector('.menu-btn');
+  const menuClose = document.querySelector('.menu-close');
+  const navlinks = document.getElementById('navlinks');
+
+  if (menuBtn && navlinks) {
+    menuBtn.addEventListener('click', () => {
+      navlinks.classList.add('show');
+      menuBtn.setAttribute('aria-expanded', 'true');
+    });
+  }
+
+  if (menuClose && navlinks) {
+    menuClose.addEventListener('click', () => {
+      navlinks.classList.remove('show');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  if (navlinks) {
+    navlinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
         if (window.innerWidth <= 960) {
-          const parent = link.parentElement;
-    
-          if (!parent.classList.contains('open')) {
-            e.preventDefault(); // ouvre le sous-menu sans naviguer
-            parent.classList.add('open');
-          } else {
-            parent.classList.remove('open'); // referme et permet la navigation
-          }
+          navlinks.classList.remove('show');
+          menuBtn.setAttribute('aria-expanded', 'false');
         }
       });
     });
-    
-    lucide.createIcons();
-    
-    // --- Footer année ---
-    const yearEl = document.getElementById('year');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
-    
-   
-    
-    </script>
-    <!-- === EMAILJS pour le formulaire de contact === -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>
-(function(){
-  // ✅ Initialisation EmailJS avec ta clé publique
-  emailjs.init("YJzz-OgaLVwXWT_5i");
-})();
+  }
 
-document.addEventListener("DOMContentLoaded", function() {
-  const form = document.getElementById("contactForm");
-  const formSuccess = document.getElementById("formSuccess");
-  const button = form.querySelector("button");
-
-  form.addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    // Désactive le bouton pendant l’envoi
-    button.disabled = true;
-    const originalText = button.textContent;
-    button.textContent = "Envoi en cours...";
-
-    // ✅ Envoi via EmailJS
-    emailjs.sendForm("service_i6e6q6b", "template_6bx0c48", this)
-      .then(() => {
-        // ✅ Affiche le message de succès animé
-        form.reset();
-        formSuccess.classList.add("show");
-
-        // ✅ Le message reste affiché 2 minutes (120 000 ms)
-        setTimeout(() => formSuccess.classList.remove("show"), 120000);
-      })
-      .catch((error) => {
-        console.error("❌ Erreur EmailJS :", error);
-        alert("Une erreur est survenue lors de l’envoi. Veuillez réessayer plus tard.");
-      })
-      .finally(() => {
-        // Réactive le bouton
-        button.disabled = false;
-        button.textContent = originalText;
-      });
+  // --- Sous-menus mobile ---
+  document.querySelectorAll('.dropdown > a').forEach(link => {
+    link.addEventListener('click', e => {
+      if (window.innerWidth <= 960) {
+        const parent = link.parentElement;
+        if (!parent.classList.contains('open')) {
+          e.preventDefault();
+          parent.classList.add('open');
+        } else {
+          parent.classList.remove('open');
+        }
+      }
+    });
   });
+
+  // --- Formulaire contact ---
+  const form = document.getElementById('contactForm');
+  const formSuccess = document.getElementById('formSuccess');
+  if (form) {
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      form.querySelector('button').disabled = true;
+      setTimeout(() => {
+        form.reset();
+        formSuccess.classList.add('show');
+        form.querySelector('button').disabled = false;
+        setTimeout(() => formSuccess.classList.remove('show'), 4000);
+      }, 1200);
+    });
+  }
+
+  // === BARRE DE PROGRESSION SCROLL ===
+  window.addEventListener('scroll', () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    document.getElementById("scrollProgress").style.width = scrolled + "%";
+  });
+
+  // Force le chargement des icônes Lucide (très important pour LinkedIn)
+  window.addEventListener('load', () => {
+    lucide.createIcons();
+  });
+
+
+  // ====================== MODE CLAIR / SOMBRE ======================
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+
+// Charge la préférence sauvegardée
+const savedTheme = localStorage.getItem('theme') || 'dark';
+html.setAttribute('data-theme', savedTheme);
+
+// Met à jour l’icône au chargement
+if (savedTheme === 'light') {
+  themeToggle.innerHTML = '<i data-lucide="moon" width="24" height="24"></i>';
+} else {
+  themeToggle.innerHTML = '<i data-lucide="sun" width="24" height="24"></i>';
+}
+
+// Toggle
+themeToggle.addEventListener('click', () => {
+  const currentTheme = html.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+  html.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+
+  // Change l’icône
+  if (newTheme === 'light') {
+    themeToggle.innerHTML = '<i data-lucide="moon" width="24" height="24"></i>';
+  } else {
+    themeToggle.innerHTML = '<i data-lucide="sun" width="24" height="24"></i>';
+  }
+
+  lucide.createIcons(); // Recharge les icônes
 });
 </script>
-
 </body>
 </html>
